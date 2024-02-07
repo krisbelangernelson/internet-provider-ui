@@ -1,0 +1,28 @@
+# don't skip the following
+!*.css
+!*.js
+!*.json
+!*.jsx
+!*.less
+!*.ts
+!*.tsx
+!*.yml
+
+# skip the following
+dist
+server-dist
+node_modules
+.gitignore
+.prettierignore
+Dockerfile
+coverage
+*.log
+.*
+scripts
+*.yaml
+
+public/*
+jest.config.js
+package.json
+package-lock.json
+tsconfig.json
