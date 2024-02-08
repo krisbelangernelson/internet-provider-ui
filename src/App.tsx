@@ -1,16 +1,13 @@
-import ReactDOM from 'react-dom/client'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 export default function App(): React.ReactElement {
-  return <>App loaded</>
+  return (
+    <Container fluid>
+      <Row>
+        <Col>App loaded</Col>
+      </Row>
+    </Container>
+  )
 }
-
-class AppElement extends HTMLElement {
-  root: ReactDOM.Root | undefined
-
-  connectedCallback(): void {
-    this.root = ReactDOM.createRoot(this)
-    this.root.render(<App />)
-  }
-}
-
-customElements.define('internet-provider-ui', AppElement)

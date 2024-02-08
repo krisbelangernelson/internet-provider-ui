@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/krisbelangernelson/internet-provider-ui#readme",
   "dependencies": {
+    "bootstrap": "^5.3.2",
     "cors": "^2.8.5",
     "pino-http": "^9.0.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
