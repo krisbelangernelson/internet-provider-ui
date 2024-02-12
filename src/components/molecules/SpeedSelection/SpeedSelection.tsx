@@ -11,10 +11,6 @@ const SpeedSelection: FC<SpeedSelectionProps> = ({ serviceSelected }): ReactElem
   // TODO: get all speeds from db
   const [selectedSpeed, setSelectedSpeed] = useState<string>('')
 
-  // const onClickSpeed = (selection: string): void => {
-  //   setSelectedSpeed(selection)
-  // }
-
   const sortedOffers = useMemo(() => {
     return offersAvailable
       .sort((offerA, offerB) => {

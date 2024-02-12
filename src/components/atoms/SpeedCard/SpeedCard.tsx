@@ -15,7 +15,6 @@ const SpeedCard: FC<SpeedCardProps> = ({ offer, active, setSelectedSpeed }): Rea
   return (
     <Card
       className={classes}
-      // style={{ '--hoverColor': 'orange', '--selectedColor': 'red' } satisfies CSSProperties}
       onClick={() => {
         setSelectedSpeed(offer.name)
       }}
