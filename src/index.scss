@@ -10,6 +10,7 @@ $primary: orange;
 .clickable-card {
   @extend .card !optional;
   cursor: pointer;
+  margin: 2px;
 
   &:hover {
     border: 1px solid orange;
@@ -17,10 +18,16 @@ $primary: orange;
 }
 
 .clickable-card-selected {
-  border: 1px solid red;
+  border: 3px solid orange;
+  margin: 0;
+
+  &:hover {
+    border: 3px solid orange;
+  }
 }
 
 a {
+  text-decoration: none;
   color: $primary;
 
   &:link, &:active, &:visited {

@@ -5,11 +5,16 @@ import SpeedCard from '@/components/atoms/SpeedCard/SpeedCard'
 
 interface SpeedSelectionProps {
   serviceSelected: string
+  setSelectedSpeed: React.Dispatch<React.SetStateAction<string>>
+  selectedSpeed: string
 }
 
-const SpeedSelection: FC<SpeedSelectionProps> = ({ serviceSelected }): ReactElement => {
+const SpeedSelection: FC<SpeedSelectionProps> = ({
+  serviceSelected,
+  setSelectedSpeed,
+  selectedSpeed
+}): ReactElement => {
   // TODO: get all speeds from db
-  const [selectedSpeed, setSelectedSpeed] = useState<string>('')
 
   const sortedOffers = useMemo(() => {
     return offersAvailable

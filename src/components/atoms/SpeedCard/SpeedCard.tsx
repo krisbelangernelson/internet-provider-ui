@@ -1,6 +1,7 @@
 import { type ReactElement, type FC } from 'react'
 import Card from 'react-bootstrap/Card'
 import { type offersAvailable } from '@/constants'
+import classNames from 'classnames'
 
 interface SpeedCardProps {
   offer: (typeof offersAvailable)[number]
@@ -9,12 +10,9 @@ interface SpeedCardProps {
 }
 
 const SpeedCard: FC<SpeedCardProps> = ({ offer, active, setSelectedSpeed }): ReactElement => {
-  let classes = 'clickable-card text-center'
-  classes = active ? `${classes} clickable-card-selected` : classes
-
   return (
     <Card
-      className={classes}
+      className={classNames('clickable-card text-center', active && 'clickable-card-selected')}
       onClick={() => {
         setSelectedSpeed(offer.name)
       }}

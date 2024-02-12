@@ -15,7 +15,8 @@ const localConfig = {
   mode: 'development',
   output: {
     filename: '[name]-[contenthash].bundle.js',
-    path: paths.dist(dist)
+    path: paths.dist(dist),
+    publicPath: '/'
   },
   devtool: 'inline-source-map',
   devServer: {

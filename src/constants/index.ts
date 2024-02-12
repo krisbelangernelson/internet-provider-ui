@@ -57,7 +57,7 @@ export const offersAvailable = [
   },
   {
     bandwidthDown: 100,
-    bandwidthUp: 50,
+    bandwidthUp: 30,
     title: 'FIBER100',
     name: 'fiber100',
     description: 'Get and give things fast.',
@@ -84,12 +84,21 @@ export const offersAvailable = [
   },
   {
     bandwidthDown: 1000,
-    bandwidthUp: 1000,
+    bandwidthUp: 500,
     title: 'FIBER1000',
     name: 'fiber1000',
     description: "There's no stopping you.",
     price: 100,
     type: ['business', 'home']
+  },
+  {
+    bandwidthDown: 1000,
+    bandwidthUp: 1000,
+    title: 'FIBER1000+',
+    name: 'fiber1000plus',
+    description: "There's no stopping you.",
+    price: 100,
+    type: ['business']
   },
   {
     bandwidthDown: 1600,
