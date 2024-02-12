@@ -15,7 +15,7 @@ exports.bundleAnalyzerPlugin = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: false,
-      analyzerPort: 9083
+      analyzerPort: 9080
     })
   ]
 }
@@ -55,10 +55,6 @@ exports.purgeCSSWebpackPlugin = {
       ]
     })
   ]
-}
-
-exports.hotModuleReplacementPlugin = {
-  plugins: [new webpack.HotModuleReplacementPlugin()]
 }
 
 exports.compressionPlugin = {

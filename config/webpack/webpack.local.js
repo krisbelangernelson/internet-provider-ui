@@ -13,24 +13,16 @@ const config = require('../server/local/resources')
 
 const localConfig = {
   mode: 'development',
-  entry: {
-    app: ['webpack-hot-middleware/client?reload=true']
-  },
   output: {
-    filename: '[name]-local-[contenthash].bundle.js',
+    filename: '[name]-[contenthash].bundle.js',
     path: paths.dist(dist)
   },
   devtool: 'inline-source-map',
   devServer: {
     port,
+    hot: true,
     historyApiFallback: {
       index: '/index.html'
-    },
-    contentBase: paths.dist(dist),
-    hot: true,
-    overlay: true,
-    stats: {
-      colors: true
     }
   }
 }
@@ -50,12 +42,4 @@ module.exports = mergeWithCustomize({
   customizeObject: customizeObject({
     entry: 'prepend'
   })
-})(
-  commonConfig,
-  webpackDefinePlugin(config),
-  localConfig,
-  cssDevelopmentLoaders,
-  sourceMapLoader,
-  bundleAnalyzerPlugin,
-  hotModuleReplacementPlugin
-)
+})(commonConfig, webpackDefinePlugin(config), localConfig, cssDevelopmentLoaders, sourceMapLoader, bundleAnalyzerPlugin)

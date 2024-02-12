@@ -9,7 +9,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const pinoHttp = require('pino-http')
 const serverConfig = require('./server-config')
 const webpackConfig = require('../../webpack/webpack.local')
-const { cors: corsConfig } = require('../local/resources')
+const { cors: corsConfig } = require('./resources')
 const cors = require('cors')
 
 const server = express()
