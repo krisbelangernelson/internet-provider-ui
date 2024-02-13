@@ -17,7 +17,9 @@ export const offersAvailable = [
     name: 'dsl3',
     description: 'Basic internet connectivity needs, email.',
     price: 40,
-    type: ['home']
+    type: 'home',
+    idealNumUsers: '1',
+    idealNumDevices: '1'
   },
   {
     bandwidthDown: 7,
@@ -26,7 +28,9 @@ export const offersAvailable = [
     name: 'dsl7',
     description: 'Stream content to watch or listen to.',
     price: 45,
-    type: ['home']
+    type: 'home',
+    idealNumUsers: '2',
+    idealNumDevices: '2'
   },
   {
     bandwidthDown: 30,
@@ -35,7 +39,9 @@ export const offersAvailable = [
     name: 'cable30',
     description: 'Stream more demanding content in better quality.',
     price: 55,
-    type: ['home']
+    type: 'home',
+    idealNumUsers: '2-3',
+    idealNumDevices: '4-6'
   },
   {
     bandwidthDown: 70,
@@ -44,16 +50,9 @@ export const offersAvailable = [
     name: 'cable70',
     description: 'Stream higher quality content.',
     price: 65,
-    type: ['home']
-  },
-  {
-    bandwidthDown: 100,
-    bandwidthUp: 30,
-    title: 'CABLE100',
-    name: 'cable100',
-    description: 'Stream yourself for others to watch.',
-    price: 70,
-    type: ['home']
+    type: 'home',
+    idealNumUsers: '4',
+    idealNumDevices: '8'
   },
   {
     bandwidthDown: 100,
@@ -62,7 +61,9 @@ export const offersAvailable = [
     name: 'fiber100',
     description: 'Get and give things fast.',
     price: 80,
-    type: ['business', 'home']
+    type: 'home',
+    idealNumUsers: '5+',
+    idealNumDevices: '10+'
   },
   {
     bandwidthDown: 100,
@@ -71,7 +72,9 @@ export const offersAvailable = [
     name: 'fiber100plus',
     description: 'Get and give things fast.',
     price: 85,
-    type: ['business']
+    type: 'business',
+    idealNumUsers: '5+',
+    idealNumDevices: '10+'
   },
   {
     bandwidthDown: 300,
@@ -80,16 +83,20 @@ export const offersAvailable = [
     name: 'fiber300',
     description: 'Blaze your way to content delivery.',
     price: 90,
-    type: ['business', 'home']
+    type: 'home',
+    idealNumUsers: '6+',
+    idealNumDevices: '11+'
   },
   {
     bandwidthDown: 1000,
-    bandwidthUp: 500,
+    bandwidthUp: 300,
     title: 'FIBER1000',
     name: 'fiber1000',
     description: "There's no stopping you.",
-    price: 100,
-    type: ['business', 'home']
+    price: 110,
+    type: 'home',
+    idealNumUsers: '10+',
+    idealNumDevices: '20+'
   },
   {
     bandwidthDown: 1000,
@@ -97,8 +104,10 @@ export const offersAvailable = [
     title: 'FIBER1000+',
     name: 'fiber1000plus',
     description: "There's no stopping you.",
-    price: 100,
-    type: ['business']
+    price: 150,
+    type: 'business',
+    idealNumUsers: '10+',
+    idealNumDevices: '20+'
   },
   {
     bandwidthDown: 1600,
@@ -106,7 +115,9 @@ export const offersAvailable = [
     title: 'FIBER1600',
     name: 'fiber1600',
     description: 'Top of the line.',
-    price: 120,
-    type: ['business']
+    price: 180,
+    type: 'business',
+    idealNumUsers: '20+',
+    idealNumDevices: '40+'
   }
 ]

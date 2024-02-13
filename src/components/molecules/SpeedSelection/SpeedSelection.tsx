@@ -1,32 +1,22 @@
-import { type ReactElement, useMemo, useState, useEffect, type FC } from 'react'
+import { type ReactElement, useEffect, type FC } from 'react'
 import Stack from 'react-bootstrap/Stack'
-import { offersAvailable } from '@/constants'
 import SpeedCard from '@/components/atoms/SpeedCard/SpeedCard'
+import { type offersAvailable } from '@/constants'
 
 interface SpeedSelectionProps {
   serviceSelected: string
   setSelectedSpeed: React.Dispatch<React.SetStateAction<string>>
   selectedSpeed: string
+  speedOffers: Array<(typeof offersAvailable)[number]>
 }
 
 const SpeedSelection: FC<SpeedSelectionProps> = ({
   serviceSelected,
   setSelectedSpeed,
-  selectedSpeed
+  selectedSpeed,
+  speedOffers
 }): ReactElement => {
   // TODO: get all speeds from db
-
-  const sortedOffers = useMemo(() => {
-    return offersAvailable
-      .sort((offerA, offerB) => {
-        const a = offerA.bandwidthDown
-        const b = offerB.bandwidthDown
-        return Number(a) - Number(b)
-      })
-      .reverse()
-  }, [offersAvailable])
-
-  const serviceOffers = sortedOffers.filter((offer) => offer.type.includes(serviceSelected))
 
   useEffect(() => {
     setSelectedSpeed('')
@@ -34,7 +24,7 @@ const SpeedSelection: FC<SpeedSelectionProps> = ({
 
   return (
     <Stack gap={4} className="col-lg-5 mx-auto">
-      {serviceOffers.map((offer) => (
+      {speedOffers.map((offer) => (
         <SpeedCard
           key={offer.name}
           offer={offer}

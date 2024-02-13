@@ -1,13 +1,26 @@
-import { type ReactElement, useState, useEffect } from 'react'
+import { type ReactElement, useState, useEffect, useMemo } from 'react'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import ServiceSelection from '@/components/molecules/ServiceSelection/ServiceSelection'
 import SpeedSelection from '@/components/molecules/SpeedSelection/SpeedSelection'
+import SpeedDetailsModal from '@/components/molecules/SpeedDetailsModal/SpeedDetailsModal'
+import { offersAvailable } from '@/constants'
 
 const Internet = (): ReactElement => {
   const [serviceSelected, setServiceSelected] = useState<string>('home')
   const [selectedSpeed, setSelectedSpeed] = useState<string>('')
+  const [modalShow, setModalShow] = useState(false)
+
+  const sortedOffers = useMemo(() => {
+    return offersAvailable.sort((offerA, offerB) => {
+      const a = offerA.bandwidthDown
+      const b = offerB.bandwidthDown
+      return Number(a) - Number(b)
+    })
+  }, [offersAvailable])
+
+  const speedOffers = sortedOffers.filter((offer) => offer.type === serviceSelected)
 
   useEffect(() => {
     if (serviceSelected !== '' && selectedSpeed !== '') {
@@ -21,13 +34,6 @@ const Internet = (): ReactElement => {
       <Row className="mb-2 align-items-center">
         <Col>
           <span className="fs-2">1. Choose Your Service</span>
-        </Col>
-        <Col>
-          <div className="d-flex justify-content-end fs-6">
-            <a href="/internet/how-it-works" className="fw-bold">
-              Help me choose
-            </a>
-          </div>
         </Col>
       </Row>
       <Row>
@@ -44,6 +50,19 @@ const Internet = (): ReactElement => {
         <Col>
           <span className="fs-2">2. Choose Your Speed</span>
         </Col>
+        <Col>
+          <div className="d-flex justify-content-end fs-6">
+            <a
+              href="#"
+              className="fw-bold"
+              onClick={() => {
+                setModalShow(true)
+              }}
+            >
+              Help me choose
+            </a>
+          </div>
+        </Col>
       </Row>
       <Row>
         <Col>
@@ -51,9 +70,17 @@ const Internet = (): ReactElement => {
             serviceSelected={serviceSelected}
             setSelectedSpeed={setSelectedSpeed}
             selectedSpeed={selectedSpeed}
+            speedOffers={[...speedOffers].reverse()}
           />
         </Col>
       </Row>
+      <SpeedDetailsModal
+        show={modalShow}
+        onHide={() => {
+          setModalShow(false)
+        }}
+        offers={speedOffers}
+      />
     </Container>
   )
 }
