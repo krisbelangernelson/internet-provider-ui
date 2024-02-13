@@ -34,15 +34,15 @@ const SpeedDetailsModal: FC<ModalProps> = (props) => {
     return acc
   }, {})
 
-  const renderRowValues = (index: number): ReactNode => {
+  const renderRowValues = (header: string): ReactNode => {
     let value
-    if (index === 0) {
+    if (header === 'Number of people') {
       value = groupedOffers.idealNumUsers.map((numUsers) => <td key={numUsers}>{numUsers}</td>)
-    } else if (index === 1) {
+    } else if (header === 'Number of devices') {
       value = groupedOffers.idealNumDevices.map((numDevices) => <td key={numDevices}>{numDevices}</td>)
     } else {
       value = groupedOffers.bandwidthDown.map((bandwidth, j) => {
-        if (index === 5) {
+        if (header === 'Creator streaming') {
           if (Number(bandwidth) < 70) {
             return <td key={bandwidth}>N</td>
           }
@@ -68,20 +68,25 @@ const SpeedDetailsModal: FC<ModalProps> = (props) => {
           <thead>
             <tr>
               <th></th>
-              {groupedOffers.bandwidthDown.map((bandwidth) => (
-                <th key={bandwidth}>
+              {groupedOffers.bandwidthDown.map((bandwidth, index) => (
+                <th key={bandwidth} style={{ fontWeight: 'normal' }}>
                   <div className="text-center">
-                    <div className="fs-2">{bandwidth}</div> Mbps
+                    <div className="fs-2" style={{ margin: 0 }}>
+                      {bandwidth}
+                    </div>{' '}
+                    Mbps
+                    <hr style={{ margin: '3px 0' }} />
+                    <span className="fs-6">{groupedOffers.bandwidthUp[index]}</span> Mbps<div>Upload</div>
                   </div>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rowHeader.map((header, index) => (
+            {rowHeader.map((header) => (
               <tr key={header}>
                 <td>{header}</td>
-                {renderRowValues(index)}
+                {renderRowValues(header)}
               </tr>
             ))}
           </tbody>
