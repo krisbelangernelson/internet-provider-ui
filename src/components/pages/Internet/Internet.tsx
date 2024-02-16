@@ -9,6 +9,7 @@ import SpeedDetailsModal from '@/components/molecules/SpeedDetailsModal/SpeedDet
 import { useQuery } from '@tanstack/react-query'
 import { type InternetService } from '@/types/InternetService'
 import internetServices from '@/services/internetServices'
+import Spinner from 'react-bootstrap/Spinner'
 
 const Internet = (): ReactElement => {
   const [serviceSelected, setServiceSelected] = useState<string>('home')
@@ -33,7 +34,7 @@ const Internet = (): ReactElement => {
         .filter((offer) => offer.category === serviceSelected)
       setSortedOffers(sorted)
     }
-  }, [data])
+  }, [data, serviceSelected])
 
   useEffect(() => {
     if (serviceSelected !== '' && selectedSpeed !== '') {
@@ -42,7 +43,22 @@ const Internet = (): ReactElement => {
   }, [serviceSelected, selectedSpeed])
 
   if (isLoading || sortedOffers === undefined) {
-    return <>Loading...</>
+    return (
+      <Container>
+        <Row>
+          <Col className="text-center">
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+              style={{ width: '3rem', height: '3rem' }}
+            />
+          </Col>
+        </Row>
+      </Container>
+    )
   }
 
   return (
