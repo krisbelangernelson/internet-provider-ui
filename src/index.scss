@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 $primary: orange;
+$primaryHover: darkorange;
 
 @media screen and (min-width: 769px) {
   .desktop-stack-horiz {
@@ -13,16 +14,16 @@ $primary: orange;
   margin: 2px;
 
   &:hover {
-    border: 1px solid orange;
+    border: 1px solid $primary;
   }
 }
 
 .clickable-card-selected {
-  border: 3px solid orange;
+  border: 3px solid $primary;
   margin: 0;
 
   &:hover {
-    border: 3px solid orange;
+    border: 3px solid $primary;
   }
 }
 
@@ -35,6 +36,6 @@ a {
   }
 
   &:hover {
-    color: darkorange;
+    color: $primaryHover;
   }
 }

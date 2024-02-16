@@ -1,3 +1,12 @@
+export const helpChooseRowHeaders = [
+  'Number of people',
+  'Number of devices',
+  'Audio streaming',
+  'Video streaming',
+  'Online gaming',
+  'Creator streaming'
+]
+
 export const servicesAvailable = [
   {
     label: 'Home Internet',
@@ -40,7 +49,7 @@ export const offersAvailable = [
     description: 'Stream more demanding content in better quality.',
     price: 55,
     type: 'home',
-    idealNumUsers: '2-3',
+    idealNumUsers: '3-4',
     idealNumDevices: '4-6'
   },
   {

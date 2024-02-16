@@ -1,10 +1,10 @@
 import { type ReactElement, type FC } from 'react'
 import Card from 'react-bootstrap/Card'
-import { type offersAvailable } from '@/constants'
+import { type InternetService } from '@/types/InternetService'
 import classNames from 'classnames'
 
 interface SpeedCardProps {
-  offer: (typeof offersAvailable)[number]
+  offer: InternetService
   active: boolean
   setSelectedSpeed: React.Dispatch<React.SetStateAction<string>>
 }
@@ -18,13 +18,13 @@ const SpeedCard: FC<SpeedCardProps> = ({ offer, active, setSelectedSpeed }): Rea
       }}
     >
       <Card.Header as="h3" className="fw-bold">
-        {offer.title}
+        {offer.label}
       </Card.Header>
       <Card.Body>
         <Card.Title>
-          <span className="fs-2">{offer.bandwidthDown.toLocaleString('en-US')} </span> Mbps
+          <span className="fs-2">{offer.bandwidth_down.toLocaleString('en-US')} </span> Mbps
         </Card.Title>
-        <Card.Text as="h5">{offer.bandwidthUp.toLocaleString('en-US')} Mbps Upload</Card.Text>
+        <Card.Text as="h5">{offer.bandwidth_up.toLocaleString('en-US')} Mbps Upload</Card.Text>
         <Card.Text>
           <span className="fs-2">${offer.price}</span>/month
         </Card.Text>

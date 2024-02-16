@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'development'
-process.env.APP_ENV = 'development'
+process.env.APP_ENV = 'local'
 
 require('dotenv-override').config({ override: true })
 const express = require('express')

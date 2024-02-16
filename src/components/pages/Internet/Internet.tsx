@@ -1,32 +1,49 @@
-import { type ReactElement, useState, useEffect, useMemo } from 'react'
+import { type ReactElement, useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import ServiceSelection from '@/components/molecules/ServiceSelection/ServiceSelection'
 import SpeedSelection from '@/components/molecules/SpeedSelection/SpeedSelection'
 import SpeedDetailsModal from '@/components/molecules/SpeedDetailsModal/SpeedDetailsModal'
-import { offersAvailable } from '@/constants'
+// import { offersAvailable } from '@/constants'
+import { useQuery } from '@tanstack/react-query'
+import { type InternetService } from '@/types/InternetService'
+import internetServices from '@/services/internetServices'
 
 const Internet = (): ReactElement => {
   const [serviceSelected, setServiceSelected] = useState<string>('home')
   const [selectedSpeed, setSelectedSpeed] = useState<string>('')
   const [modalShow, setModalShow] = useState(false)
+  const [sortedOffers, setSortedOffers] = useState<InternetService[] | undefined>(undefined)
 
-  const sortedOffers = useMemo(() => {
-    return offersAvailable.sort((offerA, offerB) => {
-      const a = offerA.bandwidthDown
-      const b = offerB.bandwidthDown
-      return Number(a) - Number(b)
-    })
-  }, [offersAvailable])
+  const { data, isLoading } = useQuery<InternetService[], Error>({
+    queryKey: ['internet-services'],
+    queryFn: internetServices.findAll,
+    enabled: true
+  })
 
-  const speedOffers = sortedOffers.filter((offer) => offer.type === serviceSelected)
+  useEffect(() => {
+    if (data !== undefined) {
+      const sorted = data
+        .sort((offerA, offerB) => {
+          const a = offerA.bandwidth_down
+          const b = offerB.bandwidth_down
+          return Number(a) - Number(b)
+        })
+        .filter((offer) => offer.category === serviceSelected)
+      setSortedOffers(sorted)
+    }
+  }, [data])
 
   useEffect(() => {
     if (serviceSelected !== '' && selectedSpeed !== '') {
       window.location.href = `/order/${serviceSelected}-${selectedSpeed}`
     }
   }, [serviceSelected, selectedSpeed])
+
+  if (isLoading || sortedOffers === undefined) {
+    return <>Loading...</>
+  }
 
   return (
     <Container>
@@ -70,7 +87,7 @@ const Internet = (): ReactElement => {
             serviceSelected={serviceSelected}
             setSelectedSpeed={setSelectedSpeed}
             selectedSpeed={selectedSpeed}
-            speedOffers={[...speedOffers].reverse()}
+            speedOffers={[...sortedOffers].reverse()}
           />
         </Col>
       </Row>
@@ -79,7 +96,7 @@ const Internet = (): ReactElement => {
         onHide={() => {
           setModalShow(false)
         }}
-        offers={speedOffers}
+        offers={sortedOffers}
       />
     </Container>
   )

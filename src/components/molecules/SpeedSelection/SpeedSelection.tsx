@@ -1,13 +1,13 @@
 import { type ReactElement, useEffect, type FC } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import SpeedCard from '@/components/atoms/SpeedCard/SpeedCard'
-import { type offersAvailable } from '@/constants'
+import { type InternetService } from '@/types/InternetService'
 
 interface SpeedSelectionProps {
   serviceSelected: string
   setSelectedSpeed: React.Dispatch<React.SetStateAction<string>>
   selectedSpeed: string
-  speedOffers: Array<(typeof offersAvailable)[number]>
+  speedOffers: InternetService[]
 }
 
 const SpeedSelection: FC<SpeedSelectionProps> = ({
