@@ -5,22 +5,24 @@ import { type InternetService } from '@/types/InternetService'
 
 interface SpeedSelectionProps {
   serviceSelected: string
-  setSelectedSpeed: React.Dispatch<React.SetStateAction<string>>
-  selectedSpeed: string
+  setSpeedSelected: React.Dispatch<React.SetStateAction<string>>
+  speedSelected: string
   speedOffers: InternetService[]
 }
 
 const SpeedSelection: FC<SpeedSelectionProps> = ({
   serviceSelected,
-  setSelectedSpeed,
-  selectedSpeed,
+  setSpeedSelected,
+  speedSelected,
   speedOffers
 }): ReactElement => {
   // TODO: get all speeds from db
 
   useEffect(() => {
-    setSelectedSpeed('')
+    setSpeedSelected('')
   }, [serviceSelected])
+
+  if (serviceSelected === '') return <></>
 
   return (
     <Stack gap={4} className="col-lg-5 mx-auto">
@@ -28,8 +30,8 @@ const SpeedSelection: FC<SpeedSelectionProps> = ({
         <SpeedCard
           key={offer.name}
           offer={offer}
-          active={selectedSpeed === offer.name}
-          setSelectedSpeed={setSelectedSpeed}
+          active={speedSelected === offer.name}
+          setSpeedSelected={setSpeedSelected}
         />
       ))}
     </Stack>

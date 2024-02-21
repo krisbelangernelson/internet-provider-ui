@@ -5,17 +5,17 @@ import Row from 'react-bootstrap/Row'
 import ServiceSelection from '@/components/molecules/ServiceSelection/ServiceSelection'
 import SpeedSelection from '@/components/molecules/SpeedSelection/SpeedSelection'
 import SpeedDetailsModal from '@/components/molecules/SpeedDetailsModal/SpeedDetailsModal'
-// import { offersAvailable } from '@/constants'
 import { useQuery } from '@tanstack/react-query'
 import { type InternetService } from '@/types/InternetService'
 import internetServices from '@/services/internetServices'
 import Spinner from 'react-bootstrap/Spinner'
 
 const Internet = (): ReactElement => {
-  const [serviceSelected, setServiceSelected] = useState<string>('home')
-  const [selectedSpeed, setSelectedSpeed] = useState<string>('')
+  const [serviceSelected, setServiceSelected] = useState<string>('')
+  const [speedSelected, setSpeedSelected] = useState<string>('')
   const [modalShow, setModalShow] = useState(false)
   const [sortedOffers, setSortedOffers] = useState<InternetService[] | undefined>(undefined)
+  const [disabledStyle, setDisabledStyle] = useState('')
 
   const { data, isLoading } = useQuery<InternetService[], Error>({
     queryKey: ['internet-services'],
@@ -25,22 +25,28 @@ const Internet = (): ReactElement => {
 
   useEffect(() => {
     if (data !== undefined) {
-      const sorted = data
-        .sort((offerA, offerB) => {
-          const a = offerA.bandwidth_down
-          const b = offerB.bandwidth_down
-          return Number(a) - Number(b)
-        })
-        .filter((offer) => offer.category === serviceSelected)
+      let sorted = data.sort((offerA, offerB) => {
+        const a = offerA.bandwidth_down
+        const b = offerB.bandwidth_down
+        return Number(a) - Number(b)
+      })
+      if (serviceSelected !== '') {
+        sorted = sorted.filter((offer) => offer.category === serviceSelected)
+      }
       setSortedOffers(sorted)
     }
   }, [data, serviceSelected])
 
   useEffect(() => {
-    if (serviceSelected !== '' && selectedSpeed !== '') {
-      window.location.href = `/order/${serviceSelected}-${selectedSpeed}`
+    if (serviceSelected !== '' && speedSelected !== '') {
+      window.location.href = `/order/${serviceSelected}-${speedSelected}`
     }
-  }, [serviceSelected, selectedSpeed])
+  }, [serviceSelected, speedSelected])
+
+  useEffect(() => {
+    if (serviceSelected === '') setDisabledStyle('disabled-look')
+    else setDisabledStyle('')
+  }, [serviceSelected])
 
   if (isLoading || sortedOffers === undefined) {
     return (
@@ -79,7 +85,7 @@ const Internet = (): ReactElement => {
           <div className="mt-5" />
         </Col>
       </Row>
-      <Row className="mb-2">
+      <Row className={`mb-2 vertical-column ${disabledStyle}`}>
         <Col>
           <span className="fs-2">2. Choose Your Speed</span>
         </Col>
@@ -87,7 +93,7 @@ const Internet = (): ReactElement => {
           <div className="d-flex justify-content-end fs-6">
             <a
               href="#"
-              className="fw-bold"
+              className={`fw-bold ${disabledStyle}`}
               onClick={() => {
                 setModalShow(true)
               }}
@@ -101,8 +107,8 @@ const Internet = (): ReactElement => {
         <Col>
           <SpeedSelection
             serviceSelected={serviceSelected}
-            setSelectedSpeed={setSelectedSpeed}
-            selectedSpeed={selectedSpeed}
+            setSpeedSelected={setSpeedSelected}
+            speedSelected={speedSelected}
             speedOffers={[...sortedOffers].reverse()}
           />
         </Col>

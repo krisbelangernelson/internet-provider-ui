@@ -2,13 +2,13 @@ import axios from 'axios'
 import { type InternetService } from '@/types/InternetService'
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:3000/api/v1',
   headers: {
     'Content-type': 'application/json'
   }
 })
 
-const findAll = async () => {
+const findAll = async (): Promise<InternetService[]> => {
   return await apiClient.get<InternetService[]>('/internet-services').then((response) => response.data)
 }
 

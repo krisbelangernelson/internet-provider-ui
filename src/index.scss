@@ -39,3 +39,17 @@ a {
     color: $primaryHover;
   }
 }
+
+.vertical-column {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 769px) {
+    flex-direction: row;
+  }
+}
+
+.disabled-look {
+  color: #ddd !important;
+  pointer-events: none;
+}

@@ -6,15 +6,15 @@ import classNames from 'classnames'
 interface SpeedCardProps {
   offer: InternetService
   active: boolean
-  setSelectedSpeed: React.Dispatch<React.SetStateAction<string>>
+  setSpeedSelected: React.Dispatch<React.SetStateAction<string>>
 }
 
-const SpeedCard: FC<SpeedCardProps> = ({ offer, active, setSelectedSpeed }): ReactElement => {
+const SpeedCard: FC<SpeedCardProps> = ({ offer, active, setSpeedSelected }): ReactElement => {
   return (
     <Card
       className={classNames('clickable-card text-center', active && 'clickable-card-selected')}
       onClick={() => {
-        setSelectedSpeed(offer.name)
+        setSpeedSelected(offer.name)
       }}
     >
       <Card.Header as="h3" className="fw-bold">
