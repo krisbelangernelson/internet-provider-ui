@@ -1,6 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 $primary: #ffa500;
 $primaryHover: #ff8c00;
+$accordion-button-active-color: green;
+$accordion-border-width: 2px;
+$border-color: green;
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -57,4 +60,13 @@ a {
 .disabled-look {
   color: #ddd !important;
   pointer-events: none;
+}
+
+.accordion {
+  --bs-accordion-active-bg: transparent;
+}
+
+button.accordion-button:focus{
+      box-shadow: none;
+      outline: none; 
 }
