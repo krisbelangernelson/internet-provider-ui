@@ -9,8 +9,6 @@ interface ServiceSelectionProps {
 }
 
 const ServiceSelection: FC<ServiceSelectionProps> = ({ serviceSelected, setServiceSelected }): ReactElement => {
-  // TODO: get all Service from db
-
   return (
     <Stack gap={3} className="desktop-stack-horiz">
       {servicesAvailable.map((service) => (

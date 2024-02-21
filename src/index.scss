@@ -2,6 +2,11 @@
 $primary: orange;
 $primaryHover: darkorange;
 
+* {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
 @media screen and (min-width: 769px) {
   .desktop-stack-horiz {
     flex-direction: row !important
