@@ -85,7 +85,7 @@ const Internet = (): ReactElement => {
           <div className="mt-5" />
         </Col>
       </Row>
-      <Row className={`mb-2 vertical-column ${disabledStyle}`}>
+      <Row className={`mb-2 mob-col-desk-row ${disabledStyle}`}>
         <Col>
           <span className="fs-2">2. Choose Your Speed</span>
         </Col>

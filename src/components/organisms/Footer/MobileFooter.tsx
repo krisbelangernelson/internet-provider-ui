@@ -8,7 +8,7 @@ import Accordion from 'react-bootstrap/Accordion'
 
 const MobileFooter = (): ReactElement => (
   <Container className="mt-5">
-    <Row style={{ minHeight: '200px', padding: '1rem' }} className="vertical-column">
+    <Row style={{ minHeight: '200px', padding: '1rem' }} className="mob-col-desk-row">
       <Col>
         <Accordion flush>
           <Accordion.Item eventKey="0">

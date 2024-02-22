@@ -7,7 +7,7 @@ import Stack from 'react-bootstrap/Stack'
 
 const DesktopFooter = (): ReactElement => (
   <Container className="mt-5">
-    <Row style={{ minHeight: '200px', padding: '1rem' }} className="vertical-column">
+    <Row style={{ minHeight: '200px', padding: '1rem' }} className="mob-col-desk-row">
       <Col>
         <Stack>
           <Link to="/internet" className="fw-bold mb-2">

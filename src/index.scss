@@ -1,9 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
-$primary: #ffa500;
-$primaryHover: #ff8c00;
-$accordion-button-active-color: green;
-$accordion-border-width: 2px;
-$border-color: green;
+@import './variables.module.scss';
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -48,7 +44,7 @@ a {
   }
 }
 
-.vertical-column {
+.mob-col-desk-row {
   display: flex;
   flex-direction: column;
 
@@ -62,6 +58,7 @@ a {
   pointer-events: none;
 }
 
+/* adjust bootstrap accordian styles */
 .accordion {
   --bs-accordion-active-bg: transparent;
 }
