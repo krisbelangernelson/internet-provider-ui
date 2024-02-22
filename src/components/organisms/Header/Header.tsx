@@ -15,7 +15,7 @@ const Header = (): ReactElement => (
           <div className="p-2">
             <NavMenu />
           </div>
-          <Stack direction="horizontal" gap={3} className="p-2 ms-auto me-3">
+          <Stack direction="horizontal" gap={3} className="p-2 ms-auto">
             <Language />
             <MyAccount />
           </Stack>

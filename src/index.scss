@@ -1,5 +1,13 @@
-@import '~bootstrap/scss/bootstrap';
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
 @import './variables.module.scss';
+
+$primary: $primary;
+$theme-colors: map-merge($theme-colors, (
+  "primary": $primary
+));
+
+@import '~bootstrap/scss/bootstrap';
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -44,6 +52,15 @@ a {
   }
 }
 
+.hover-color *:hover {
+  color: $primaryHover;
+  fill: $primaryHover;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .mob-col-desk-row {
   display: flex;
   flex-direction: column;
@@ -56,14 +73,4 @@ a {
 .disabled-look {
   color: #ddd !important;
   pointer-events: none;
-}
-
-/* adjust bootstrap accordian styles */
-.accordion {
-  --bs-accordion-active-bg: transparent;
-}
-
-button.accordion-button:focus{
-      box-shadow: none;
-      outline: none; 
 }

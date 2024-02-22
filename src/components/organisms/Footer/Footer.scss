@@ -1,0 +1,14 @@
+/* adjust bootstrap accordian styles */
+.accordion {
+  --bs-accordion-active-bg: transparent;
+  --bs-accordion-border-width: 0;
+}
+
+button.accordion-button:focus{
+      box-shadow: none;
+      outline: none; 
+}
+
+.accordion-body {
+  padding: 0 var(--bs-accordion-body-padding-x);
+}

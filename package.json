@@ -4,6 +4,7 @@
   "description": "Internet Provider UI",
   "main": "index.js",
   "scripts": {
+    "build:local": "webpack --config config/webpack/webpack.local.js",
     "dev": "webpack serve --config  config/webpack/webpack.local.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
