@@ -69,7 +69,9 @@ const Internet = (): ReactElement => {
 
   return (
     <Container>
-      <Row className="mb-2 align-items-center">Featured Offer</Row>
+      <Row className="mb-2 align-items-center">
+        <Col>Featured Offer</Col>
+      </Row>
       <Row className="mb-2 align-items-center">
         <Col>
           <span className="fs-2">1. Choose Your Service</span>
@@ -90,7 +92,7 @@ const Internet = (): ReactElement => {
           <span className="fs-2">2. Choose Your Speed</span>
         </Col>
         <Col>
-          <div className="d-flex justify-content-end fs-6">
+          <div className="d-flex justify-content-end fs-6 pe-1">
             <a
               href="#"
               className={`fw-bold ${disabledStyle}`}
