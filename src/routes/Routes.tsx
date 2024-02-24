@@ -7,6 +7,7 @@ const Home = lazy(async () => await import('@/components/pages/Home/Home'))
 const Internet = lazy(async () => await import('@/components/pages/Internet/Internet'))
 const HowItWorks = lazy(async () => await import('@/components/pages/Internet/HowItWorks'))
 const Order = lazy(async () => await import('@/components/pages/Order/Order'))
+const CustomerAccount = lazy(async () => await import('@/components/pages/CustomerAccount/CustomerAccount'))
 const NotFound = lazy(async () => await import('./NotFound'))
 
 const AppRoutes = (): ReactElement => (
@@ -22,6 +23,7 @@ const AppRoutes = (): ReactElement => (
         <Routes>
           <Route path="/internet/how-it-works" element={<HowItWorks />} />
           <Route path="/internet" element={<Internet />} />
+          <Route path="/my-account" element={<CustomerAccount />} />
           <Route path="/order/:plan" element={<Order />} />
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
