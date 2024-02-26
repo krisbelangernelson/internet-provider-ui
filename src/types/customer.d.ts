@@ -1,6 +1,7 @@
 export interface Customer {
-  id?: string | null
-  username: string
+  firstName: string
+  lastName: string
   email: string
+  phone: string
   password: string
 }

@@ -2,7 +2,7 @@ import { type ReactElement } from 'react'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import Register from '@/components/molecules/Register/Register'
+import CustomerForm from '@/components/molecules/CreateOrder/CustomerForm'
 
 const CustomerAccount = (): ReactElement => (
   <Container>
@@ -10,9 +10,7 @@ const CustomerAccount = (): ReactElement => (
       <Col className="text-center">Account</Col>
     </Row>
     <Row>
-      <Col>
-        <Register />
-      </Col>
+      <Col>Sign in</Col>
     </Row>
   </Container>
 )

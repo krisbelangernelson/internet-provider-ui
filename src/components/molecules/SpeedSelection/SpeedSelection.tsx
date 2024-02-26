@@ -2,6 +2,7 @@ import { type ReactElement, useEffect, type FC } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import SpeedCard from '@/components/atoms/SpeedCard/SpeedCard'
 import { type InternetService } from '@/types/InternetService'
+import { useNavigate } from 'react-router-dom'
 
 interface SpeedSelectionProps {
   serviceSelected: string
@@ -16,7 +17,20 @@ const SpeedSelection: FC<SpeedSelectionProps> = ({
   speedSelected,
   speedOffers
 }): ReactElement => {
-  // TODO: get all speeds from db
+  const navigate = useNavigate()
+
+  const handleSpeedSelection = (speed: string, price: number): void => {
+    setSpeedSelected(speed)
+    if (serviceSelected !== '' && speed !== '') {
+      navigate('/order', {
+        state: {
+          serviceSelected,
+          speed,
+          price
+        }
+      })
+    }
+  }
 
   useEffect(() => {
     setSpeedSelected('')
@@ -31,7 +45,7 @@ const SpeedSelection: FC<SpeedSelectionProps> = ({
           key={offer.name}
           offer={offer}
           active={speedSelected === offer.name}
-          setSpeedSelected={setSpeedSelected}
+          handleSpeedSelection={handleSpeedSelection}
         />
       ))}
     </Stack>

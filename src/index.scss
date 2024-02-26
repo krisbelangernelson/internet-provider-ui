@@ -2,7 +2,6 @@
 @import "../node_modules/bootstrap/scss/variables";
 @import './variables.module.scss';
 
-$primary: $primary;
 $theme-colors: map-merge($theme-colors, (
   "primary": $primary
 ));
@@ -75,6 +74,24 @@ a {
   pointer-events: none;
 }
 
+.primary {
+  color: $primary
+}
+
+/* Customize boostrap styles */
+
 .form-label {
   margin-bottom: 0.2rem;
+}
+
+// .form-control:focus {
+//   border-color: $primary;
+//   box-shadow: 0 0 0 0.2rem rgba(255, 165, 0, 0.25);
+// }
+
+.btn-primary {
+  --bs-btn-color: white;
+  --bs-btn-hover-color: white;
+  --bs-btn-disabled-bg: lightgray;
+  font-weight: bold;
 }

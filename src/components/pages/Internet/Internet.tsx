@@ -38,12 +38,6 @@ const Internet = (): ReactElement => {
   }, [data, serviceSelected])
 
   useEffect(() => {
-    if (serviceSelected !== '' && speedSelected !== '') {
-      window.location.href = `/order/${serviceSelected}-${speedSelected}`
-    }
-  }, [serviceSelected, speedSelected])
-
-  useEffect(() => {
     if (serviceSelected === '') setDisabledStyle('disabled-look')
     else setDisabledStyle('')
   }, [serviceSelected])
