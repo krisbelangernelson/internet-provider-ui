@@ -61,7 +61,7 @@ const PaymentStatus: FC = () => {
               onClick={() => {
                 navigate(-1)
               }}
-              variant="outline-success"
+              variant="outline-danger"
             >
               Try again
             </Button>

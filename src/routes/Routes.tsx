@@ -1,12 +1,8 @@
-import { lazy, Suspense, type FC, useState, useEffect } from 'react'
+import { lazy, Suspense, type FC } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from '@/components/templates/Layout/Layout'
 import Spinner from 'react-bootstrap/Spinner'
-import { type Stripe, loadStripe } from '@stripe/stripe-js'
-import orderServices from '@/services/orderServices'
-import { type StripeConfig } from '@/types/order'
-import { useQuery } from '@tanstack/react-query'
-import { useErrorBoundary } from 'react-error-boundary'
+import useStripeConfig from '@/hooks/useStripeConfig'
 
 const Home = lazy(async () => await import('@/components/pages/Home/Home'))
 const Internet = lazy(async () => await import('@/components/pages/Internet/Internet'))
@@ -17,37 +13,11 @@ const CustomerAccount = lazy(async () => await import('@/components/pages/Custom
 const NotFound = lazy(async () => await import('./NotFound'))
 
 const AppRoutes: FC = () => {
-  const [stripePromise, setStripePromise] = useState<Stripe | null>(null)
-  const { showBoundary } = useErrorBoundary()
-
-  const { data, error } = useQuery<StripeConfig, Error>({
-    queryKey: ['stripe-config'],
-    queryFn: orderServices.stripeConfig,
-    enabled: true
-  })
-
-  const stripeLoader = async (publishableKey: string): Promise<void> => {
-    setStripePromise(await loadStripe(publishableKey))
-  }
-
-  useEffect(() => {
-    if (data !== undefined) {
-      const { publishableKey } = data
-      void stripeLoader(publishableKey).catch((error) => {
-        console.error(error) // eslint-disable-line no-console
-      })
-    }
-  }, [data])
-
-  useEffect(() => {
-    if (error != null) {
-      showBoundary(error)
-    }
-  }, [error])
+  const { stripePromise, alertMsg } = useStripeConfig()
 
   return (
     <BrowserRouter>
-      <Layout>
+      <Layout alertMsg={alertMsg}>
         <Suspense
           fallback={
             <div className="text-center">

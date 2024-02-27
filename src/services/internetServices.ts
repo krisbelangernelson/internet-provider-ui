@@ -1,16 +1,11 @@
-import axios from 'axios'
 import { type InternetService } from '@/types/InternetService'
+import { axiosInstance } from '@/utils/utils'
 
 const {
   internetApi: { baseUrl }
 } = Resources
 
-const apiClient = axios.create({
-  baseURL: baseUrl,
-  headers: {
-    'Content-type': 'application/json'
-  }
-})
+const apiClient = axiosInstance(baseUrl)
 
 const findAll = async (): Promise<InternetService[]> => {
   return await apiClient.get<InternetService[]>('/internet-services').then((response) => response.data)
