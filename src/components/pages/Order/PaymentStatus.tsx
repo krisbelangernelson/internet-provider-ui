@@ -1,10 +1,10 @@
 import { useStripe } from '@stripe/react-stripe-js'
-import { useEffect, useState, type ReactElement } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
 
-const PaymentStatus = (): ReactElement => {
+const PaymentStatus: FC = () => {
   const stripe = useStripe()
   const navigate = useNavigate()
   const [message, setMessage] = useState<string | null>(null)
@@ -24,7 +24,7 @@ const PaymentStatus = (): ReactElement => {
         switch (paymentIntent.status) {
           case 'succeeded':
             setTitle('Thank you!')
-            setMessage(`Your purchase for $${paymentIntent.amount} has been accepted successfully.`)
+            setMessage(`Your order for $${paymentIntent.amount} has been processed successfully.`)
             break
 
           case 'processing':
@@ -48,6 +48,7 @@ const PaymentStatus = (): ReactElement => {
     })
   }, [stripe, navigate, setMessage])
 
+  // TODO: login after ordering
   return (
     <Alert variant={isError ? 'danger' : 'success'}>
       <Alert.Heading>{title}</Alert.Heading>

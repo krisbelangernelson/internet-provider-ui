@@ -10,7 +10,7 @@ interface Props {
   stripePromise: Stripe | null
 }
 
-const ThankYou: FC<Props> = ({ stripePromise }) => {
+const Completed: FC<Props> = ({ stripePromise }) => {
   return (
     <Elements stripe={stripePromise}>
       <Container className="text-center">
@@ -24,4 +24,4 @@ const ThankYou: FC<Props> = ({ stripePromise }) => {
   )
 }
 
-export default ThankYou
+export default Completed

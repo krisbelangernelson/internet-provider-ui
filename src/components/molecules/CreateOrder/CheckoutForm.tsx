@@ -1,5 +1,5 @@
 import { useStripe, useElements, PaymentElement, AddressElement } from '@stripe/react-stripe-js'
-import { type FormEvent, useState, type ReactElement, type FC } from 'react'
+import { type FormEvent, useState, type FC } from 'react'
 import './CheckoutForm.scss'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
@@ -12,7 +12,7 @@ interface Props {
   customer?: Customer
 }
 
-const CheckoutForm: FC<Props> = ({ customer }): ReactElement => {
+const CheckoutForm: FC<Props> = ({ customer }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [message, setMessage] = useState<string | null>(null)
@@ -23,10 +23,7 @@ const CheckoutForm: FC<Props> = ({ customer }): ReactElement => {
     isPending,
     isError
   } = useMutation({
-    mutationFn: async (body: Customer) => await customerServices.registerCustomer(body),
-    onError: () => {
-      setIsLoading(false)
-    }
+    mutationFn: async (body: Customer) => await customerServices.registerCustomer(body)
   })
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -36,16 +33,16 @@ const CheckoutForm: FC<Props> = ({ customer }): ReactElement => {
       setIsLoading(true)
 
       if (customer !== undefined) {
-        // registerCustomer(customer)
         await registerCustomer(customer).catch((error) => {
           console.error(error) // eslint-disable-line no-console
+          setIsLoading(false)
         })
 
         if (!isPending && !isError) {
           const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-              return_url: `${window.location.origin}/order/thankyou`
+              return_url: `${window.location.origin}/order/completed`
             }
           })
 

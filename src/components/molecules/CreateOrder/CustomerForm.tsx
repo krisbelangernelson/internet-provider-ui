@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { useState, type ReactElement } from 'react'
+import { useState, type FC } from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { normalizeInputPhone } from '@/utils/utils'
@@ -12,7 +12,7 @@ import { type OrderNavigateState } from '@/types/order'
 
 // TODO:
 // verify if email exists as customer, if address exists as order
-const CustomerForm = (): ReactElement => {
+const CustomerForm: FC = () => {
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
   const navigate = useNavigate()
   const params = useLocation()

@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ReactElement, useState, useEffect } from 'react'
+import { lazy, Suspense, type FC, useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from '@/components/templates/Layout/Layout'
 import Spinner from 'react-bootstrap/Spinner'
@@ -9,7 +9,7 @@ const Home = lazy(async () => await import('@/components/pages/Home/Home'))
 const Internet = lazy(async () => await import('@/components/pages/Internet/Internet'))
 const HowItWorks = lazy(async () => await import('@/components/pages/Internet/HowItWorks'))
 const Order = lazy(async () => await import('@/components/pages/Order/Order'))
-const ThankYou = lazy(async () => await import('@/components/pages/Order/ThankYou'))
+const Completed = lazy(async () => await import('@/components/pages/Order/Completed'))
 const CustomerAccount = lazy(async () => await import('@/components/pages/CustomerAccount/CustomerAccount'))
 const NotFound = lazy(async () => await import('./NotFound'))
 
@@ -17,7 +17,7 @@ interface StripeConfig {
   publishableKey: string
 }
 
-const AppRoutes = (): ReactElement => {
+const AppRoutes: FC = () => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null)
 
   // TODO: useQuery, service, and config for url
@@ -51,7 +51,7 @@ const AppRoutes = (): ReactElement => {
             <Route path="/my-account" element={<CustomerAccount />} />
             <Route path="/order/payment" element={<Order page="payment" stripePromise={stripePromise} />} />
             <Route path="/order/customer" element={<Order page="customer" stripePromise={stripePromise} />} />
-            <Route path="/order/thankyou" element={<ThankYou stripePromise={stripePromise} />} />
+            <Route path="/order/completed" element={<Completed stripePromise={stripePromise} />} />
             <Route path="/order" element={<Order stripePromise={stripePromise} />} />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />

@@ -1,7 +1,6 @@
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { useState, useEffect, type FC } from 'react'
-// import { type Customer } from '@/types/customer'
 import { Elements } from '@stripe/react-stripe-js'
 import { type Stripe } from '@stripe/stripe-js'
 import axios from 'axios'
@@ -29,6 +28,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
     window.location.href = '/internet'
   }
 
+  // TODO: useMutation, config url
   useEffect(() => {
     void axios
       .post('http://localhost:3002/api/v1/stripe/create-payment-intent', {
