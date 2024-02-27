@@ -27,7 +27,6 @@ const staticMiddleware = express.static(dist)
 const pino = pinoHttp()
 
 server.use(cors(corsConfig))
-
 server.use(pino)
 server.use(devMiddleware)
 server.use(hotMiddleware)

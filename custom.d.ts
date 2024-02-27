@@ -12,3 +12,16 @@ declare module '*.scss' {
   const content: ScssVariables
   export default content
 }
+
+interface Api {
+  baseUrl: string
+}
+
+interface ResourcesConfig {
+  environment: string
+  internetApi: Api
+  customersApi: Api
+  ordersApi: Api
+}
+
+declare let Resources: ResourcesConfig

@@ -7,7 +7,7 @@ const webpack = require('webpack')
 const { paths } = require('./parts/webpack.utils')
 const { cssDevelopmentLoaders } = require('./parts/webpack.css-config')
 const { sourceMapLoader } = require('./parts/webpack.js-config')
-const { bundleAnalyzerPlugin, hotModuleReplacementPlugin } = require('./parts/webpack.plugins-config')
+const { bundleAnalyzerPlugin } = require('./parts/webpack.plugins-config')
 const { dist, port } = require('../server/local/server-config')
 const config = require('../server/local/resources')
 
@@ -24,6 +24,9 @@ const localConfig = {
     hot: true,
     historyApiFallback: {
       index: '/index.html'
+    },
+    client: {
+      overlay: false
     }
   }
 }

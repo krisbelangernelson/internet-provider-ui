@@ -3,7 +3,12 @@ const { moduleFileExtensions, paths } = require('./parts/webpack.utils')
 const { jsLoader } = require('./parts/webpack.js-config')
 const { svgLoader } = require('./parts/webpack.asset-config')
 const { alias } = require('./parts/webpack.alias')
-const { cleanWebpackPlugin, htmlWebpackPlugin } = require('./parts/webpack.plugins-config')
+const {
+  cleanWebpackPlugin,
+  htmlWebpackPlugin,
+  purgeCSSWebpackPlugin,
+  compressionPlugin
+} = require('./parts/webpack.plugins-config')
 
 const commonConfig = {
   mode: 'none',
@@ -16,4 +21,13 @@ const commonConfig = {
   }
 }
 
-module.exports = merge(commonConfig, alias, jsLoader, svgLoader, htmlWebpackPlugin, cleanWebpackPlugin)
+module.exports = merge(
+  commonConfig,
+  alias,
+  jsLoader,
+  svgLoader,
+  htmlWebpackPlugin,
+  cleanWebpackPlugin,
+  purgeCSSWebpackPlugin,
+  compressionPlugin
+)

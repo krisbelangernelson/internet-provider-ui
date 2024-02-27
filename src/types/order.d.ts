@@ -6,3 +6,7 @@ export interface OrderNavigateState {
   price?: number
   customer?: Customer
 }
+
+export interface StripeConfig {
+  publishableKey: string
+}

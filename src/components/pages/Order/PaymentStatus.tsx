@@ -68,7 +68,9 @@ const PaymentStatus: FC = () => {
           </div>
         </>
       ) : (
-        <>Login</>
+        <Button onClick={() => {}} variant="outline-success">
+          Login
+        </Button>
       )}
     </Alert>
   )
