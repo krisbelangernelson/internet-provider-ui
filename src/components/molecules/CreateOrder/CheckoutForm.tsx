@@ -1,12 +1,12 @@
 import { useStripe, useElements, PaymentElement, AddressElement } from '@stripe/react-stripe-js'
 import { type FormEvent, useState, type FC } from 'react'
-import './CheckoutForm.scss'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import { useMutation } from '@tanstack/react-query'
 import customerServices from '@/services/customerServices'
 import { type Customer } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
+import './CheckoutForm.scss'
 
 interface Props {
   customer?: Customer

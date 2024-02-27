@@ -1,5 +1,6 @@
 import { type FC } from 'react'
 import Alert from 'react-bootstrap/Alert'
+import './StickyAlert.scss'
 
 interface Props {
   text: string | null
@@ -9,7 +10,7 @@ interface Props {
 const StickyAlert: FC<Props> = ({ text, variant }) => (
   <>
     {text != null && (
-      <Alert variant={variant ?? 'danger'} style={{ top: 0, width: '100%' }} className="text-center">
+      <Alert id="sticky-alert" variant={variant ?? 'danger'} className="text-center">
         {text}
       </Alert>
     )}

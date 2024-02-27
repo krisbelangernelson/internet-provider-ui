@@ -12,7 +12,7 @@ const Layout: FC<Props> = ({ children, alertMsg }) => (
   <>
     <StickyAlert text={alertMsg} variant="danger" />
     <Header />
-    {children}
+    <section id="page-content">{children}</section>
     <Footer />
   </>
 )

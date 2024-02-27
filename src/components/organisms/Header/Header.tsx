@@ -8,21 +8,23 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 const Header = (): ReactElement => (
-  <Container>
-    <Row>
-      <Col style={{ minHeight: '100px' }}>
-        <Stack direction="horizontal" gap={3}>
-          <div className="p-2">
-            <NavMenu />
-          </div>
-          <Stack direction="horizontal" gap={3} className="p-2 ms-auto">
-            <Language />
-            <MyAccount />
+  <header>
+    <Container>
+      <Row>
+        <Col style={{ minHeight: '100px' }}>
+          <Stack direction="horizontal" gap={3}>
+            <div className="p-2">
+              <NavMenu />
+            </div>
+            <Stack direction="horizontal" gap={3} className="p-2 ms-auto">
+              <Language />
+              <MyAccount />
+            </Stack>
           </Stack>
-        </Stack>
-      </Col>
-    </Row>
-  </Container>
+        </Col>
+      </Row>
+    </Container>
+  </header>
 )
 
 export default Header

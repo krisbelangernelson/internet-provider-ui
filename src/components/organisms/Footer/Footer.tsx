@@ -8,7 +8,7 @@ const Footer = (): ReactElement => {
   const { width } = useViewport()
   const breakpoint = 768
 
-  return width < breakpoint ? <MobileFooter /> : <DesktopFooter />
+  return <footer>{width < breakpoint ? <MobileFooter /> : <DesktopFooter />}</footer>
 }
 
 export default Footer

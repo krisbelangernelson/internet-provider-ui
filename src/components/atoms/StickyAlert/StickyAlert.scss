@@ -1,0 +1,10 @@
+#sticky-alert {
+  top: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 10000;
+}
+
+#sticky-alert + header {
+  padding-top: 60px;
+}
