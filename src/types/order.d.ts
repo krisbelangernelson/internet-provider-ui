@@ -10,3 +10,8 @@ export interface OrderNavigateState {
 export interface StripeConfig {
   publishableKey: string
 }
+
+export interface StripeIntent {
+  clientSecret: string
+  amount: number
+}

@@ -3,18 +3,18 @@ import Row from 'react-bootstrap/Row'
 import { useState, useEffect, type FC } from 'react'
 import { Elements } from '@stripe/react-stripe-js'
 import { type Stripe } from '@stripe/stripe-js'
-import axios from 'axios'
-import CheckoutForm from './CheckoutForm'
-import { type OrderNavigateState } from '@/types/order'
+import type { OrderNavigateState } from '@/types/order'
 import { useLocation } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
+import orderServices from '@/services/orderServices'
+import CheckoutForm from './CheckoutForm'
 
 interface Props {
   stripePromise: Stripe | null
 }
 
-interface StripeIntent {
-  clientSecret: string
-  amount: number
+interface PaymentBody {
+  plan: string
 }
 
 const Payment: FC<Props> = ({ stripePromise }) => {
@@ -28,19 +28,21 @@ const Payment: FC<Props> = ({ stripePromise }) => {
     window.location.href = '/internet'
   }
 
-  // TODO: useMutation, config url
+  const { mutateAsync: stripePayment } = useMutation({
+    mutationFn: async (body: PaymentBody) => await orderServices.stripePaymenIntent(body)
+  })
+
   useEffect(() => {
-    void axios
-      .post('http://localhost:3002/api/v1/stripe/create-payment-intent', {
-        plan: `${serviceSelected}-${speed}`
-      })
-      .then(async (response) => {
-        const { clientSecret, amount } = (await response.data) as StripeIntent
+    void stripePayment({
+      plan: `${serviceSelected}-${speed}`
+    })
+      .then((response) => {
+        const { clientSecret, amount } = response
         setClientSecret(clientSecret)
         setTotal(amount)
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error) // eslint-disable-line no-console
       })
   }, [])
 
