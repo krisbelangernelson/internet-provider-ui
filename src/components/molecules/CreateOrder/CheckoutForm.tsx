@@ -1,7 +1,5 @@
 import { useStripe, useElements, PaymentElement, AddressElement } from '@stripe/react-stripe-js'
 import { type FormEvent, useState, type FC } from 'react'
-import Button from 'react-bootstrap/Button'
-import Spinner from 'react-bootstrap/Spinner'
 import { useMutation } from '@tanstack/react-query'
 import customerServices from '@/services/customerServices'
 import { type CustomerRegister } from '@/types/customer'
@@ -17,57 +15,56 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [message, setMessage] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
 
   const {
-    mutateAsync: registerCustomer,
+    mutate: registerCustomer,
     isPending,
-    isError
+    isError,
+    error
   } = useMutation({
-    mutationFn: async (body: CustomerRegister) => await customerServices.registerCustomer(body)
-  })
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault()
-
-    if (stripe != null && elements != null) {
-      setIsLoading(true)
-
-      if (customer !== undefined) {
-        // TODO: should the customer be created before or after?
-        await registerCustomer(customer).catch((error) => {
-          console.error(error) // eslint-disable-line no-console
-          setIsLoading(false)
+    mutationFn: async (body: CustomerRegister) => await customerServices.registerCustomer(body),
+    onError: () => {
+      console.error('registerCustomer error:', error) // eslint-disable-line no-console
+      setIsProcessing(false)
+    },
+    onSuccess: async () => {
+      if (!isError && stripe != null && elements != null) {
+        const { error } = await stripe.confirmPayment({
+          elements,
+          confirmParams: {
+            return_url: `${window.location.origin}/order/completed`
+          }
         })
 
-        if (!isPending && !isError) {
-          const { error } = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-              return_url: `${window.location.origin}/order/completed`
-            }
-          })
-
-          if (error.type === 'card_error' || error.type === 'validation_error') {
-            setMessage(error.message ?? 'error.message undefined')
-          } else {
-            setMessage('An unexpected error occured.')
-          }
-
-          setIsLoading(false)
+        if (error.type === 'card_error' || error.type === 'validation_error') {
+          setMessage(error.message ?? 'error.message undefined')
+        } else {
+          setMessage('An unexpected error occured.')
         }
+
+        setIsProcessing(false)
       }
+    }
+  })
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+
+    if (customer !== undefined) {
+      setIsProcessing(true)
+      // TODO: should the customer be created before or after?
+      registerCustomer(customer)
     }
   }
 
   return (
-    /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
     <form id="payment-form" onSubmit={handleSubmit}>
       <AddressElement options={{ mode: 'shipping', allowedCountries: ['CA'] }} />
       <PaymentElement id="payment-element" className="mt-2" />
       <ButtonSpinner
-        isDisabled={isPending || isLoading || stripe == null || elements == null}
-        isLoading={isLoading}
+        isDisabled={isPending || isProcessing || stripe == null || elements == null}
+        isLoading={isProcessing}
         buttonLabel="Pay Now"
         loadingLabel="Paying"
         className="w-100"

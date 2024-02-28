@@ -10,13 +10,10 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Alert from 'react-bootstrap/Alert'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { type AxiosError } from 'axios'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
-
-interface ErrorResponseData {
-  message: string
-}
+import { type AxiosError } from 'axios'
+import { handleAxiosError } from '@/utils/handleError'
 
 interface LocationState {
   from: string
@@ -37,14 +34,10 @@ const Login: FC = () => {
     password: yup.string().required('Password is required.')
   })
 
-  const { mutate: loginCustomer, isPending } = useMutation<CustomerResponse, AxiosError, CustomerLogin>({
+  const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerServices.loginCustomer(body),
     onError: (error) => {
-      if (error.response?.data !== undefined) {
-        setError((error.response?.data as ErrorResponseData).message)
-      } else {
-        setError(error.message)
-      }
+      setError(handleAxiosError(error as AxiosError))
     },
     onSuccess: (data) => {
       // TODO: store userinfo in context?
@@ -104,7 +97,6 @@ const Login: FC = () => {
                 <ButtonSpinner
                   onClick={() => {
                     setValidateAfterSubmit(true)
-                    handleSubmit()
                   }}
                   isDisabled={isPending}
                   isLoading={isPending}

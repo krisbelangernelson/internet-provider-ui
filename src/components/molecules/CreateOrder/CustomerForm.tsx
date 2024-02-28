@@ -10,8 +10,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { normalizeInputPhone } from '@/utils/utils'
 import { type OrderNavigateState } from '@/types/order'
 
-// TODO:
-// verify if email exists as customer, if address exists as order
+// TODO: verify if email exists as customer, if address exists as order
+// TODO: login vs register option (account created, proceeding to payment)
 const CustomerForm: FC = () => {
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
   const navigate = useNavigate()
@@ -58,6 +58,8 @@ const CustomerForm: FC = () => {
   const formik = useFormik({
     validationSchema: schema,
     onSubmit: (values) => {
+      // TODO: verify email doesn't already exist
+      // create custom error state for Form.Control.Feedback
       const customerData = {
         firstName: values.firstName,
         lastName: values.lastName,

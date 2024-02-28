@@ -1,5 +1,3 @@
-import axios, { type AxiosInstance } from 'axios'
-
 export const normalizeInputPhone = (value: string): string => {
   if (value === '') return value
   const currentValue = value.replace(/[^\d]/g, '')
@@ -8,13 +6,4 @@ export const normalizeInputPhone = (value: string): string => {
   if (cvLength < 4) return currentValue
   if (cvLength < 7) return `${currentValue.slice(0, 3)}-${currentValue.slice(3)}`
   return `${currentValue.slice(0, 3)}-${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`
-}
-
-export const axiosInstance = (baseUrl: string): AxiosInstance => {
-  return axios.create({
-    baseURL: baseUrl,
-    headers: {
-      'Content-type': 'application/json'
-    }
-  })
 }

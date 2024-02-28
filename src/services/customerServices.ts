@@ -1,5 +1,5 @@
 import type { CustomerRegister, RegisterResponse, CustomerLogin, CustomerResponse } from '@/types/customer'
-import { axiosInstance } from '@/utils/utils'
+import axiosInstance from '@/utils/axios'
 
 const {
   customersApi: { baseUrl }
@@ -8,7 +8,7 @@ const {
 const apiClient = axiosInstance(baseUrl)
 
 const registerCustomer = async (body: CustomerRegister): Promise<RegisterResponse> => {
-  return await apiClient.post<RegisterResponse>('/auth/register', body).then((response) => response.data)
+  return await apiClient.post<RegisterResponse>('/auth/registerr', body).then((response) => response.data)
 }
 
 const loginCustomer = async (body: CustomerLogin): Promise<CustomerResponse> => {

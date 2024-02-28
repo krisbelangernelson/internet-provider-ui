@@ -14,6 +14,7 @@ interface Props {
   stripePromise: Stripe | null
 }
 
+// TODO: convert into HOC for the 3 section to be pages and be DRY?
 const Order: FC<Props> = ({ page, stripePromise }) => {
   const params = useLocation()
   const { serviceSelected, speed } = (params.state as OrderNavigateState) ?? {}

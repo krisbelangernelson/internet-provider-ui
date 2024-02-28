@@ -1,5 +1,5 @@
 import type { StripeConfig, StripeIntent } from '@/types/order'
-import { axiosInstance } from '@/utils/utils'
+import axiosInstance from '@/utils/axios'
 
 const {
   ordersApi: { baseUrl }

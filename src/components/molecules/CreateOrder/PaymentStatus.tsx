@@ -48,7 +48,6 @@ const PaymentStatus: FC = () => {
     })
   }, [stripe, navigate, setMessage])
 
-  // TODO: login after ordering
   return (
     <Alert variant={isError ? 'danger' : 'success'}>
       <Alert.Heading>{title}</Alert.Heading>

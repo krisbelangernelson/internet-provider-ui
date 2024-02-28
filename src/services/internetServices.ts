@@ -1,5 +1,5 @@
 import { type InternetService } from '@/types/InternetService'
-import { axiosInstance } from '@/utils/utils'
+import axiosInstance from '@/utils/axios'
 
 const {
   internetApi: { baseUrl }
