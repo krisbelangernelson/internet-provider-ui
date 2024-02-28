@@ -4,12 +4,12 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import { useMutation } from '@tanstack/react-query'
 import customerServices from '@/services/customerServices'
-import { type Customer } from '@/types/customer'
+import { type CustomerRegister } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
 import './CheckoutForm.scss'
 
 interface Props {
-  customer?: Customer
+  customer?: CustomerRegister
 }
 
 const CheckoutForm: FC<Props> = ({ customer }) => {
@@ -23,7 +23,7 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
     isPending,
     isError
   } = useMutation({
-    mutationFn: async (body: Customer) => await customerServices.registerCustomer(body)
+    mutationFn: async (body: CustomerRegister) => await customerServices.registerCustomer(body)
   })
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -33,6 +33,7 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
       setIsLoading(true)
 
       if (customer !== undefined) {
+        // TODO: should the customer be created before or after?
         await registerCustomer(customer).catch((error) => {
           console.error(error) // eslint-disable-line no-console
           setIsLoading(false)

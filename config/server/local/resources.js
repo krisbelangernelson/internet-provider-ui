@@ -4,7 +4,7 @@ const { environment } = require('./server-config')
 module.exports = {
   ...common,
   environment,
-  cors: {
+  corsConfig: {
     origin: 'http://localhost:8080',
     credentials: true
   },

@@ -1,10 +1,10 @@
-import { type Customer } from '@/types/customer'
+import { type CustomerRegister } from '@/types/customer'
 
 export interface OrderNavigateState {
   serviceSelected?: string
   speed?: string
   price?: number
-  customer?: Customer
+  customer?: CustomerRegister
 }
 
 export interface StripeConfig {

@@ -4,11 +4,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Spinner from 'react-bootstrap/Spinner'
 import Stack from 'react-bootstrap/Stack'
 import Alert from 'react-bootstrap/Alert'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { type OrderNavigateState } from '@/types/order'
+import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 
 // TODO: make an autocomplete with real addresses
 // https://www.canadapost-postescanada.ca/ac/support/api/
@@ -22,7 +22,7 @@ const ServiceAvailability = (): ReactElement => {
   const params = useLocation()
   const { serviceSelected, speed, price } = (params.state as OrderNavigateState) ?? {}
 
-  const onClick = (): void => {
+  const onClickSearch = (): void => {
     setIsSearching(true)
     setTimeout(() => {
       setIsSearching(false)
@@ -60,16 +60,13 @@ const ServiceAvailability = (): ReactElement => {
             </Form.Group>
 
             {!isFound ? (
-              <Button variant="primary" type="submit" onClick={onClick} disabled={isSearching || address === ''}>
-                {isSearching ? (
-                  <>
-                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-                    <span className="ms-1">Searching...</span>
-                  </>
-                ) : (
-                  <>Search</>
-                )}
-              </Button>
+              <ButtonSpinner
+                onClick={onClickSearch}
+                isDisabled={isSearching || address === ''}
+                isLoading={isSearching}
+                buttonLabel="Search"
+                loadingLabel="Searching..."
+              />
             ) : (
               <Button type="submit" onClick={onClickNext}>
                 Next
