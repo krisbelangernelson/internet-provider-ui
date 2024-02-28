@@ -17,7 +17,8 @@ const Internet = (): ReactElement => {
   const [sortedOffers, setSortedOffers] = useState<InternetService[] | undefined>(undefined)
   const [disabledStyle, setDisabledStyle] = useState('')
 
-  const { data, isLoading } = useQuery<InternetService[], Error>({
+  // TODO: use notification component to show error
+  const { data, isLoading, error, isError } = useQuery({
     queryKey: ['internet-services'],
     queryFn: internetServices.findAll,
     enabled: true

@@ -3,6 +3,8 @@ import { type Stripe, loadStripe } from '@stripe/stripe-js'
 import orderServices from '@/services/orderServices'
 import { type StripeConfig } from '@/types/order'
 import { useQuery } from '@tanstack/react-query'
+import { handleAxiosError } from '@/utils/handleError'
+import { PAYMENT_OFFLINE_ALERT } from '@/constants/errors'
 
 interface UseStripeConfig {
   stripePromise: Stripe | null
@@ -13,7 +15,7 @@ const useStripeConfig = (): UseStripeConfig => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null)
   const [alertMsg, setAlertMsg] = useState<string | null>(null)
 
-  const { data, error } = useQuery<StripeConfig, Error>({
+  const { data, error, isError } = useQuery<StripeConfig, Error>({
     queryKey: ['stripe-config'],
     queryFn: orderServices.stripeConfig,
     enabled: true
@@ -33,10 +35,11 @@ const useStripeConfig = (): UseStripeConfig => {
   }, [data])
 
   useEffect(() => {
-    if (error != null) {
-      setAlertMsg('ATTENTION: Payments are currently not functioning.')
+    if (isError) {
+      handleAxiosError(error)
+      setAlertMsg(PAYMENT_OFFLINE_ALERT)
     }
-  }, [error])
+  }, [isError, error])
 
   return { stripePromise, alertMsg }
 }

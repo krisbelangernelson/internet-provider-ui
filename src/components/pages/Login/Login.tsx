@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router'
 import { useState, type FC } from 'react'
 import customerServices from '@/services/customerServices'
-import type { CustomerLogin, CustomerResponse } from '@/types/customer'
+import type { CustomerLogin } from '@/types/customer'
 import { useMutation } from '@tanstack/react-query'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
@@ -12,7 +12,6 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
-import { type AxiosError } from 'axios'
 import { handleAxiosError } from '@/utils/handleError'
 
 interface LocationState {
@@ -37,7 +36,7 @@ const Login: FC = () => {
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerServices.loginCustomer(body),
     onError: (error) => {
-      setError(handleAxiosError(error as AxiosError))
+      setError(handleAxiosError(error, 'loginCustomer'))
     },
     onSuccess: (data) => {
       // TODO: store userinfo in context?

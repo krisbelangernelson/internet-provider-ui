@@ -6,6 +6,7 @@ import { type CustomerRegister } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import './CheckoutForm.scss'
+import { UNEXPECTED_ERROR } from '@/constants/errors'
 
 interface Props {
   customer?: CustomerRegister
@@ -69,7 +70,7 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
         loadingLabel="Paying"
         className="w-100"
       />
-      {isError && <Alert variant="danger">An unexpected error occured. Please contact support.</Alert>}
+      {isError && <Alert variant="danger">{UNEXPECTED_ERROR}</Alert>}
       {message != null && <div id="payment-message">{message}</div>}
     </form>
   )

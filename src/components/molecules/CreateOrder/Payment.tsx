@@ -28,6 +28,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
     window.location.href = '/internet'
   }
 
+  // TODO: use notification component to show error
   const { mutateAsync: stripePayment } = useMutation({
     mutationFn: async (body: PaymentBody) => await orderServices.stripePaymenIntent(body)
   })
