@@ -9,12 +9,11 @@ import Row from 'react-bootstrap/Row'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Alert from 'react-bootstrap/Alert'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 import { handleAxiosError } from '@/utils/handleError'
-import VALIDATIONS from '@/constants/validations'
 import FORMS from '@/constants/forms'
+import { loginFormSchema } from '@/utils/validationSchemas'
 
 interface LocationState {
   from: string
@@ -26,14 +25,6 @@ const Login: FC = () => {
   const from: string = (params.state as LocationState)?.from ?? '/customer-area'
   const [error, setError] = useState('')
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
-
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .required(VALIDATIONS.email.required)
-      .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, VALIDATIONS.email.invalid),
-    password: yup.string().required(VALIDATIONS.password.required)
-  })
 
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerService.loginCustomer(body),
@@ -47,7 +38,7 @@ const Login: FC = () => {
   })
 
   const formik = useFormik({
-    validationSchema: schema,
+    validationSchema: loginFormSchema,
     onSubmit: ({ email, password }) => {
       loginCustomer({ email, password })
     },
