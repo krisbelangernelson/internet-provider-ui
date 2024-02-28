@@ -1,10 +1,10 @@
-import React, { type ErrorInfo, type FC } from 'react'
+import { type ErrorInfo, type FC, type ReactNode } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { ErrorBoundary as ErrorBoundaryLib } from 'react-error-boundary'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 // use the useErrorBoundary hook to send errors here

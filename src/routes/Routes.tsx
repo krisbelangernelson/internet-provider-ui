@@ -10,7 +10,7 @@ const HowItWorks = lazy(async () => await import('@/components/pages/Internet/Ho
 const Order = lazy(async () => await import('@/components/pages/Order/Order'))
 const Completed = lazy(async () => await import('@/components/pages/Order/Completed'))
 const CustomerAccount = lazy(async () => await import('@/components/pages/CustomerAccount/CustomerAccount'))
-const Login = lazy(async () => await import('@/components/molecules/Login/Login'))
+const Login = lazy(async () => await import('@/components/pages/Login/Login'))
 const NotFound = lazy(async () => await import('./NotFound'))
 
 const AppRoutes: FC = () => {

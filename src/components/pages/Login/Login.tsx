@@ -8,20 +8,24 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Alert from 'react-bootstrap/Alert'
-import Container from 'react-bootstrap/Container'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { type AxiosError } from 'axios'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
+import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 
 interface ErrorResponseData {
   message: string
 }
 
+interface LocationState {
+  from: string
+}
+
 const Login: FC = () => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const from: string = location.state?.from?.pathname ?? '/customer-area' // eslint-disable-line
+  const params = useLocation()
+  const from: string = (params.state as LocationState)?.from ?? '/customer-area'
   const [error, setError] = useState('')
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
 
@@ -63,10 +67,7 @@ const Login: FC = () => {
   const { handleSubmit, handleChange, values, touched, errors } = formik
 
   return (
-    <Container className="text-center">
-      <Row>
-        <Col className="fs-2 mb-2">Customer Login</Col>
-      </Row>
+    <SectionLayout title="Customer Login">
       <Row className="text-start">
         <Form noValidate onSubmit={handleSubmit}>
           <Row className="mb-3">
@@ -116,7 +117,7 @@ const Login: FC = () => {
           </Row>
         </Form>
       </Row>
-    </Container>
+    </SectionLayout>
   )
 }
 

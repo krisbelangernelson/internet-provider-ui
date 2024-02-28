@@ -1,6 +1,5 @@
 import { type FC } from 'react'
 import { useLocation } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ServiceAvailability from '@/components/molecules/ServiceAvailability/ServiceAvailability'
@@ -8,6 +7,7 @@ import CustomerForm from '@/components/molecules/CreateOrder/CustomerForm'
 import Payment from '@/components/molecules/CreateOrder/Payment'
 import { type Stripe } from '@stripe/stripe-js'
 import { type OrderNavigateState } from '@/types/order'
+import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 
 interface Props {
   page?: string
@@ -32,20 +32,21 @@ const Order: FC<Props> = ({ page, stripePromise }) => {
     section = <ServiceAvailability />
   }
 
+  const title = (
+    <>
+      Ordering{' '}
+      <span className="primary">
+        {serviceSelected?.toUpperCase()}-{speed?.toUpperCase()}
+      </span>
+    </>
+  )
+
   return (
-    <Container className="text-center">
-      <Row>
-        <Col className="fs-2">
-          Ordering{' '}
-          <span className="primary">
-            {serviceSelected?.toUpperCase()}-{speed?.toUpperCase()}
-          </span>
-        </Col>
-      </Row>
+    <SectionLayout title={title}>
       <Row>
         <Col>{section}</Col>
       </Row>
-    </Container>
+    </SectionLayout>
   )
 }
 

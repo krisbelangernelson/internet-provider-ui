@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query'
 import customerServices from '@/services/customerServices'
 import { type CustomerRegister } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
+import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import './CheckoutForm.scss'
 
 interface Props {
@@ -64,22 +65,13 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
     <form id="payment-form" onSubmit={handleSubmit}>
       <AddressElement options={{ mode: 'shipping', allowedCountries: ['CA'] }} />
       <PaymentElement id="payment-element" className="mt-2" />
-      <Button
-        variant="primary"
-        type="submit"
-        disabled={isPending || isLoading || stripe == null || elements == null}
-        id="submit"
+      <ButtonSpinner
+        isDisabled={isPending || isLoading || stripe == null || elements == null}
+        isLoading={isLoading}
+        buttonLabel="Pay Now"
+        loadingLabel="Paying"
         className="w-100"
-      >
-        {isLoading ? (
-          <>
-            <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-            <span className="ms-1">Paying</span>
-          </>
-        ) : (
-          <>Pay Now</>
-        )}
-      </Button>
+      />
       {isError && <Alert variant="danger">An unexpected error occured. Please contact support.</Alert>}
       {message != null && <div id="payment-message">{message}</div>}
     </form>

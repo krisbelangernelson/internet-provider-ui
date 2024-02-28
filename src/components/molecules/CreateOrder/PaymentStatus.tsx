@@ -68,7 +68,12 @@ const PaymentStatus: FC = () => {
           </div>
         </>
       ) : (
-        <Button onClick={() => {}} variant="outline-success">
+        <Button
+          onClick={() => {
+            navigate('/login', { state: { from: '/from-url' } })
+          }}
+          variant="outline-success"
+        >
           Login
         </Button>
       )}
