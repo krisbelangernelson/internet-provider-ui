@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
 import CheckoutForm from './CheckoutForm'
+import logger from '@/utils/logger'
 
 interface Props {
   stripePromise: Stripe | null
@@ -24,6 +25,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
   const { serviceSelected, speed, customer } = (params.state as OrderNavigateState) ?? {}
 
   // Don't allow payment access without customer info
+  // TODO: make into a hook
   if (customer === undefined) {
     window.location.href = '/internet'
   }
@@ -42,8 +44,8 @@ const Payment: FC<Props> = ({ stripePromise }) => {
         setClientSecret(clientSecret)
         setTotal(amount)
       })
-      .catch((error) => {
-        console.error(error) // eslint-disable-line no-console
+      .catch((error: Error) => {
+        logger.error(error, 'stripePayment')
       })
   }, [])
 
@@ -58,7 +60,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
             <>
               <div className="fs-3 mb-2 primary">Total: ${total}</div>
               <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm customer={customer} />
+                <CheckoutForm />
               </Elements>
             </>
           )}

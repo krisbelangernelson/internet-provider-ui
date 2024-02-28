@@ -6,6 +6,9 @@ const VALIDATIONS = {
   },
   password: {
     required: 'Password is required.'
+  },
+  phone: {
+    exists: 'Phone number already exists as a customer.'
   }
 }
 

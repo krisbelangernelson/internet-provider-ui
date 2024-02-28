@@ -12,18 +12,44 @@ import { type OrderNavigateState } from '@/types/order'
 import { useMutation } from '@tanstack/react-query'
 import customerService from '@/services/customerService'
 import VALIDATIONS from '@/constants/validations'
+import APP_ERRORS from '@/constants/appErrors'
+import { handleAxiosError } from '@/utils/handleError'
+import type { CustomerRegister, CustomerExistsResponse, CustomerExists } from '@/types/customer'
+import Alert from 'react-bootstrap/Alert'
 
-// TODO: verify if email exists as customer, if address exists as order
 // TODO: login vs register option (account created, proceeding to payment)
 const CustomerForm: FC = () => {
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
   const navigate = useNavigate()
   const params = useLocation()
   const { serviceSelected, speed, price, customer } = (params.state as OrderNavigateState) ?? {}
+  const [customerData, setCustomerData] = useState<CustomerRegister | null>(null)
 
   // TODO: use notification component to show error
-  const { mutateAsync: emailExists } = useMutation({
-    mutationFn: async (email: string) => await customerService.emailExists(email)
+  const { mutateAsync: customerExists } = useMutation({
+    mutationFn: async (body: CustomerExists) => await customerService.customerExists(body)
+  })
+
+  const {
+    mutate: registerCustomer,
+    isPending,
+    isError
+  } = useMutation({
+    mutationFn: async (body: CustomerRegister) => await customerService.registerCustomer(body),
+    onError: (error) => {
+      handleAxiosError(error, 'loginCustomer')
+      // setIsProcessing(false)
+    },
+    onSuccess: (data) => {
+      navigate('/order/payment', {
+        state: {
+          serviceSelected,
+          speed,
+          price,
+          customer: customerData
+        }
+      })
+    }
   })
 
   // TODO: move text to constants
@@ -60,27 +86,33 @@ const CustomerForm: FC = () => {
   const formik = useFormik({
     validationSchema: schema,
     onSubmit: async (values, { setFieldError }) => {
-      // TODO: verify email doesn't already exist
-      // create custom error state for Form.Control.Feedback
-      const { exists } = await emailExists(values.email)
-      if (!exists) {
-        const customerData = {
+      const { emailExists, phoneExists } = await customerExists({
+        email: values.email,
+        phone: values.phone.replace(/[^\d]/g, '')
+      })
+      console.log('emailExists, phoneExists', emailExists, phoneExists)
+      if (!emailExists && !phoneExists) {
+        const data = {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
           phone: values.phone.replace(/[^\d]/g, ''),
           password: values.password
         }
-        navigate('/order/payment', {
-          state: {
-            serviceSelected,
-            speed,
-            price,
-            customer: customerData
-          }
+        setCustomerData({
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          phone: values.phone.replace(/[^\d]/g, '')
         })
-      } else {
+        registerCustomer(data)
+      } else if (emailExists && phoneExists) {
         setFieldError('email', VALIDATIONS.email.exists)
+        setFieldError('phone', VALIDATIONS.phone.exists)
+      } else if (emailExists && !phoneExists) {
+        setFieldError('email', VALIDATIONS.email.exists)
+      } else if (phoneExists && !emailExists) {
+        setFieldError('phone', VALIDATIONS.phone.exists)
       }
     },
     initialValues: {
@@ -210,11 +242,12 @@ const CustomerForm: FC = () => {
                   type="submit"
                   onClick={() => {
                     setValidateAfterSubmit(true)
-                    handleSubmit()
                   }}
+                  disabled={isPending}
                 >
                   Next
                 </Button>
+                {isError && <Alert variant="danger">{APP_ERRORS.unexpectedError}</Alert>}
               </div>
             </Col>
           </Row>

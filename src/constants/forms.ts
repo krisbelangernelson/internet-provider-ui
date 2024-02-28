@@ -14,6 +14,9 @@ const FORMS = {
   payment: {
     label: 'Pay Now',
     loadingLabel: 'Paying...'
+  },
+  buttons: {
+    next: 'Next'
   }
 }
 

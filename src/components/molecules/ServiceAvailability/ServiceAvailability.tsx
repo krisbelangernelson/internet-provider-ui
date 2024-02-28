@@ -13,6 +13,7 @@ import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 // TODO: make an autocomplete with real addresses
 // https://www.canadapost-postescanada.ca/ac/support/api/
 
+// TODO: verify if address exists as order
 const ServiceAvailability = (): ReactElement => {
   const navigate = useNavigate()
   const [isSearching, setIsSearching] = useState(false)

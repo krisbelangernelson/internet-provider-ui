@@ -3,7 +3,7 @@ export interface CustomerRegister {
   lastName: string
   email: string
   phone: string
-  password: string
+  password?: string
 }
 
 export interface RegisterResponse {
@@ -19,10 +19,18 @@ export interface CustomerResponse {
   lastName: string
   email: string
   phone: string
-  password: string
 }
 
 export interface CustomerLogin {
   email: string
   password: string
+}
+
+export interface CustomerExists {
+  email: string
+  phone: string
+}
+export interface CustomerExistsResponse {
+  emailExists: boolean
+  phoneExists: boolean
 }
