@@ -15,6 +15,6 @@ const stripePaymenIntent = async (body: { plan: string }): Promise<StripeIntent>
   return await apiClient.post<StripeIntent>('/stripe/create-payment-intent', body).then((response) => response.data)
 }
 
-const orderServices = { stripeConfig, stripePaymenIntent }
+const orderService = { stripeConfig, stripePaymenIntent }
 
-export default orderServices
+export default orderService

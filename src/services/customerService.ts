@@ -19,6 +19,6 @@ const emailExists = async (email: string): Promise<{ exists: boolean }> => {
   return await apiClient.post<{ exists: boolean }>('/auth/email-exists', { email }).then((response) => response.data)
 }
 
-const customerServices = { registerCustomer, loginCustomer, emailExists }
+const customerService = { registerCustomer, loginCustomer, emailExists }
 
-export default customerServices
+export default customerService

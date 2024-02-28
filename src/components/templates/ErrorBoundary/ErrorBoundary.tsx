@@ -2,12 +2,14 @@ import { type ErrorInfo, type FC, type ReactNode } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { ErrorBoundary as ErrorBoundaryLib } from 'react-error-boundary'
+import APP_ERRORS from '@/constants/appErrors'
+import logger from '@/utils/logger'
 
 interface Props {
   children: ReactNode
 }
 
-// use the useErrorBoundary hook to send errors here
+// Note: use the 'useErrorBoundary' hook to send errors directly here
 // can be useful for async error handling
 const ErrorBoundary: FC<Props> = ({ children }) => {
   const onClickReload = (): void => {
@@ -16,7 +18,7 @@ const ErrorBoundary: FC<Props> = ({ children }) => {
 
   const logError = (error: Error, info: ErrorInfo): void => {
     const { componentStack } = info
-    console.error(error, componentStack) // eslint-disable-line no-console
+    logger.error(`error: ${JSON.stringify(error)}, stack: ${JSON.stringify(componentStack)}`, 'ErrorBoundary')
   }
 
   return (
@@ -27,7 +29,7 @@ const ErrorBoundary: FC<Props> = ({ children }) => {
           <Modal.Header closeButton>
             <Modal.Title>Error</Modal.Title>
           </Modal.Header>
-          <Modal.Body>An unexpected error occurred. Reload to try again, or contact support.</Modal.Body>
+          <Modal.Body>{APP_ERRORS.errourBoundary}</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClickReload}>
               Reload

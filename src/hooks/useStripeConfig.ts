@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { type Stripe, loadStripe } from '@stripe/stripe-js'
-import orderServices from '@/services/orderServices'
+import orderService from '@/services/orderService'
 import { type StripeConfig } from '@/types/order'
 import { useQuery } from '@tanstack/react-query'
 import { handleAxiosError } from '@/utils/handleError'
@@ -17,7 +17,7 @@ const useStripeConfig = (): UseStripeConfig => {
 
   const { data, error, isError } = useQuery<StripeConfig, Error>({
     queryKey: ['stripe-config'],
-    queryFn: orderServices.stripeConfig,
+    queryFn: orderService.stripeConfig,
     enabled: true
   })
 

@@ -9,6 +9,9 @@ import { useState, type FC } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { normalizeInputPhone } from '@/utils/utils'
 import { type OrderNavigateState } from '@/types/order'
+import { useMutation } from '@tanstack/react-query'
+import customerService from '@/services/customerService'
+import VALIDATIONS from '@/constants/validations'
 
 // TODO: verify if email exists as customer, if address exists as order
 // TODO: login vs register option (account created, proceeding to payment)
@@ -17,6 +20,11 @@ const CustomerForm: FC = () => {
   const navigate = useNavigate()
   const params = useLocation()
   const { serviceSelected, speed, price, customer } = (params.state as OrderNavigateState) ?? {}
+
+  // TODO: use notification component to show error
+  const { mutateAsync: emailExists } = useMutation({
+    mutationFn: async (email: string) => await customerService.emailExists(email)
+  })
 
   // TODO: move text to constants
   const schema = yup.object().shape({
@@ -34,12 +42,6 @@ const CustomerForm: FC = () => {
       .string()
       .required('Email is required.')
       .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'Must be a valid email.'),
-    // TODO: cehck if email exists
-    // .test('checkDuplEmail', 'Email already in use.', async (value) => {
-    //   // needs a debounce to wait for typing to stop before making request when the submit re-enables live validation?
-    //   await sleep(2000)
-    //   return false
-    // }),
     phone: yup
       .string()
       .required('Please enter your phone number.')
@@ -57,24 +59,29 @@ const CustomerForm: FC = () => {
 
   const formik = useFormik({
     validationSchema: schema,
-    onSubmit: (values) => {
+    onSubmit: async (values, { setFieldError }) => {
       // TODO: verify email doesn't already exist
       // create custom error state for Form.Control.Feedback
-      const customerData = {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        phone: values.phone.replace(/[^\d]/g, ''),
-        password: values.password
-      }
-      navigate('/order/payment', {
-        state: {
-          serviceSelected,
-          speed,
-          price,
-          customer: customerData
+      const { exists } = await emailExists(values.email)
+      if (!exists) {
+        const customerData = {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          phone: values.phone.replace(/[^\d]/g, ''),
+          password: values.password
         }
-      })
+        navigate('/order/payment', {
+          state: {
+            serviceSelected,
+            speed,
+            price,
+            customer: customerData
+          }
+        })
+      } else {
+        setFieldError('email', VALIDATIONS.email.exists)
+      }
     },
     initialValues: {
       firstName: customer?.firstName ?? '',

@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router'
 import { useState, type FC } from 'react'
-import customerServices from '@/services/customerServices'
+import customerService from '@/services/customerService'
 import type { CustomerLogin } from '@/types/customer'
 import { useMutation } from '@tanstack/react-query'
 import Col from 'react-bootstrap/Col'
@@ -36,7 +36,7 @@ const Login: FC = () => {
   })
 
   const { mutate: loginCustomer, isPending } = useMutation({
-    mutationFn: async (body: CustomerLogin) => await customerServices.loginCustomer(body),
+    mutationFn: async (body: CustomerLogin) => await customerService.loginCustomer(body),
     onError: (error) => {
       setError(handleAxiosError(error, 'loginCustomer'))
     },

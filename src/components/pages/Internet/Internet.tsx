@@ -7,7 +7,7 @@ import SpeedSelection from '@/components/molecules/SpeedSelection/SpeedSelection
 import SpeedDetailsModal from '@/components/molecules/SpeedDetailsModal/SpeedDetailsModal'
 import { useQuery } from '@tanstack/react-query'
 import { type InternetService } from '@/types/InternetService'
-import internetServices from '@/services/internetServices'
+import internetService from '@/services/internetService'
 import Spinner from 'react-bootstrap/Spinner'
 
 const Internet = (): ReactElement => {
@@ -20,7 +20,7 @@ const Internet = (): ReactElement => {
   // TODO: use notification component to show error
   const { data, isLoading, error, isError } = useQuery({
     queryKey: ['internet-services'],
-    queryFn: internetServices.findAll,
+    queryFn: internetService.findAll,
     enabled: true
   })
 

@@ -6,7 +6,7 @@ import { type Stripe } from '@stripe/stripe-js'
 import type { OrderNavigateState } from '@/types/order'
 import { useLocation } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import orderServices from '@/services/orderServices'
+import orderService from '@/services/orderService'
 import CheckoutForm from './CheckoutForm'
 
 interface Props {
@@ -30,7 +30,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
 
   // TODO: use notification component to show error
   const { mutateAsync: stripePayment } = useMutation({
-    mutationFn: async (body: PaymentBody) => await orderServices.stripePaymenIntent(body)
+    mutationFn: async (body: PaymentBody) => await orderService.stripePaymenIntent(body)
   })
 
   useEffect(() => {

@@ -11,6 +11,6 @@ const findAll = async (): Promise<InternetService[]> => {
   return await apiClient.get<InternetService[]>('/internet-services').then((response) => response.data)
 }
 
-const internetServices = { findAll }
+const internetService = { findAll }
 
-export default internetServices
+export default internetService

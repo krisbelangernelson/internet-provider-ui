@@ -1,7 +1,7 @@
 import { useStripe, useElements, PaymentElement, AddressElement } from '@stripe/react-stripe-js'
 import { type FormEvent, useState, type FC } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import customerServices from '@/services/customerServices'
+import customerService from '@/services/customerService'
 import { type CustomerRegister } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
@@ -25,7 +25,7 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
     isPending,
     isError
   } = useMutation({
-    mutationFn: async (body: CustomerRegister) => await customerServices.registerCustomer(body),
+    mutationFn: async (body: CustomerRegister) => await customerService.registerCustomer(body),
     onError: (error) => {
       handleAxiosError(error, 'loginCustomer')
       setIsProcessing(false)
