@@ -4,7 +4,7 @@ import orderServices from '@/services/orderServices'
 import { type StripeConfig } from '@/types/order'
 import { useQuery } from '@tanstack/react-query'
 import { handleAxiosError } from '@/utils/handleError'
-import { PAYMENT_OFFLINE_ALERT } from '@/constants/errors'
+import APP_ERRORS from '@/constants/appErrors'
 
 interface UseStripeConfig {
   stripePromise: Stripe | null
@@ -37,7 +37,7 @@ const useStripeConfig = (): UseStripeConfig => {
   useEffect(() => {
     if (isError) {
       handleAxiosError(error)
-      setAlertMsg(PAYMENT_OFFLINE_ALERT)
+      setAlertMsg(APP_ERRORS.paymentOfflineAlert)
     }
   }, [isError, error])
 

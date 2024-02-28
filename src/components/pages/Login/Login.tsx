@@ -13,6 +13,8 @@ import * as yup from 'yup'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 import { handleAxiosError } from '@/utils/handleError'
+import VALIDATIONS from '@/constants/validations'
+import FORMS from '@/constants/forms'
 
 interface LocationState {
   from: string
@@ -28,9 +30,9 @@ const Login: FC = () => {
   const schema = yup.object().shape({
     email: yup
       .string()
-      .required('Email is required.')
-      .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'Must be a valid email.'),
-    password: yup.string().required('Password is required.')
+      .required(VALIDATIONS.email.required)
+      .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, VALIDATIONS.email.invalid),
+    password: yup.string().required(VALIDATIONS.password.required)
   })
 
   const { mutate: loginCustomer, isPending } = useMutation({
@@ -65,7 +67,7 @@ const Login: FC = () => {
           <Row className="mb-3">
             <Col md={{ span: 8, offset: 2 }} lg={{ span: 4, offset: 4 }}>
               <Form.Group as={Col} controlId="email" className="mt-2">
-                <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3">
+                <FloatingLabel controlId="floatingEmail" label={FORMS.email.label} className="mb-3">
                   <Form.Control
                     type="email"
                     name="email"
@@ -73,13 +75,13 @@ const Login: FC = () => {
                     onChange={handleChange}
                     isValid={errors.email === undefined && touched.email}
                     isInvalid={errors.email !== undefined && touched.email}
-                    placeholder="name@domain.com"
+                    placeholder={FORMS.email.placeholder}
                   />
                   <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
                 </FloatingLabel>
               </Form.Group>
               <Form.Group as={Col} controlId="password" className="mt-2">
-                <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+                <FloatingLabel controlId="floatingPassword" label={FORMS.password.label} className="mb-3">
                   <Form.Control
                     type="password"
                     name="password"
@@ -87,7 +89,7 @@ const Login: FC = () => {
                     onChange={handleChange}
                     isValid={errors.password === undefined && touched.password}
                     isInvalid={errors.password !== undefined && touched.password}
-                    placeholder="Password"
+                    placeholder={FORMS.password.placeholder}
                   />
                   <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                 </FloatingLabel>
@@ -99,8 +101,8 @@ const Login: FC = () => {
                   }}
                   isDisabled={isPending}
                   isLoading={isPending}
-                  buttonLabel="Login"
-                  loadingLabel="Logging in..."
+                  buttonLabel={FORMS.loginSubmit.label}
+                  loadingLabel={FORMS.loginSubmit.loadingLabel}
                 />
                 {error !== '' && <Alert variant="danger">{error}</Alert>}
               </div>

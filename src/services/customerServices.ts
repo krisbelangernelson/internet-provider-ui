@@ -15,6 +15,10 @@ const loginCustomer = async (body: CustomerLogin): Promise<CustomerResponse> => 
   return await apiClient.post<CustomerResponse>('/auth/login', body).then((response) => response.data)
 }
 
-const customerServices = { registerCustomer, loginCustomer }
+const emailExists = async (email: string): Promise<{ exists: boolean }> => {
+  return await apiClient.post<{ exists: boolean }>('/auth/email-exists', { email }).then((response) => response.data)
+}
+
+const customerServices = { registerCustomer, loginCustomer, emailExists }
 
 export default customerServices

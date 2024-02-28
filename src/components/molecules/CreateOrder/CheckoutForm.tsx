@@ -6,7 +6,9 @@ import { type CustomerRegister } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import './CheckoutForm.scss'
-import { UNEXPECTED_ERROR } from '@/constants/errors'
+import APP_ERRORS from '@/constants/appErrors'
+import { handleAxiosError } from '@/utils/handleError'
+import FORMS from '@/constants/forms'
 
 interface Props {
   customer?: CustomerRegister
@@ -21,12 +23,11 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
   const {
     mutate: registerCustomer,
     isPending,
-    isError,
-    error
+    isError
   } = useMutation({
     mutationFn: async (body: CustomerRegister) => await customerServices.registerCustomer(body),
-    onError: () => {
-      console.error('registerCustomer error:', error) // eslint-disable-line no-console
+    onError: (error) => {
+      handleAxiosError(error, 'loginCustomer')
       setIsProcessing(false)
     },
     onSuccess: async () => {
@@ -41,7 +42,7 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
         if (error.type === 'card_error' || error.type === 'validation_error') {
           setMessage(error.message ?? 'error.message undefined')
         } else {
-          setMessage('An unexpected error occured.')
+          setMessage(APP_ERRORS.unexpectedError)
         }
 
         setIsProcessing(false)
@@ -66,11 +67,12 @@ const CheckoutForm: FC<Props> = ({ customer }) => {
       <ButtonSpinner
         isDisabled={isPending || isProcessing || stripe == null || elements == null}
         isLoading={isProcessing}
-        buttonLabel="Pay Now"
-        loadingLabel="Paying"
+        buttonLabel={FORMS.payment.label}
+        loadingLabel={FORMS.payment.loadingLabel}
         className="w-100"
       />
-      {isError && <Alert variant="danger">{UNEXPECTED_ERROR}</Alert>}
+      {/* TODO: consolidate these two errors */}
+      {isError && <Alert variant="danger">{APP_ERRORS.unexpectedError}</Alert>}
       {message != null && <div id="payment-message">{message}</div>}
     </form>
   )
