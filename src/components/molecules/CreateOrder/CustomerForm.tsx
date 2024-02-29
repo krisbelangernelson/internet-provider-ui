@@ -13,9 +13,10 @@ import customerService from '@/services/customerService'
 import VALIDATIONS from '@/constants/validations'
 import APP_ERRORS from '@/constants/appErrors'
 import { handleAxiosError } from '@/utils/handleError'
-import type { CustomerRegister, CustomerExistsResponse, CustomerExists } from '@/types/customer'
+import type { CustomerRegister, CustomerExists } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
 import { customerFormSchema } from '@/utils/validationSchemas'
+import FORMS from '@/constants/forms'
 
 // TODO: login vs register option (account created, proceeding to payment)
 const CustomerForm: FC = () => {
@@ -37,8 +38,7 @@ const CustomerForm: FC = () => {
   } = useMutation({
     mutationFn: async (body: CustomerRegister) => await customerService.registerCustomer(body),
     onError: (error) => {
-      handleAxiosError(error, 'loginCustomer')
-      // setIsProcessing(false)
+      handleAxiosError(error, 'registerCustomer')
     },
     onSuccess: (data) => {
       navigate('/order/payment', {
@@ -108,7 +108,7 @@ const CustomerForm: FC = () => {
           <Row className="mb-3">
             <Col md={{ span: 8, offset: 2 }} lg={{ span: 4, offset: 4 }}>
               <Form.Group as={Col} controlId="firstName">
-                <FloatingLabel controlId="floatingFirstName" label="First name" className="mb-3">
+                <FloatingLabel controlId="floatingFirstName" label={FORMS.firstName.label} className="mb-3">
                   <Form.Control
                     type="text"
                     name="firstName"
@@ -122,7 +122,7 @@ const CustomerForm: FC = () => {
                 </FloatingLabel>
               </Form.Group>
               <Form.Group as={Col} controlId="lastName" className="mt-2">
-                <FloatingLabel controlId="floatingLastName" label="Last name" className="mb-3">
+                <FloatingLabel controlId="floatingLastName" label={FORMS.lastName.label} className="mb-3">
                   <Form.Control
                     type="text"
                     name="lastName"
@@ -136,7 +136,7 @@ const CustomerForm: FC = () => {
                 </FloatingLabel>
               </Form.Group>
               <Form.Group as={Col} controlId="email" className="mt-2">
-                <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3">
+                <FloatingLabel controlId="floatingEmail" label={FORMS.email.label} className="mb-3">
                   <Form.Control
                     type="email"
                     name="email"
@@ -150,7 +150,7 @@ const CustomerForm: FC = () => {
                 </FloatingLabel>
               </Form.Group>
               <Form.Group as={Col} controlId="phone" className="mt-2">
-                <FloatingLabel controlId="floatingPhone" label="Phone" className="mb-3">
+                <FloatingLabel controlId="floatingPhone" label={FORMS.phone.label} className="mb-3">
                   <Form.Control
                     type="tel"
                     name="phone"
@@ -168,7 +168,7 @@ const CustomerForm: FC = () => {
                 </FloatingLabel>
               </Form.Group>
               <Form.Group as={Col} controlId="password" className="mt-2">
-                <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+                <FloatingLabel controlId="floatingPassword" label={FORMS.password.label} className="mb-3">
                   <Form.Control
                     type="password"
                     name="password"
@@ -182,7 +182,7 @@ const CustomerForm: FC = () => {
                 </FloatingLabel>
               </Form.Group>
               <Form.Group as={Col} controlId="passwordConfirm" className="mt-2">
-                <FloatingLabel controlId="floatingConfirmPassword" label="Confirm Password" className="mb-3">
+                <FloatingLabel controlId="floatingConfirmPassword" label={FORMS.passwordConfirm.label} className="mb-3">
                   <Form.Control
                     type="password"
                     name="passwordConfirm"
@@ -198,7 +198,7 @@ const CustomerForm: FC = () => {
               <Form.Group className="mb-3 mt-2">
                 <Form.Check
                   name="terms"
-                  label="Agree to terms and conditions"
+                  label={FORMS.terms.label}
                   onChange={handleChange}
                   isInvalid={errors.terms !== undefined && touched.terms}
                   feedback={errors.terms}
@@ -214,7 +214,7 @@ const CustomerForm: FC = () => {
                   }}
                   disabled={isPending}
                 >
-                  Next
+                  {FORMS.buttons.next}
                 </Button>
                 {isError && <Alert variant="danger">{APP_ERRORS.unexpectedError}</Alert>}
               </div>

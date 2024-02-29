@@ -4,33 +4,34 @@ import VALIDATIONS from '@/constants/validations'
 export const customerFormSchema = yup.object().shape({
   firstName: yup
     .string()
-    .required('First name is required.')
-    .min(2, 'First name must be at least 2 characters long.')
-    .max(20, 'First name must be less than 20 characters long.'),
+    .required(VALIDATIONS.firstName.required)
+    .min(2, VALIDATIONS.firstName.min)
+    .max(20, VALIDATIONS.firstName.max),
   lastName: yup
     .string()
-    .required('Last name is required.')
-    .min(2, 'Last name must be at least 2 characters long.')
-    .max(40, 'First name must be less than 40 characters long.'),
+    .required(VALIDATIONS.lastName.required)
+    .min(2, VALIDATIONS.lastName.min)
+    .max(40, VALIDATIONS.lastName.max),
   email: yup
     .string()
-    .required('Email is required.')
-    .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'Must be a valid email.'),
+    .required(VALIDATIONS.email.required)
+    .matches(VALIDATIONS.email.invalidRegex, VALIDATIONS.email.invalid),
   phone: yup
     .string()
-    .required('Please enter your phone number.')
-    .test('len', 'Must be a 10-digit number', (val) => val.length === 12),
-  password: yup.string().required('Please enter your password.').min(7, 'Password must be at least 7 characters long.'),
+    .required(VALIDATIONS.phone.required)
+    .test('len', VALIDATIONS.phone.testLength, (val) => val.length === 12),
+  password: yup.string().required(VALIDATIONS.password.required).min(7, VALIDATIONS.password.min),
   passwordConfirm: yup
     .string()
-    .required('Please confirm your password.')
-    .oneOf([yup.ref('password'), ''], "Passwords don't match."),
-  terms: yup.bool().required().oneOf([true], 'Terms must be accepted.')
+    .required(VALIDATIONS.passwordConfirm.required)
+    .oneOf([yup.ref('password'), ''], VALIDATIONS.passwordConfirm.oneOf),
+  terms: yup.bool().required().oneOf([true], VALIDATIONS.terms.required)
 })
+
 export const loginFormSchema = yup.object().shape({
   email: yup
     .string()
     .required(VALIDATIONS.email.required)
-    .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, VALIDATIONS.email.invalid),
+    .matches(VALIDATIONS.email.invalidRegex, VALIDATIONS.email.invalid),
   password: yup.string().required(VALIDATIONS.password.required)
 })

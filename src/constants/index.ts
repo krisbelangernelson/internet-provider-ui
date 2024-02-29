@@ -1,3 +1,7 @@
+export const PAGE_HEADERS = {
+  payment: 'Payment'
+}
+
 export const helpChooseRowHeaders = [
   'Number of people',
   'Number of devices',
@@ -17,3 +21,10 @@ export const servicesAvailable = [
     name: 'business'
   }
 ]
+
+export const INTERNET_PAGE = {
+  chooseService: '1. Choose Your Service',
+  chooseSpeed: '2. Choose Your Speed',
+  helpChoose: 'Help me choose',
+  featuredOffer: 'Featured Offer'
+}

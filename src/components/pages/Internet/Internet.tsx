@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query'
 import { type InternetService } from '@/types/InternetService'
 import internetService from '@/services/internetService'
 import Spinner from 'react-bootstrap/Spinner'
+import { INTERNET_PAGE } from '@/constants'
 
 const Internet = (): ReactElement => {
   const [serviceSelected, setServiceSelected] = useState<string>('')
@@ -65,11 +66,11 @@ const Internet = (): ReactElement => {
   return (
     <Container>
       <Row className="mb-2 align-items-center">
-        <Col>Featured Offer</Col>
+        <Col>{INTERNET_PAGE.featuredOffer}</Col>
       </Row>
       <Row className="mb-2 align-items-center">
         <Col>
-          <span className="fs-2">1. Choose Your Service</span>
+          <span className="fs-2">{INTERNET_PAGE.chooseService}</span>
         </Col>
       </Row>
       <Row>
@@ -84,7 +85,7 @@ const Internet = (): ReactElement => {
       </Row>
       <Row className={`mb-2 mob-col-desk-row ${disabledStyle}`}>
         <Col>
-          <span className="fs-2">2. Choose Your Speed</span>
+          <span className="fs-2">{INTERNET_PAGE.chooseSpeed}</span>
         </Col>
         <Col>
           <div className="d-flex justify-content-end fs-6 pe-1">
@@ -95,7 +96,7 @@ const Internet = (): ReactElement => {
                 setModalShow(true)
               }}
             >
-              Help me choose
+              {INTERNET_PAGE.helpChoose}
             </a>
           </div>
         </Col>
