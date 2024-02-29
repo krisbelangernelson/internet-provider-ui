@@ -9,6 +9,7 @@ import { type OrderNavigateState } from '@/types/order'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 import useRedirect from '@/hooks/useRedirect'
 import Customer from './Customer'
+import { ROUTES, MAIN_HEADERS } from '@/constants'
 
 interface Props {
   page?: string
@@ -16,11 +17,12 @@ interface Props {
 }
 
 // TODO: convert into HOC for the 3 section to be pages and be DRY?
+// use an Outlet instead
 const Order: FC<Props> = ({ page, stripePromise }) => {
   const location = useLocation()
   const { serviceSelected, speed } = (location.state as OrderNavigateState) ?? {}
 
-  useRedirect(serviceSelected === undefined, '/internet')
+  useRedirect(serviceSelected === undefined, ROUTES.internet)
 
   let section = null
 
@@ -34,7 +36,7 @@ const Order: FC<Props> = ({ page, stripePromise }) => {
 
   const title = (
     <>
-      Ordering{' '}
+      {MAIN_HEADERS.ordering}{' '}
       <span className="primary">
         {serviceSelected?.toUpperCase()}-{speed?.toUpperCase()}
       </span>

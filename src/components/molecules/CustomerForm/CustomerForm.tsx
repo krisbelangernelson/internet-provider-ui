@@ -17,9 +17,8 @@ import type { CustomerRegister, CustomerExists } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
 import { customerFormSchema } from '@/utils/validationSchemas'
 import FORMS from '@/constants/forms'
-import { SECTION_HEADERS } from '@/constants'
+import { MAIN_HEADERS, ROUTES } from '@/constants'
 
-// TODO: login vs register option (account created, proceeding to payment)
 const CustomerForm: FC = () => {
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
   const navigate = useNavigate()
@@ -42,7 +41,7 @@ const CustomerForm: FC = () => {
       handleAxiosError(error, 'registerCustomer')
     },
     onSuccess: (data) => {
-      navigate('/order/payment', {
+      navigate(ROUTES.orderPayment, {
         state: {
           serviceSelected,
           speed,
@@ -105,7 +104,7 @@ const CustomerForm: FC = () => {
   return (
     <>
       <Row>
-        <Col className="fs-2 mb-2">{SECTION_HEADERS.createAccount}</Col>
+        <Col className="fs-2 mb-2">{MAIN_HEADERS.createAccount}</Col>
       </Row>
       <Row className="text-start">
         <Form noValidate onSubmit={handleSubmit}>
@@ -218,7 +217,7 @@ const CustomerForm: FC = () => {
                   }}
                   disabled={isPending}
                 >
-                  {FORMS.buttons.next}
+                  {FORMS.buttons.next.label}
                 </Button>
                 {isError && <Alert variant="danger">{APP_ERRORS.unexpectedError}</Alert>}
               </div>

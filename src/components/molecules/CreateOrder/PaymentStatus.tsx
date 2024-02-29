@@ -3,7 +3,10 @@ import { useEffect, useState, type FC } from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
+import FORMS from '@/constants/forms'
+import { ROUTES } from '@/constants'
 
+// TODO: lang/constants
 const PaymentStatus: FC = () => {
   const stripe = useStripe()
   const navigate = useNavigate()
@@ -62,18 +65,18 @@ const PaymentStatus: FC = () => {
               }}
               variant="outline-danger"
             >
-              Try again
+              {FORMS.buttons.payment.failed}
             </Button>
           </div>
         </>
       ) : (
         <Button
           onClick={() => {
-            navigate('/login')
+            navigate(ROUTES.login)
           }}
           variant="outline-success"
         >
-          Login
+          {FORMS.buttons.login.label}
         </Button>
       )}
     </Alert>

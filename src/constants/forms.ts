@@ -14,16 +14,29 @@ const FORMS = {
     label: 'Confirm Password'
   },
   terms: { label: 'Agree to terms and conditions' },
-  loginSubmit: {
-    label: 'Login',
-    loadingLabel: 'Logging in...'
-  },
-  payment: {
-    label: 'Pay Now',
-    loadingLabel: 'Paying...'
-  },
   buttons: {
-    next: 'Next'
+    next: {
+      label: 'Next'
+    },
+    reload: {
+      label: 'Reload'
+    },
+    internet: {
+      label: 'Internet'
+    },
+    login: {
+      label: 'Login',
+      loadingLabel: 'Logging in...'
+    },
+    search: {
+      label: 'Search',
+      loadingLabel: 'Searching...'
+    },
+    payment: {
+      label: 'Pay Now',
+      loadingLabel: 'Paying...',
+      failed: 'Try again'
+    }
   }
 }
 

@@ -19,7 +19,7 @@ const Internet = (): ReactElement => {
   const [disabledStyle, setDisabledStyle] = useState('')
 
   // TODO: use notification component to show error
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['internet-services'],
     queryFn: internetService.findAll,
     enabled: true

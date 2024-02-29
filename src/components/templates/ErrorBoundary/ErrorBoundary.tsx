@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import { ErrorBoundary as ErrorBoundaryLib } from 'react-error-boundary'
 import APP_ERRORS from '@/constants/appErrors'
 import logger from '@/utils/logger'
+import FORMS from '@/constants/forms'
 
 interface Props {
   children: ReactNode
@@ -32,7 +33,7 @@ const ErrorBoundary: FC<Props> = ({ children }) => {
           <Modal.Body>{APP_ERRORS.errourBoundary}</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onClickReload}>
-              Reload
+              {FORMS.buttons.reload.label}
             </Button>
           </Modal.Footer>
         </Modal>

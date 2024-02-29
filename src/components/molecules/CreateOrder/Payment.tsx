@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
 import CheckoutForm from './CheckoutForm'
 import logger from '@/utils/logger'
-import { SECTION_HEADERS } from '@/constants'
+import { MAIN_HEADERS } from '@/constants'
 import useRedirect from '@/hooks/useRedirect'
 
 interface Props {
@@ -50,7 +50,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
   return (
     <>
       <Row>
-        <Col className="fs-2 mb-2">{SECTION_HEADERS.payment}</Col>
+        <Col className="fs-2 mb-2">{MAIN_HEADERS.payment}</Col>
       </Row>
       <Row className="text-center">
         <Col md={{ span: 8, offset: 2 }} lg={{ span: 4, offset: 4 }}>

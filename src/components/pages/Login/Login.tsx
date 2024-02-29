@@ -14,6 +14,7 @@ import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 import { handleAxiosError } from '@/utils/handleError'
 import FORMS from '@/constants/forms'
 import { loginFormSchema } from '@/utils/validationSchemas'
+import { ROUTES, MAIN_HEADERS } from '@/constants'
 
 interface LocationState {
   from: string
@@ -26,7 +27,7 @@ const Login: FC = () => {
   const location = useLocation()
   const [error, setError] = useState('')
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
-  const { from = '/customer-area', serviceSelected, speed } = location.state as LocationState
+  const { from = ROUTES.customerArea, serviceSelected, speed } = location.state as LocationState
 
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerService.loginCustomer(body),
@@ -54,7 +55,7 @@ const Login: FC = () => {
   const { handleSubmit, handleChange, values, touched, errors } = formik
 
   return (
-    <SectionLayout title="Customer Login">
+    <SectionLayout title={MAIN_HEADERS.customerLogin}>
       <Row className="text-start">
         <Form noValidate onSubmit={handleSubmit}>
           <Row className="mb-3">
@@ -94,8 +95,8 @@ const Login: FC = () => {
                   }}
                   isDisabled={isPending}
                   isLoading={isPending}
-                  buttonLabel={FORMS.loginSubmit.label}
-                  loadingLabel={FORMS.loginSubmit.loadingLabel}
+                  buttonLabel={FORMS.buttons.login.label}
+                  loadingLabel={FORMS.buttons.login.loadingLabel}
                 />
                 {error !== '' && <Alert variant="danger">{error}</Alert>}
               </div>

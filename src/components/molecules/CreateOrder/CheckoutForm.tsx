@@ -4,6 +4,7 @@ import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import './CheckoutForm.scss'
 import APP_ERRORS from '@/constants/appErrors'
 import FORMS from '@/constants/forms'
+import { ROUTES } from '@/constants'
 
 const CheckoutForm: FC = () => {
   const stripe = useStripe()
@@ -16,7 +17,7 @@ const CheckoutForm: FC = () => {
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${window.location.origin}/order/completed`
+          return_url: `${window.location.origin}${ROUTES.orderCompleted}`
         }
       })
 
@@ -43,8 +44,8 @@ const CheckoutForm: FC = () => {
       <ButtonSpinner
         isDisabled={stripe == null || elements == null}
         isLoading={isProcessing}
-        buttonLabel={FORMS.payment.label}
-        loadingLabel={FORMS.payment.loadingLabel}
+        buttonLabel={FORMS.buttons.payment.label}
+        loadingLabel={FORMS.buttons.payment.loadingLabel}
         className="w-100"
       />
       {message != null && <div id="payment-message">{message}</div>}

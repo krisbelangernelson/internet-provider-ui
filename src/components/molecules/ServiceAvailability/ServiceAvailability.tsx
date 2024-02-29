@@ -9,6 +9,8 @@ import Alert from 'react-bootstrap/Alert'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { type OrderNavigateState } from '@/types/order'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
+import { ROUTES, MAIN_HEADERS, SERVICE_AVAILABILITY } from '@/constants'
+import FORMS from '@/constants/forms'
 
 // TODO: make an autocomplete with real addresses
 // https://www.canadapost-postescanada.ca/ac/support/api/
@@ -33,7 +35,7 @@ const ServiceAvailability: FC = () => {
   }
 
   const onClickNext = (): void => {
-    navigate('/order/customer', {
+    navigate(ROUTES.orderCustomer, {
       state: {
         serviceSelected,
         speed,
@@ -50,11 +52,11 @@ const ServiceAvailability: FC = () => {
   return (
     <Container>
       <Row>
-        <Col className="fs-1 mb-2">Service Availability</Col>
+        <Col className="fs-1 mb-2">{MAIN_HEADERS.serviceAvailability}</Col>
       </Row>
       <Row className="d-flex flex-column">
         <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
-          <div className="mb-2 text-start">Verify that this service is available at your address</div>
+          <div className="mb-2 text-start">{SERVICE_AVAILABILITY.verifyLabel}</div>
           <Stack direction="horizontal" gap={3}>
             <Form.Group as={Col} controlId="firstName">
               <Form.Control type="address" placeholder="Enter address" onChange={handleAddress} value={address} />
@@ -65,19 +67,19 @@ const ServiceAvailability: FC = () => {
                 onClick={onClickSearch}
                 isDisabled={isSearching || address === ''}
                 isLoading={isSearching}
-                buttonLabel="Search"
-                loadingLabel="Searching..."
+                buttonLabel={FORMS.buttons.search.label}
+                loadingLabel={FORMS.buttons.search.loadingLabel}
               />
             ) : (
               <Button type="submit" onClick={onClickNext}>
-                Next
+                {FORMS.buttons.next.label}
               </Button>
             )}
           </Stack>
           <Stack direction="horizontal" gap={3}>
             {hasSearched && (
               <Alert variant="success" className="mt-2">
-                Your address qualifies for this service!
+                {SERVICE_AVAILABILITY.qualifiedLabel}
               </Alert>
             )}
           </Stack>

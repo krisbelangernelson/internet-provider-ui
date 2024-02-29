@@ -1,6 +1,19 @@
-export const SECTION_HEADERS = {
+export const MAIN_HEADERS = {
   payment: 'Payment',
-  createAccount: 'Create an account'
+  createAccount: 'Create an Account',
+  customerLogin: 'Customer Login',
+  ordering: 'Ordering',
+  serviceAvailability: 'Service Availability'
+}
+
+export const ROUTES = {
+  internet: '/internet',
+  login: '/login',
+  order: '/order',
+  orderCompleted: '/order/completed',
+  orderCustomer: '/order/customer',
+  orderPayment: '/order/payment',
+  customerArea: '/customer-area'
 }
 
 export const helpChooseRowHeaders = [
@@ -28,4 +41,9 @@ export const INTERNET_PAGE = {
   chooseSpeed: '2. Choose Your Speed',
   helpChoose: 'Help me choose',
   featuredOffer: 'Featured Offer'
+}
+
+export const SERVICE_AVAILABILITY = {
+  verifyLabel: 'Verify that this service is available at your address',
+  qualifiedLabel: 'Your address qualifies for this service!'
 }

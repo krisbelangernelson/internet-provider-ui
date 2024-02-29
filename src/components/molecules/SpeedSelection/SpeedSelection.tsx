@@ -3,6 +3,7 @@ import Stack from 'react-bootstrap/Stack'
 import SpeedCard from '@/components/atoms/SpeedCard/SpeedCard'
 import { type InternetService } from '@/types/InternetService'
 import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '@/constants'
 
 interface SpeedSelectionProps {
   serviceSelected: string
@@ -22,7 +23,7 @@ const SpeedSelection: FC<SpeedSelectionProps> = ({
   const handleSpeedSelection = (speed: string, price: number): void => {
     setSpeedSelected(speed)
     if (serviceSelected !== '' && speed !== '') {
-      navigate('/order', {
+      navigate(ROUTES.order, {
         state: {
           serviceSelected,
           speed,
