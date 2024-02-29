@@ -1,4 +1,4 @@
-import { type ReactElement, useState, type ChangeEvent } from 'react'
+import { type FC, useState, type ChangeEvent } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -14,14 +14,14 @@ import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 // https://www.canadapost-postescanada.ca/ac/support/api/
 
 // TODO: verify if address exists as order
-const ServiceAvailability = (): ReactElement => {
+const ServiceAvailability: FC = () => {
   const navigate = useNavigate()
   const [isSearching, setIsSearching] = useState(false)
   const [isFound, setIsFound] = useState(false)
   const [hasSearched, setHasSearched] = useState(false)
   const [address, setAddress] = useState('')
-  const params = useLocation()
-  const { serviceSelected, speed, price } = (params.state as OrderNavigateState) ?? {}
+  const location = useLocation()
+  const { serviceSelected, speed, price } = (location.state as OrderNavigateState) ?? {}
 
   const onClickSearch = (): void => {
     setIsSearching(true)

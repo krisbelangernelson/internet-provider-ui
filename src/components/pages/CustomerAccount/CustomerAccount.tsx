@@ -2,7 +2,7 @@ import { type ReactElement } from 'react'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import CustomerForm from '@/components/molecules/CreateOrder/CustomerForm'
+import CustomerForm from '@/components/molecules/CustomerForm/CustomerForm'
 
 const CustomerAccount = (): ReactElement => (
   <Container>

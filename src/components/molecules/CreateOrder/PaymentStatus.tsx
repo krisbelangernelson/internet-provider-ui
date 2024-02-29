@@ -69,7 +69,7 @@ const PaymentStatus: FC = () => {
       ) : (
         <Button
           onClick={() => {
-            navigate('/login', { state: { from: '/from-url' } })
+            navigate('/login')
           }}
           variant="outline-success"
         >

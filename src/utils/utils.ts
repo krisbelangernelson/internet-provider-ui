@@ -7,3 +7,7 @@ export const normalizeInputPhone = (value: string): string => {
   if (cvLength < 7) return `${currentValue.slice(0, 3)}-${currentValue.slice(3)}`
   return `${currentValue.slice(0, 3)}-${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`
 }
+
+export const keepDigits = (value: string): string => {
+  return value.replace(/[^\d]/g, '')
+}

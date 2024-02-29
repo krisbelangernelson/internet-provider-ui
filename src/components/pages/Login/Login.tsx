@@ -17,23 +17,25 @@ import { loginFormSchema } from '@/utils/validationSchemas'
 
 interface LocationState {
   from: string
+  serviceSelected?: string
+  speed?: string
 }
 
 const Login: FC = () => {
   const navigate = useNavigate()
-  const params = useLocation()
-  const from: string = (params.state as LocationState)?.from ?? '/customer-area'
+  const location = useLocation()
   const [error, setError] = useState('')
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
+  const { from = '/customer-area', serviceSelected, speed } = location.state as LocationState
 
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerService.loginCustomer(body),
     onError: (error) => {
       setError(handleAxiosError(error, 'loginCustomer'))
     },
-    onSuccess: (data) => {
+    onSuccess: (customer) => {
       // TODO: store userinfo in context?
-      navigate(from, { replace: true })
+      navigate(from, { replace: true, state: { serviceSelected, speed, customer } })
     }
   })
 

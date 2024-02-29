@@ -9,7 +9,8 @@ import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
 import CheckoutForm from './CheckoutForm'
 import logger from '@/utils/logger'
-import { PAGE_HEADERS } from '@/constants'
+import { SECTION_HEADERS } from '@/constants'
+import useRedirect from '@/hooks/useRedirect'
 
 interface Props {
   stripePromise: Stripe | null
@@ -22,14 +23,10 @@ interface PaymentBody {
 const Payment: FC<Props> = ({ stripePromise }) => {
   const [clientSecret, setClientSecret] = useState('')
   const [total, setTotal] = useState(0)
-  const params = useLocation()
-  const { serviceSelected, speed, customer } = (params.state as OrderNavigateState) ?? {}
+  const location = useLocation()
+  const { serviceSelected, speed, customer } = (location.state as OrderNavigateState) ?? {}
 
-  // Don't allow payment access without customer info
-  // TODO: make into a hook
-  if (customer === undefined) {
-    window.location.href = '/internet'
-  }
+  useRedirect(customer === undefined, '/internet')
 
   // TODO: use notification component to show error
   const { mutateAsync: stripePayment } = useMutation({
@@ -53,7 +50,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
   return (
     <>
       <Row>
-        <Col className="fs-2 mb-2">{PAGE_HEADERS.payment}</Col>
+        <Col className="fs-2 mb-2">{SECTION_HEADERS.payment}</Col>
       </Row>
       <Row className="text-center">
         <Col md={{ span: 8, offset: 2 }} lg={{ span: 4, offset: 4 }}>

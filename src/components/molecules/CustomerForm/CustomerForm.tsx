@@ -6,7 +6,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useFormik } from 'formik'
 import { useState, type FC } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { normalizeInputPhone } from '@/utils/utils'
+import { normalizeInputPhone, keepDigits } from '@/utils/utils'
 import { type OrderNavigateState } from '@/types/order'
 import { useMutation } from '@tanstack/react-query'
 import customerService from '@/services/customerService'
@@ -17,13 +17,14 @@ import type { CustomerRegister, CustomerExists } from '@/types/customer'
 import Alert from 'react-bootstrap/Alert'
 import { customerFormSchema } from '@/utils/validationSchemas'
 import FORMS from '@/constants/forms'
+import { SECTION_HEADERS } from '@/constants'
 
 // TODO: login vs register option (account created, proceeding to payment)
 const CustomerForm: FC = () => {
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
   const navigate = useNavigate()
-  const params = useLocation()
-  const { serviceSelected, speed, price, customer } = (params.state as OrderNavigateState) ?? {}
+  const location = useLocation()
+  const { serviceSelected, speed, price, customer } = (location.state as OrderNavigateState) ?? {}
   const [customerData, setCustomerData] = useState<CustomerRegister | null>(null)
 
   // TODO: use notification component to show error
@@ -55,9 +56,10 @@ const CustomerForm: FC = () => {
   const formik = useFormik({
     validationSchema: customerFormSchema,
     onSubmit: async (values, { setFieldError }) => {
+      const phoneClean = keepDigits(values.phone)
       const { emailExists, phoneExists } = await customerExists({
         email: values.email,
-        phone: values.phone.replace(/[^\d]/g, '')
+        phone: phoneClean
       })
 
       if (!emailExists && !phoneExists) {
@@ -65,15 +67,17 @@ const CustomerForm: FC = () => {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
-          phone: values.phone.replace(/[^\d]/g, ''),
+          phone: phoneClean,
           password: values.password
         }
+
         setCustomerData({
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
-          phone: values.phone.replace(/[^\d]/g, '')
+          phone: phoneClean
         })
+
         registerCustomer(data)
       } else if (emailExists && phoneExists) {
         setFieldError('email', VALIDATIONS.email.exists)
@@ -101,7 +105,7 @@ const CustomerForm: FC = () => {
   return (
     <>
       <Row>
-        <Col className="fs-2 mb-2">Customer Account</Col>
+        <Col className="fs-2 mb-2">{SECTION_HEADERS.createAccount}</Col>
       </Row>
       <Row className="text-start">
         <Form noValidate onSubmit={handleSubmit}>

@@ -1,5 +1,6 @@
-export const PAGE_HEADERS = {
-  payment: 'Payment'
+export const SECTION_HEADERS = {
+  payment: 'Payment',
+  createAccount: 'Create an account'
 }
 
 export const helpChooseRowHeaders = [
