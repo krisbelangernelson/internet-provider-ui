@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { type Stripe, loadStripe } from '@stripe/stripe-js'
 import orderService from '@/services/orderService'
 import { type StripeConfig } from '@/types/order'
@@ -13,7 +13,6 @@ interface UseStripeConfig {
 
 const useStripeConfig = (): UseStripeConfig => {
   const [stripePromise, setStripePromise] = useState<Stripe | null>(null)
-  const [alertMsg, setAlertMsg] = useState<string | null>(null)
 
   const { data, error, isError } = useQuery<StripeConfig, Error>({
     queryKey: ['stripe-config'],
@@ -34,11 +33,12 @@ const useStripeConfig = (): UseStripeConfig => {
     }
   }, [data])
 
-  useEffect(() => {
+  const alertMsg = useMemo(() => {
     if (isError) {
       handleAxiosError(error)
-      setAlertMsg(APP_ERRORS.paymentOfflineAlert)
+      return APP_ERRORS.paymentOfflineAlert
     }
+    return null
   }, [isError, error])
 
   return { stripePromise, alertMsg }

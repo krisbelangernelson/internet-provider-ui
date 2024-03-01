@@ -5,14 +5,17 @@ import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
 import FORMS from '@/constants/forms'
 import { ROUTES } from '@/constants'
+import { getPaymentStatus } from '@/utils/utils'
+import type { StripePaymentStatus } from '@/types/order'
 
-// TODO: lang/constants
 const PaymentStatus: FC = () => {
   const stripe = useStripe()
   const navigate = useNavigate()
-  const [message, setMessage] = useState<string | null>(null)
-  const [title, setTitle] = useState<string | null>(null)
-  const [isError, setIsError] = useState(false)
+  const [paymentStatus, setPaymentStatus] = useState<StripePaymentStatus>({
+    title: null,
+    message: null,
+    isError: false
+  })
 
   useEffect(() => {
     if (stripe == null) {
@@ -20,42 +23,18 @@ const PaymentStatus: FC = () => {
     }
 
     const clientSecret =
-      new URLSearchParams(window.location.search).get('payment_intent_client_secret') ?? 'client secret undefined'
+      new URLSearchParams(window.location.search).get('payment_intent_client_secret') ?? 'secret undefined'
 
     void stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      if (paymentIntent != null) {
-        switch (paymentIntent.status) {
-          case 'succeeded':
-            setTitle('Thank you!')
-            setMessage(`Your order for $${paymentIntent.amount} has been processed successfully.`)
-            break
-
-          case 'processing':
-            setTitle('Payment processing.')
-            setMessage("We'll update you when payment is received.")
-            break
-
-          case 'requires_payment_method':
-            setIsError(true)
-            setTitle('Payment failed.')
-            setMessage('Please try another payment method.')
-            break
-
-          default:
-            setIsError(true)
-            setTitle('Error.')
-            setMessage('Something went wrong.')
-            break
-        }
-      }
+      setPaymentStatus(getPaymentStatus(paymentIntent))
     })
-  }, [stripe, navigate, setMessage])
+  }, [stripe])
 
   return (
-    <Alert variant={isError ? 'danger' : 'success'}>
-      <Alert.Heading>{title}</Alert.Heading>
-      <p>{message}</p>
-      {isError ? (
+    <Alert variant={paymentStatus.isError ? 'danger' : 'success'}>
+      <Alert.Heading>{paymentStatus.title}</Alert.Heading>
+      <p>{paymentStatus.message}</p>
+      {paymentStatus.isError ? (
         <>
           <hr />
           <div className="d-flex justify-content-end">

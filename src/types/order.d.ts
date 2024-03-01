@@ -15,3 +15,9 @@ export interface StripeIntent {
   clientSecret: string
   amount: number
 }
+
+export interface StripePaymentStatus {
+  title: string | null
+  message: string | null
+  isError: boolean
+}

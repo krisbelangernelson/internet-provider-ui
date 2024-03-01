@@ -1,4 +1,4 @@
-import { type ReactElement, useState, useEffect } from 'react'
+import { type ReactElement, useState, useMemo } from 'react'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -15,8 +15,6 @@ const Internet = (): ReactElement => {
   const [serviceSelected, setServiceSelected] = useState<string>('')
   const [speedSelected, setSpeedSelected] = useState<string>('')
   const [modalShow, setModalShow] = useState(false)
-  const [sortedOffers, setSortedOffers] = useState<InternetService[] | undefined>(undefined)
-  const [disabledStyle, setDisabledStyle] = useState('')
 
   // TODO: use notification component to show error
   const { data, isLoading } = useQuery({
@@ -25,7 +23,7 @@ const Internet = (): ReactElement => {
     enabled: true
   })
 
-  useEffect(() => {
+  const sortedOffers = useMemo(() => {
     if (data !== undefined) {
       let sorted = data.sort((offerA, offerB) => {
         const a = offerA.bandwidth_down
@@ -35,13 +33,13 @@ const Internet = (): ReactElement => {
       if (serviceSelected !== '') {
         sorted = sorted.filter((offer) => offer.category === serviceSelected)
       }
-      setSortedOffers(sorted)
+      return sorted
     }
   }, [data, serviceSelected])
 
-  useEffect(() => {
-    if (serviceSelected === '') setDisabledStyle('disabled-look')
-    else setDisabledStyle('')
+  const disabledStyle = useMemo(() => {
+    if (serviceSelected === '') return 'disabled-look'
+    return ''
   }, [serviceSelected])
 
   if (isLoading || sortedOffers === undefined) {
