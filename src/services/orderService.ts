@@ -5,7 +5,7 @@ const {
   ordersApi: { baseUrl }
 } = Resources
 
-const apiClient = axiosInstance(baseUrl)
+const apiClient = axiosInstance(baseUrl, false)
 
 const stripeConfig = async (): Promise<StripeConfig> => {
   return await apiClient.get<StripeConfig>('/stripe/config').then((response) => response.data)

@@ -6,10 +6,9 @@ import ServiceSelection from '@/components/molecules/ServiceSelection/ServiceSel
 import SpeedSelection from '@/components/molecules/SpeedSelection/SpeedSelection'
 import SpeedDetailsModal from '@/components/molecules/SpeedDetailsModal/SpeedDetailsModal'
 import { useQuery } from '@tanstack/react-query'
-import { type InternetService } from '@/types/InternetService'
 import internetService from '@/services/internetService'
-import Spinner from 'react-bootstrap/Spinner'
 import { INTERNET_PAGE } from '@/constants'
+import Loading from '@/components/atoms/Loading/Loading'
 
 const Internet = (): ReactElement => {
   const [serviceSelected, setServiceSelected] = useState<string>('')
@@ -43,22 +42,7 @@ const Internet = (): ReactElement => {
   }, [serviceSelected])
 
   if (isLoading || sortedOffers === undefined) {
-    return (
-      <Container>
-        <Row>
-          <Col className="text-center">
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-              style={{ width: '3rem', height: '3rem' }}
-            />
-          </Col>
-        </Row>
-      </Container>
-    )
+    return <Loading />
   }
 
   return (

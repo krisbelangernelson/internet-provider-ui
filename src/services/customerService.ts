@@ -26,6 +26,10 @@ const customerExists = async (body: CustomerExists): Promise<CustomerExistsRespo
   return await apiClient.post<CustomerExistsResponse>('/auth/customer-exists', body).then((response) => response.data)
 }
 
-const customerService = { registerCustomer, loginCustomer, customerExists }
+const customerArea = async (): Promise<{ message: string }> => {
+  return await apiClient.get<{ message: string }>('/auth/customer-area').then((response) => response.data)
+}
+
+const customerService = { registerCustomer, loginCustomer, customerExists, customerArea }
 
 export default customerService

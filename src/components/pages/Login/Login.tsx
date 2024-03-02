@@ -27,7 +27,7 @@ const Login: FC = () => {
   const location = useLocation()
   const [error, setError] = useState('')
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
-  const { from = ROUTES.customerArea, serviceSelected, speed } = location.state as LocationState
+  const { from = ROUTES.customerArea, serviceSelected, speed } = (location?.state as LocationState) ?? {}
 
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerService.loginCustomer(body),

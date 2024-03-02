@@ -17,6 +17,7 @@ const PaymentStatus: FC = () => {
     isError: false
   })
 
+  // TODO: custom hook
   useEffect(() => {
     if (stripe == null) {
       return

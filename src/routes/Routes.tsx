@@ -10,6 +10,7 @@ const HowItWorks = lazy(async () => await import('@/components/pages/Internet/Ho
 const Order = lazy(async () => await import('@/components/pages/Order/Order'))
 const Completed = lazy(async () => await import('@/components/pages/Order/Completed'))
 const CustomerAccount = lazy(async () => await import('@/components/pages/CustomerAccount/CustomerAccount'))
+const CustomerArea = lazy(async () => await import('@/components/pages/CustomerArea/CustomerArea'))
 const Login = lazy(async () => await import('@/components/pages/Login/Login'))
 const NotFound = lazy(async () => await import('./NotFound'))
 
@@ -33,6 +34,7 @@ const AppRoutes: FC = () => {
             <Route path="/internet/how-it-works" element={<HowItWorks />} />
             <Route path="/internet" element={<Internet />} />
             <Route path="/my-account" element={<CustomerAccount />} />
+            <Route path="/customer-area" element={<CustomerArea />} />
             <Route path="/order/payment" element={<Order page="payment" stripePromise={stripePromise} />} />
             <Route path="/order/customer" element={<Order page="customer" stripePromise={stripePromise} />} />
             <Route path="/order/completed" element={<Completed stripePromise={stripePromise} />} />
