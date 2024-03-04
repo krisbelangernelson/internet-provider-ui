@@ -1,40 +1,31 @@
-import { type ReactElement, useEffect, type FC } from 'react'
+import { type ReactElement, useEffect, useState, type FC } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import SpeedCard from '@/components/atoms/SpeedCard/SpeedCard'
 import { type InternetService } from '@/types/InternetService'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/constants'
+import { useCustomerContext } from '@/providers/customer/CustomerContext'
 
 interface SpeedSelectionProps {
   serviceSelected: string
-  setSpeedSelected: React.Dispatch<React.SetStateAction<string>>
-  speedSelected: string
   speedOffers: InternetService[]
 }
 
-const SpeedSelection: FC<SpeedSelectionProps> = ({
-  serviceSelected,
-  setSpeedSelected,
-  speedSelected,
-  speedOffers
-}): ReactElement => {
+const SpeedSelection: FC<SpeedSelectionProps> = ({ serviceSelected, speedOffers }): ReactElement => {
   const navigate = useNavigate()
+  const { setServiceSelection } = useCustomerContext()
+  const [speedSelected, setSpeedSelected] = useState<number | null>(null)
 
-  const handleSpeedSelection = (speed: string, price: number): void => {
-    setSpeedSelected(speed)
-    if (serviceSelected !== '' && speed !== '') {
-      navigate(ROUTES.order, {
-        state: {
-          serviceSelected,
-          speed,
-          price
-        }
-      })
+  const handleSpeedSelection = (offerId: number, offerName: string): void => {
+    setSpeedSelected(offerId)
+    if (serviceSelected !== '' && offerId !== null) {
+      setServiceSelection({ serviceType: serviceSelected, offerId, offerName })
+      navigate(ROUTES.order)
     }
   }
 
   useEffect(() => {
-    setSpeedSelected('')
+    setSpeedSelected(null)
   }, [serviceSelected])
 
   if (serviceSelected === '') return <></>
@@ -43,9 +34,9 @@ const SpeedSelection: FC<SpeedSelectionProps> = ({
     <Stack gap={4} className="col-lg-5 mx-auto">
       {speedOffers.map((offer) => (
         <SpeedCard
-          key={offer.name}
+          key={offer.id}
           offer={offer}
-          active={speedSelected === offer.name}
+          active={speedSelected === offer.id}
           handleSpeedSelection={handleSpeedSelection}
         />
       ))}

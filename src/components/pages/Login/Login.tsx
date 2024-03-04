@@ -15,6 +15,7 @@ import { handleAxiosError } from '@/utils/handleError'
 import FORMS from '@/constants/forms'
 import { loginFormSchema } from '@/utils/validationSchemas'
 import { ROUTES, MAIN_HEADERS } from '@/constants'
+import { useCustomerContext } from '@/providers/customer/CustomerContext'
 
 interface LocationState {
   from: string
@@ -27,16 +28,18 @@ const Login: FC = () => {
   const location = useLocation()
   const [error, setError] = useState('')
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
-  const { from = ROUTES.customerArea, serviceSelected, speed } = (location?.state as LocationState) ?? {}
+  const { from = ROUTES.customerArea } = (location?.state as LocationState) ?? {}
+  const { setCustomer } = useCustomerContext()
 
+  // TODO: use notification component to show error
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerService.loginCustomer(body),
     onError: (error) => {
       setError(handleAxiosError(error, 'loginCustomer'))
     },
     onSuccess: (customer) => {
-      // TODO: store userinfo in context?
-      navigate(from, { replace: true, state: { serviceSelected, speed, customer } })
+      setCustomer(customer)
+      navigate(from, { replace: true, state: { customer } })
     }
   })
 

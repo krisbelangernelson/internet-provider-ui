@@ -6,7 +6,7 @@ import classNames from 'classnames'
 interface SpeedCardProps {
   offer: InternetService
   active: boolean
-  handleSpeedSelection: (speed: string, price: number) => void
+  handleSpeedSelection: (offerId: number, offerName: string) => void
 }
 
 const SpeedCard: FC<SpeedCardProps> = ({ offer, active, handleSpeedSelection }): ReactElement => {
@@ -14,7 +14,7 @@ const SpeedCard: FC<SpeedCardProps> = ({ offer, active, handleSpeedSelection }):
     <Card
       className={classNames('clickable-card text-center', active && 'clickable-card-selected')}
       onClick={() => {
-        handleSpeedSelection(offer.name, offer.price)
+        handleSpeedSelection(offer.id, offer.name)
       }}
     >
       <Card.Header as="h3" className="fw-bold">

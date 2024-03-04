@@ -1,19 +1,17 @@
-import { type ReactElement, useState, useMemo } from 'react'
+import { type FC, useState, useMemo } from 'react'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import ServiceSelection from '@/components/molecules/ServiceSelection/ServiceSelection'
 import SpeedSelection from '@/components/molecules/SpeedSelection/SpeedSelection'
-import SpeedDetailsModal from '@/components/molecules/SpeedDetailsModal/SpeedDetailsModal'
 import { useQuery } from '@tanstack/react-query'
 import internetService from '@/services/internetService'
 import { INTERNET_PAGE } from '@/constants'
 import Loading from '@/components/atoms/Loading/Loading'
+import HelpMeChoose from '@/components/atoms/HelpMeChoose/HelpMeChoose'
 
-const Internet = (): ReactElement => {
+const Internet: FC = () => {
   const [serviceSelected, setServiceSelected] = useState<string>('')
-  const [speedSelected, setSpeedSelected] = useState<string>('')
-  const [modalShow, setModalShow] = useState(false)
 
   // TODO: use notification component to show error
   const { data, isLoading } = useQuery({
@@ -71,35 +69,15 @@ const Internet = (): ReactElement => {
         </Col>
         <Col>
           <div className="d-flex justify-content-end fs-6 pe-1">
-            <a
-              href="#"
-              className={`fw-bold ${disabledStyle}`}
-              onClick={() => {
-                setModalShow(true)
-              }}
-            >
-              {INTERNET_PAGE.helpChoose}
-            </a>
+            <HelpMeChoose sortedOffers={sortedOffers} disabledStyle={disabledStyle} />
           </div>
         </Col>
       </Row>
       <Row>
         <Col>
-          <SpeedSelection
-            serviceSelected={serviceSelected}
-            setSpeedSelected={setSpeedSelected}
-            speedSelected={speedSelected}
-            speedOffers={[...sortedOffers].reverse()}
-          />
+          <SpeedSelection serviceSelected={serviceSelected} speedOffers={[...sortedOffers].reverse()} />
         </Col>
       </Row>
-      <SpeedDetailsModal
-        show={modalShow}
-        onHide={() => {
-          setModalShow(false)
-        }}
-        offers={sortedOffers}
-      />
     </Container>
   )
 }

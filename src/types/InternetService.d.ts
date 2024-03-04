@@ -1,4 +1,5 @@
 export interface InternetService {
+  id: number
   bandwidth_down: number
   bandwidth_up: number
   label: string

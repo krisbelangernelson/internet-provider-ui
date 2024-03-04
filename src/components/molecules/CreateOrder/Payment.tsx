@@ -3,7 +3,6 @@ import Row from 'react-bootstrap/Row'
 import { useState, useEffect, type FC } from 'react'
 import { Elements } from '@stripe/react-stripe-js'
 import { type Stripe } from '@stripe/stripe-js'
-import type { OrderNavigateState } from '@/types/order'
 import { useLocation } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
@@ -11,6 +10,8 @@ import CheckoutForm from './CheckoutForm'
 import logger from '@/utils/logger'
 import { MAIN_HEADERS } from '@/constants'
 import useRedirect from '@/hooks/useRedirect'
+import { useCustomerContext } from '@/providers/customer/CustomerContext'
+import type { CustomerRegister } from '@/types/customer'
 
 interface Props {
   stripePromise: Stripe | null
@@ -24,7 +25,12 @@ const Payment: FC<Props> = ({ stripePromise }) => {
   const [clientSecret, setClientSecret] = useState('')
   const [total, setTotal] = useState(0)
   const location = useLocation()
-  const { serviceSelected, speed, customer } = (location.state as OrderNavigateState) ?? {}
+  const {
+    state: {
+      serviceSelection: { serviceType, offerName }
+    }
+  } = useCustomerContext()
+  const { customer } = (location.state as { customer: CustomerRegister }) ?? {}
 
   useRedirect(customer === undefined, '/internet')
 
@@ -35,7 +41,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
 
   useEffect(() => {
     void stripePayment({
-      plan: `${serviceSelected}-${speed}`
+      plan: `${serviceType}-${offerName}`
     })
       .then((response) => {
         const { clientSecret, amount } = response
@@ -58,7 +64,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
             <>
               <div className="fs-3 mb-2 primary">Total: ${total}</div>
               <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm />
+                <CheckoutForm customerId={customer?.id} />
               </Elements>
             </>
           )}

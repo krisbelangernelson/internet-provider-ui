@@ -6,14 +6,14 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import Alert from 'react-bootstrap/Alert'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { type OrderNavigateState } from '@/types/order'
+import { useNavigate } from 'react-router-dom'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import { ROUTES, MAIN_HEADERS, SERVICE_AVAILABILITY } from '@/constants'
 import FORMS from '@/constants/forms'
 
 // TODO: make an autocomplete with real addresses
-// https://www.canadapost-postescanada.ca/ac/support/api/
+// https://apidocs.geoapify.com/playground
+// https://apidocs.geoapify.com/docs/geocoding/address-autocomplete/#autocomplete
 
 // TODO: verify if address exists as order
 const ServiceAvailability: FC = () => {
@@ -22,8 +22,6 @@ const ServiceAvailability: FC = () => {
   const [isFound, setIsFound] = useState(false)
   const [hasSearched, setHasSearched] = useState(false)
   const [address, setAddress] = useState('')
-  const location = useLocation()
-  const { serviceSelected, speed, price } = (location.state as OrderNavigateState) ?? {}
 
   const onClickSearch = (): void => {
     setIsSearching(true)
@@ -35,13 +33,7 @@ const ServiceAvailability: FC = () => {
   }
 
   const onClickNext = (): void => {
-    navigate(ROUTES.orderCustomer, {
-      state: {
-        serviceSelected,
-        speed,
-        price
-      }
-    })
+    navigate(ROUTES.orderCustomer)
   }
 
   const handleAddress = (event: ChangeEvent<HTMLInputElement>): void => {

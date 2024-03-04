@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance } from 'axios'
 
-const axiosInstance = (baseUrl: string, withCredentials = true): AxiosInstance =>
+const axiosInstance = (baseUrl: string, withCredentials = false): AxiosInstance =>
   axios.create({
     baseURL: baseUrl,
     headers: {

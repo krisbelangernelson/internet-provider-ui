@@ -5,9 +5,8 @@ import Row from 'react-bootstrap/Row'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useFormik } from 'formik'
 import { useState, type FC } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { normalizeInputPhone, keepDigits } from '@/utils/utils'
-import { type OrderNavigateState } from '@/types/order'
 import { useMutation } from '@tanstack/react-query'
 import customerService from '@/services/customerService'
 import VALIDATIONS from '@/constants/validations'
@@ -18,13 +17,15 @@ import Alert from 'react-bootstrap/Alert'
 import { customerFormSchema } from '@/utils/validationSchemas'
 import FORMS from '@/constants/forms'
 import { MAIN_HEADERS, ROUTES } from '@/constants'
+import { useCustomerContext } from '@/providers/customer/CustomerContext'
 
 const CustomerForm: FC = () => {
-  const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
   const navigate = useNavigate()
-  const location = useLocation()
-  const { serviceSelected, speed, price, customer } = (location.state as OrderNavigateState) ?? {}
   const [customerData, setCustomerData] = useState<CustomerRegister | null>(null)
+  const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
+  const {
+    state: { customerInfo }
+  } = useCustomerContext()
 
   // TODO: use notification component to show error
   const { mutateAsync: customerExists } = useMutation({
@@ -41,12 +42,13 @@ const CustomerForm: FC = () => {
       handleAxiosError(error, 'registerCustomer')
     },
     onSuccess: (data) => {
+      // TODO: put user data + service data in context?
       navigate(ROUTES.orderPayment, {
         state: {
-          serviceSelected,
-          speed,
-          price,
-          customer: customerData
+          customer: {
+            ...customerData,
+            id: data.id
+          }
         }
       })
     }
@@ -88,10 +90,10 @@ const CustomerForm: FC = () => {
       }
     },
     initialValues: {
-      firstName: customer?.firstName ?? '',
-      lastName: customer?.lastName ?? '',
-      email: customer?.email ?? '',
-      phone: normalizeInputPhone(customer?.phone ?? ''),
+      firstName: customerInfo?.firstName ?? '',
+      lastName: customerInfo?.lastName ?? '',
+      email: customerInfo?.email ?? '',
+      phone: normalizeInputPhone(customerInfo?.phone ?? ''),
       password: '',
       passwordConfirm: '',
       terms: false

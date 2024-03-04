@@ -1,24 +1,22 @@
-export interface CustomerRegister {
+export interface Customer {
   firstName: string
   lastName: string
   email: string
   phone: string
+}
+
+export interface CustomerRegister extends Customer {
   password?: string
+  id?: string
 }
 
 export interface RegisterResponse {
-  code: string
-  message: string
+  id: string
 }
 
-export interface CustomerResponse {
-  code: string
+export interface CustomerResponse extends Customer {
   accessToken: string
   id: string
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
 }
 
 export interface CustomerLogin {
@@ -33,4 +31,21 @@ export interface CustomerExists {
 export interface CustomerExistsResponse {
   emailExists: boolean
   phoneExists: boolean
+}
+
+export interface ServiceSelection {
+  serviceType: string
+  offerId: number | null
+  offerName: string
+}
+
+export interface CustomerState {
+  customerInfo: CustomerResponse
+  serviceSelection: ServiceSelection
+}
+
+export interface CustomerContextType {
+  state: CustomerState
+  setCustomer: (customerInfo: CustomerResponse) => void
+  setServiceSelection: (serviceSelection: ServiceSelection) => void
 }

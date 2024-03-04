@@ -12,7 +12,7 @@ const {
   customersApi: { baseUrl }
 } = Resources
 
-const apiClient = axiosInstance(baseUrl)
+const apiClient = axiosInstance(baseUrl, true)
 
 const registerCustomer = async (body: CustomerRegister): Promise<RegisterResponse> => {
   return await apiClient.post<RegisterResponse>('/auth/register', body).then((response) => response.data)
