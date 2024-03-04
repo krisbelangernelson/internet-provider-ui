@@ -17,14 +17,15 @@ const CustomerArea: FC = () => {
   } = useCustomerContext()
   const navigate = useNavigate()
   // TODO: use notification component to show error
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['customer-area'],
     queryFn: customerService.customerArea,
-    enabled: true
+    enabled: true,
+    retry: false
   })
   const isLoggedIn = useMemo(() => customerInfo.accessToken === '', [customerInfo.accessToken])
 
-  if (isLoading || data === undefined) {
+  if ((isLoading || data === undefined) && !isError) {
     return <Loading />
   }
 

@@ -18,16 +18,18 @@ const registerCustomer = async (body: CustomerRegister): Promise<RegisterRespons
   return await apiClient.post<RegisterResponse>('/auth/register', body).then((response) => response.data)
 }
 
-const loginCustomer = async (body: CustomerLogin): Promise<CustomerResponse> => {
+const loginCustomer = async (body: CustomerLogin | undefined): Promise<CustomerResponse> => {
   return await apiClient.post<CustomerResponse>('/auth/login', body).then((response) => response.data)
 }
 
 const customerExists = async (body: CustomerExists): Promise<CustomerExistsResponse> => {
-  return await apiClient.post<CustomerExistsResponse>('/auth/customer-exists', body).then((response) => response.data)
+  return await apiClient
+    .post<CustomerExistsResponse>('/customer/customer-exists', body)
+    .then((response) => response.data)
 }
 
 const customerArea = async (): Promise<{ message: string }> => {
-  return await apiClient.get<{ message: string }>('/auth/customer-area').then((response) => response.data)
+  return await apiClient.get<{ message: string }>('/customer/customer-area').then((response) => response.data)
 }
 
 const customerService = { registerCustomer, loginCustomer, customerExists, customerArea }
