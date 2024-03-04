@@ -32,6 +32,10 @@ const customerArea = async (): Promise<{ message: string }> => {
   return await apiClient.get<{ message: string }>('/customer/customer-area').then((response) => response.data)
 }
 
-const customerService = { registerCustomer, loginCustomer, customerExists, customerArea }
+const logout = async (): Promise<object> => {
+  return await apiClient.get<object>('/auth/logout').then((response) => response.data)
+}
+
+const customerService = { registerCustomer, loginCustomer, customerExists, customerArea, logout }
 
 export default customerService

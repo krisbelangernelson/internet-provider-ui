@@ -16,6 +16,8 @@ const CustomerArea: FC = () => {
     state: { customerInfo }
   } = useCustomerContext()
   const navigate = useNavigate()
+  const isLoggedIn = useMemo(() => customerInfo.accessToken === '', [customerInfo.accessToken])
+
   // TODO: use notification component to show error
   const { data, isLoading, isError } = useQuery({
     queryKey: ['customer-area'],
@@ -23,7 +25,6 @@ const CustomerArea: FC = () => {
     enabled: true,
     retry: false
   })
-  const isLoggedIn = useMemo(() => customerInfo.accessToken === '', [customerInfo.accessToken])
 
   if ((isLoading || data === undefined) && !isError) {
     return <Loading />
@@ -48,6 +49,16 @@ const CustomerArea: FC = () => {
           <Col>
             <div>Your Service</div>
             <div>{JSON.stringify(data)}</div>
+            <Button
+              onClick={() => {
+                void customerService.logout().then(() => {
+                  navigate(0)
+                })
+              }}
+              className="mt-2"
+            >
+              Logout
+            </Button>
           </Col>
         )}
       </Row>
