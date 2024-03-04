@@ -6,17 +6,15 @@ import { useQuery } from '@tanstack/react-query'
 import Loading from '@/components/atoms/Loading/Loading'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
-import Button from 'react-bootstrap/Button'
-import { ROUTES } from '@/constants'
-import FORMS from '@/constants/forms'
-import { useNavigate } from 'react-router-dom'
+import LoginNoAccess from '@/components/atoms/LoginNoAccess/LoginNoAccess'
+import Logout from '@/components/atoms/Logout/Logout'
 
+// TODO: consts
 const CustomerArea: FC = () => {
   const {
     state: { customerInfo }
   } = useCustomerContext()
-  const navigate = useNavigate()
-  const isLoggedIn = useMemo(() => customerInfo.accessToken === '', [customerInfo.accessToken])
+  const isLoggedIn = useMemo(() => customerInfo.accessToken !== '', [customerInfo.accessToken])
 
   // TODO: use notification component to show error
   const { data, isLoading, isError } = useQuery({
@@ -33,34 +31,17 @@ const CustomerArea: FC = () => {
   return (
     <SectionLayout title="Customer Area">
       <Row>
-        {isLoggedIn ? (
-          <Col>
-            <div>You must login to access this area.</div>
-            <Button
-              onClick={() => {
-                navigate(ROUTES.login)
-              }}
-              className="mt-2"
-            >
-              {FORMS.buttons.login.label}
-            </Button>
-          </Col>
-        ) : (
-          <Col>
-            <div>Your Service</div>
-            <div>{JSON.stringify(data)}</div>
-            <Button
-              onClick={() => {
-                void customerService.logout().then(() => {
-                  navigate(0)
-                })
-              }}
-              className="mt-2"
-            >
-              Logout
-            </Button>
-          </Col>
-        )}
+        <Col>
+          {isLoggedIn ? (
+            <>
+              <div>Your Service</div>
+              <div>{JSON.stringify(data)}</div>
+              <Logout />
+            </>
+          ) : (
+            <LoginNoAccess />
+          )}
+        </Col>
       </Row>
     </SectionLayout>
   )
