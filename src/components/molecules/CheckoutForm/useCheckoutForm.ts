@@ -7,7 +7,7 @@ import type { StripeAddress } from '@/types/order'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
 import { type Stripe, type StripeElements } from '@stripe/stripe-js'
 
-interface IUseCheckoutForm {
+interface UseCheckoutForm {
   data: { elements: StripeElements | null; isProcessing: boolean; message: string | null; stripe: Stripe | null }
   handlers: {
     handleSubmit: (e: FormEvent<HTMLFormElement>) => void
@@ -15,7 +15,7 @@ interface IUseCheckoutForm {
   }
 }
 
-const useCheckoutForm = (customerId: string | undefined): IUseCheckoutForm => {
+const useCheckoutForm = (customerId: string | undefined): UseCheckoutForm => {
   const stripe = useStripe()
   const elements = useElements()
   const [message, setMessage] = useState<string | null>(null)

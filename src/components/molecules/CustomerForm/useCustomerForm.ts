@@ -6,18 +6,24 @@ import { useMutation } from '@tanstack/react-query'
 import customerService from '@/services/customerService'
 import VALIDATIONS from '@/constants/validations'
 import { handleAxiosError } from '@/utils/handleError'
-import type { CustomerRegister, CustomerExists, IFormikValues, IFormikErrors, IFormikTouched } from '@/types/customer'
+import type {
+  CustomerRegister,
+  CustomerExists,
+  CustomerFormikValues,
+  CustomerFormikErrors,
+  CustomerFormikTouched
+} from '@/types/customer'
 import { customerFormSchema } from '@/utils/validationSchemas'
 import { ROUTES } from '@/constants'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
 
-interface IUseCustomerForm {
+interface UseCustomerForm {
   data: {
-    errors: IFormikErrors
+    errors: CustomerFormikErrors
     isError: boolean
     isPending: boolean
-    touched: IFormikTouched
-    values: IFormikValues
+    touched: CustomerFormikTouched
+    values: CustomerFormikValues
   }
   handlers: {
     handleChange: (e: BaseSyntheticEvent) => void
@@ -26,12 +32,12 @@ interface IUseCustomerForm {
       field: string,
       value: string,
       shouldValidate?: boolean | undefined
-    ) => Promise<void> | Promise<FormikErrors<IFormikValues>>
+    ) => Promise<void> | Promise<FormikErrors<CustomerFormikValues>>
     setValidateAfterSubmit: Dispatch<SetStateAction<boolean>>
   }
 }
 
-const useCustomerForm = (): IUseCustomerForm => {
+const useCustomerForm = (): UseCustomerForm => {
   const navigate = useNavigate()
   const [customerData, setCustomerData] = useState<CustomerRegister | null>(null)
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)

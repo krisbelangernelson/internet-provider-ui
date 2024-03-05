@@ -1,4 +1,3 @@
-import Payment from '../components/pages/Order/Payment'
 export interface StripeConfig {
   publishableKey: string
 }

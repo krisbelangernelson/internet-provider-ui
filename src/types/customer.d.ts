@@ -5,12 +5,12 @@ export interface Customer {
   phone: string
 }
 
-interface IFormikValues extends Customer {
+interface CustomerFormikValues extends Customer {
   password: string
   passwordConfirm: string
   terms: boolean
 }
-interface IFormikErrors {
+interface CustomerFormikErrors {
   firstName?: string
   lastName?: string
   email?: string
@@ -20,7 +20,7 @@ interface IFormikErrors {
   terms?: string
 }
 
-interface IFormikTouched {
+interface CustomerFormikTouched {
   firstName?: boolean
   lastName?: boolean
   email?: boolean
