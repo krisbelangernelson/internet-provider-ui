@@ -1,7 +1,7 @@
 import { type ReactElement, type FC, type Dispatch, type SetStateAction } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import ButtonToggle from '@/components/atoms/ButtonToggle/ButtonToggle'
-import { servicesAvailable } from '@/constants'
+import { SERVICES_AVAILABLE } from '@/constants'
 
 interface ServiceSelectionProps {
   serviceSelected: string
@@ -11,7 +11,7 @@ interface ServiceSelectionProps {
 const ServiceSelection: FC<ServiceSelectionProps> = ({ serviceSelected, setServiceSelected }): ReactElement => {
   return (
     <Stack gap={3} className="desktop-stack-horiz">
-      {servicesAvailable.map((service) => (
+      {SERVICES_AVAILABLE.map((service) => (
         <ButtonToggle
           key={service.name}
           active={serviceSelected === service.name}

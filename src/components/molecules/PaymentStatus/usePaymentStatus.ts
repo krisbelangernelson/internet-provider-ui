@@ -16,12 +16,12 @@ interface UsePaymentStatus {
 const usePaymentStatus = (): UsePaymentStatus => {
   const stripe = useStripe()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [paymentStatus, setPaymentStatus] = useState<StripePaymentStatus>({
     title: null,
     message: null,
     isError: false
   })
-  const [searchParams] = useSearchParams()
   const [isProcessing, setIsProcessing] = useState(true)
 
   // TODO: use notification component to show error

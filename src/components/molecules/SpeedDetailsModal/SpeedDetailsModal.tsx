@@ -1,7 +1,7 @@
 import { type FC, type ReactNode } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Table from 'react-bootstrap/Table'
-import { helpChooseRowHeaders } from '@/constants'
+import { HELP_CHOOSE_HEADERS } from '@/constants'
 import { type InternetService } from '@/types/InternetService'
 
 interface ModalProps {
@@ -15,6 +15,7 @@ type Values = Array<string | number>
 const SpeedDetailsModal: FC<ModalProps> = (props) => {
   const { offers } = props
 
+  // Transpose array
   const groupedOffers = offers.reduce((acc: Record<string, Values>, offer) => {
     const keys = Object.keys(offer)
     const values = Object.values(offer) as Values
@@ -28,23 +29,23 @@ const SpeedDetailsModal: FC<ModalProps> = (props) => {
     return acc
   }, {})
 
-  const renderRowValues = (header: string): ReactNode => {
-    let value
-    if (header === helpChooseRowHeaders[0]) {
-      value = groupedOffers.ideal_num_users.map((numUsers) => (
+  const renderRowContent = (header: string): ReactNode => {
+    let content
+    if (header === HELP_CHOOSE_HEADERS[0]) {
+      content = groupedOffers.ideal_num_users.map((numUsers) => (
         <td key={numUsers} className="text-center">
           {numUsers}
         </td>
       ))
-    } else if (header === helpChooseRowHeaders[1]) {
-      value = groupedOffers.ideal_num_devices.map((numDevices) => (
+    } else if (header === HELP_CHOOSE_HEADERS[1]) {
+      content = groupedOffers.ideal_num_devices.map((numDevices) => (
         <td key={numDevices} className="text-center">
           {numDevices}
         </td>
       ))
     } else {
-      value = groupedOffers.bandwidth_down.map((bandwidth, j) => {
-        if (header === helpChooseRowHeaders[5]) {
+      content = groupedOffers.bandwidth_down.map((bandwidth, j) => {
+        if (header === HELP_CHOOSE_HEADERS[5]) {
           if (Number(bandwidth) <= 70) {
             return (
               <td key={bandwidth} className="text-center">
@@ -60,7 +61,7 @@ const SpeedDetailsModal: FC<ModalProps> = (props) => {
         )
       })
     }
-    return value
+    return content
   }
 
   return (
@@ -96,10 +97,10 @@ const SpeedDetailsModal: FC<ModalProps> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {helpChooseRowHeaders.map((header) => (
+            {HELP_CHOOSE_HEADERS.map((header) => (
               <tr key={header}>
                 <td>{header}</td>
-                {renderRowValues(header)}
+                {renderRowContent(header)}
               </tr>
             ))}
           </tbody>

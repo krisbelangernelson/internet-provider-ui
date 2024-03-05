@@ -1,5 +1,5 @@
 import { type FormikErrors, useFormik } from 'formik'
-import { type Dispatch, type SetStateAction, useState, type FormEvent, type BaseSyntheticEvent } from 'react'
+import { type Dispatch, type SetStateAction, useState, type FormEvent, type BaseSyntheticEvent, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { normalizeInputPhone, keepDigits } from '@/utils/utils'
 import { useMutation } from '@tanstack/react-query'
@@ -39,7 +39,7 @@ interface UseCustomerForm {
 
 const useCustomerForm = (): UseCustomerForm => {
   const navigate = useNavigate()
-  const [customerData, setCustomerData] = useState<CustomerRegister | null>(null)
+  const customerData = useRef<CustomerRegister | null>(null)
   const [validateAfterSubmit, setValidateAfterSubmit] = useState(false)
   const {
     state: { customerInfo }
@@ -63,7 +63,7 @@ const useCustomerForm = (): UseCustomerForm => {
       navigate(ROUTES.orderPayment, {
         state: {
           customer: {
-            ...customerData,
+            ...customerData.current,
             id: data.id
           }
         }
@@ -89,12 +89,12 @@ const useCustomerForm = (): UseCustomerForm => {
           password: values.password
         }
 
-        setCustomerData({
+        customerData.current = {
           firstName: values.firstName,
           lastName: values.lastName,
           email: values.email,
           phone: phoneClean
-        })
+        }
 
         registerCustomer(data)
       } else if (emailExists && phoneExists) {

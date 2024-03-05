@@ -16,7 +16,7 @@ export const ROUTES = {
   customerArea: '/customer-area'
 }
 
-export const helpChooseRowHeaders = [
+export const HELP_CHOOSE_HEADERS = [
   'Number of people',
   'Number of devices',
   'Audio streaming',
@@ -25,7 +25,7 @@ export const helpChooseRowHeaders = [
   'Creator streaming'
 ]
 
-export const servicesAvailable = [
+export const SERVICES_AVAILABLE = [
   {
     label: 'Home Internet',
     name: 'home'
