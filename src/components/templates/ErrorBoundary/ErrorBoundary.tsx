@@ -28,7 +28,7 @@ const ErrorBoundary: FC<Props> = ({ children }) => {
       fallbackRender={() => (
         <Modal show={true} onHide={() => {}}>
           <Modal.Header closeButton>
-            <Modal.Title>Error</Modal.Title>
+            <Modal.Title>{APP_ERRORS.defaultTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>{APP_ERRORS.errourBoundary}</Modal.Body>
           <Modal.Footer>

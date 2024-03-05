@@ -2,7 +2,7 @@ import { type FC } from 'react'
 import CustomerForm from '@/components/molecules/CustomerForm/CustomerForm'
 import AlreadyCustomer from '@/components/atoms/AlreadyCustomer/AlreadyCustomer'
 
-const Customer: FC = () => {
+const OrderCustomer: FC = () => {
   return (
     <div className="mt-2">
       <AlreadyCustomer />
@@ -12,4 +12,4 @@ const Customer: FC = () => {
   )
 }
 
-export default Customer
+export default OrderCustomer

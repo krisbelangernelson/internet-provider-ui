@@ -10,6 +10,7 @@ import type { StripePaymentStatus, CreateOrder } from '@/types/order'
 import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
 import logger from '@/utils/logger'
+import Loading from '@/components/atoms/Loading/Loading'
 
 const PaymentStatus: FC = () => {
   const stripe = useStripe()
@@ -20,6 +21,7 @@ const PaymentStatus: FC = () => {
     isError: false
   })
   const [searchParams] = useSearchParams()
+  const [isProcessing, setIsProcessing] = useState(true)
 
   // TODO: use notification component to show error
   const { mutateAsync: createOrder } = useMutation({
@@ -34,7 +36,9 @@ const PaymentStatus: FC = () => {
 
     const clientSecret = searchParams.get('payment_intent_client_secret')
 
+    // Improper access to this endpoint, redirect them
     if (clientSecret == null) {
+      navigate('/')
       return
     }
 
@@ -42,6 +46,7 @@ const PaymentStatus: FC = () => {
     void stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       const status = getPaymentStatus(paymentIntent)
       setPaymentStatus(status)
+      setIsProcessing(false)
 
       if (!status.isError) {
         const data = {
@@ -60,10 +65,18 @@ const PaymentStatus: FC = () => {
         })
       }
 
-      // Prevents a reorder
+      // Clear query string, prevents a reorder
       navigate(ROUTES.orderCompleted, { replace: true })
     })
   }, [stripe])
+
+  if (isProcessing) {
+    return (
+      <Loading>
+        <>Processing...</>
+      </Loading>
+    )
+  }
 
   return (
     <Alert variant={paymentStatus.isError ? 'danger' : 'success'}>

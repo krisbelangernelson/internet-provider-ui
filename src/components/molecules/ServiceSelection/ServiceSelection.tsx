@@ -1,11 +1,11 @@
-import { type ReactElement, type FC } from 'react'
+import { type ReactElement, type FC, type Dispatch, type SetStateAction } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import ButtonToggle from '@/components/atoms/ButtonToggle/ButtonToggle'
 import { servicesAvailable } from '@/constants'
 
 interface ServiceSelectionProps {
   serviceSelected: string
-  setServiceSelected: React.Dispatch<React.SetStateAction<string>>
+  setServiceSelected: Dispatch<SetStateAction<string>>
 }
 
 const ServiceSelection: FC<ServiceSelectionProps> = ({ serviceSelected, setServiceSelected }): ReactElement => {

@@ -9,7 +9,7 @@ export const MAIN_HEADERS = {
 export const ROUTES = {
   internet: '/internet',
   login: '/login',
-  order: '/order',
+  order: '/order/availability',
   orderCompleted: '/order/completed',
   orderCustomer: '/order/customer',
   orderPayment: '/order/payment',

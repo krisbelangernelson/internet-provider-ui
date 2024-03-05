@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const useRedirect = (condition: boolean, location: string): void => {
+  const navigate = useNavigate()
   useEffect(() => {
     if (condition) {
-      window.location.href = location
+      navigate(location)
     }
   }, [condition])
 }

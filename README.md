@@ -6,6 +6,7 @@ Here are the other applications in this service provider project. These APIs are
 
 - https://github.com/krisbelangernelson/internet-services-api
 - https://github.com/krisbelangernelson/internet-customers-api
+- https://github.com/krisbelangernelson/internet-orders-api
 
 
 ## Payment testing
