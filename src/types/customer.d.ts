@@ -5,6 +5,31 @@ export interface Customer {
   phone: string
 }
 
+interface IFormikValues extends Customer {
+  password: string
+  passwordConfirm: string
+  terms: boolean
+}
+interface IFormikErrors {
+  firstName?: string
+  lastName?: string
+  email?: string
+  phone?: string
+  password?: string
+  passwordConfirm?: string
+  terms?: string
+}
+
+interface IFormikTouched {
+  firstName?: boolean
+  lastName?: boolean
+  email?: boolean
+  phone?: boolean
+  password?: boolean
+  passwordConfirm?: boolean
+  terms?: boolean
+}
+
 export interface CustomerRegister extends Customer {
   password?: string
   id?: string

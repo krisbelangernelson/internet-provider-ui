@@ -26,15 +26,14 @@ const AppRoutes: FC = () => {
   const { stripePromise, alertMsg } = useStripeConfig()
   const { setCustomer } = useCustomerContext()
 
+  // TODO: use notification component to show error
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: undefined) => await customerService.loginCustomer(body),
     onError: (error) => {
       console.log('error', error)
-      // setError(handleAxiosError(error, 'loginCustomer'))
     },
     onSuccess: (customer) => {
       setCustomer(customer)
-      // navigate(from, { replace: true, state: { customer } })
     }
   })
 
@@ -63,7 +62,6 @@ const AppRoutes: FC = () => {
             <Route path="/internet/how-it-works" element={<HowItWorks />} />
             <Route path="/internet" element={<Internet />} />
             <Route path="/customer-area" element={<CustomerArea />} />
-
             <Route path="/order/" element={<Order />}>
               <Route path="customer" element={<Customer />} />
               <Route path="availability" element={<ServiceAvailability />} />
