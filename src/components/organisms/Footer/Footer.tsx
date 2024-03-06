@@ -1,10 +1,10 @@
-import { type ReactElement } from 'react'
+import { type FC } from 'react'
 import useViewport from '@/hooks/useViewport'
 import DesktopFooter from './DesktopFooter'
 import MobileFooter from './MobileFooter'
 import './Footer.scss'
 
-const Footer = (): ReactElement => {
+const Footer: FC = () => {
   const { width } = useViewport()
   const breakpoint = 768
 
