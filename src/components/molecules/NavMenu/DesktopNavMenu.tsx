@@ -2,14 +2,12 @@ import { type ReactElement } from 'react'
 import { useLocation } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import Offcanvas from 'react-bootstrap/Offcanvas'
 import { ROUTES } from '@/constants'
 import FORMS from '@/constants/forms'
 
 const DesktopNavMenu = (): ReactElement => {
   const location = useLocation()
   const { pathname } = location
-  const expand = false
 
   return (
     <Navbar>
