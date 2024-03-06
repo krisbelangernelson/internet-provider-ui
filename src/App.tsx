@@ -3,6 +3,7 @@ import AppRoutes from '@/routes/Routes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ErrorBoundary from '@/components/templates/ErrorBoundary/ErrorBoundary'
 import CustomerProvider from '@/providers/customer/CustomerProvider'
+import NotificationProvider from './providers/notification/NotificationProvider'
 
 const queryClient = new QueryClient()
 
@@ -12,7 +13,9 @@ if (rootElement != null) {
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <CustomerProvider>
-          <AppRoutes />
+          <NotificationProvider>
+            <AppRoutes />
+          </NotificationProvider>
         </CustomerProvider>
       </QueryClientProvider>
     </ErrorBoundary>
