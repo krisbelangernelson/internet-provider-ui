@@ -15,7 +15,7 @@ type Values = Array<string | number>
 const SpeedDetailsModal: FC<ModalProps> = (props) => {
   const { offers } = props
 
-  // Transpose array
+  // Transpose array, rows become columns and vice versa
   const groupedOffers = offers.reduce((acc: Record<string, Values>, offer) => {
     const keys = Object.keys(offer)
     const values = Object.values(offer) as Values

@@ -62,11 +62,11 @@ const AppRoutes: FC = () => {
             <Route path="/internet/how-it-works" element={<HowItWorks />} />
             <Route path="/internet" element={<Internet />} />
             <Route path="/customer-area" element={<CustomerArea />} />
+            <Route path="/order/completed" element={<Completed stripePromise={stripePromise} />} />
             <Route path="/order/" element={<Order />}>
               <Route path="customer" element={<Customer />} />
               <Route path="availability" element={<ServiceAvailability />} />
               <Route path="payment" element={<Payment stripePromise={stripePromise} />} />
-              <Route path="completed" element={<Completed stripePromise={stripePromise} />} />
             </Route>
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
