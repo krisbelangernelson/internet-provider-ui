@@ -8,13 +8,14 @@ import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 import LoginNoAccess from '@/components/atoms/LoginNoAccess/LoginNoAccess'
 import Logout from '@/components/atoms/Logout/Logout'
 import useIsLoggedIn from '@/hooks/useIsLoggedIn'
+import { useNotificationContext } from '@/providers/notification/NotificationContext'
 
 // TODO: consts
 const CustomerArea: FC = () => {
   const isLoggedIn = useIsLoggedIn()
+  const { showErrorNotification } = useNotificationContext()
 
-  // TODO: use notification component to show error
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['customer-area'],
     queryFn: customerService.customerArea,
     enabled: true,
@@ -23,6 +24,10 @@ const CustomerArea: FC = () => {
 
   if ((isLoading || data === undefined) && !isError) {
     return <Loading />
+  }
+
+  if (isError) {
+    showErrorNotification({ error, caller: 'CustomerArea' })
   }
 
   return (

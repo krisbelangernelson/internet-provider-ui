@@ -9,15 +9,16 @@ import internetService from '@/services/internetService'
 import { INTERNET_PAGE } from '@/constants'
 import Loading from '@/components/atoms/Loading/Loading'
 import HelpMeChoose from '@/components/atoms/HelpMeChoose/HelpMeChoose'
+import Error from '@/components/atoms/Error/Error'
 
 const Internet: FC = () => {
   const [serviceSelected, setServiceSelected] = useState<string>('')
 
-  // TODO: use notification component to show error
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['internet-services'],
     queryFn: internetService.findAll,
-    enabled: true
+    enabled: true,
+    retry: false
   })
 
   const sortedOffers = useMemo(() => {
@@ -39,8 +40,12 @@ const Internet: FC = () => {
     return ''
   }, [serviceSelected])
 
-  if (isLoading || sortedOffers === undefined) {
+  if ((isLoading || sortedOffers === undefined) && !isError) {
     return <Loading />
+  }
+
+  if (isError || sortedOffers === undefined) {
+    return <Error title="API Error" error={error} caller="Internet" />
   }
 
   return (

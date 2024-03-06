@@ -4,24 +4,23 @@ import Button from 'react-bootstrap/Button'
 import type { NotificationData } from '@/types/notification'
 
 interface NotificationModalProps {
-  setShow: (show: boolean, data: NotificationData | null) => void
+  close: () => void
   show: boolean
   data: NotificationData
+  isError?: boolean
 }
 
-const NotificationModal: FC<NotificationModalProps> = ({ setShow, show, data }) => {
-  const handleClose = (): void => {
-    setShow(false, null)
-  }
+const NotificationModal: FC<NotificationModalProps> = ({ close, show, data, isError = false }) => {
+  const { title, message } = data
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={close}>
       <Modal.Header closeButton>
-        <Modal.Title>{data.title}</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{data.message}</Modal.Body>
+      <Modal.Body className="custom-color">{message}</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant={isError ? 'danger' : 'success'} onClick={close}>
           Close
         </Button>
       </Modal.Footer>

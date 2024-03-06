@@ -3,12 +3,16 @@ import { type NotificationContextType } from '@/types/notification'
 
 export const initialState = {
   show: false,
-  data: null
+  data: null,
+  isError: false
 }
 
 export const NotificationContext = createContext<NotificationContextType>({
   state: initialState,
-  setShow: () => undefined
+  closeNotification: () => undefined,
+  resetNotification: () => undefined,
+  showErrorNotification: () => undefined,
+  showSuccessNotification: () => undefined
 })
 
 export const useNotificationContext = (): NotificationContextType => useContext(NotificationContext)

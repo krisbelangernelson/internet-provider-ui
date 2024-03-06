@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query'
 import customerService from '@/services/customerService'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
 import Loading from '@/components/atoms/Loading/Loading'
+import { useNotificationContext } from '@/providers/notification/NotificationContext'
 
 const Home = lazy(async () => await import('@/components/pages/Home/Home'))
 const Internet = lazy(async () => await import('@/components/pages/Internet/Internet'))
@@ -25,12 +26,12 @@ const NotFound = lazy(async () => await import('./NotFound'))
 const AppRoutes: FC = () => {
   const { stripePromise, alertMsg } = useStripeConfig()
   const { setCustomer } = useCustomerContext()
+  const { showErrorNotification } = useNotificationContext()
 
-  // TODO: use notification component to show error
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: undefined) => await customerService.loginCustomer(body),
     onError: (error) => {
-      console.log('error', error)
+      showErrorNotification({ title: 'Auth Error', error, caller: 'AppRoutes' })
     },
     onSuccess: (customer) => {
       setCustomer(customer)

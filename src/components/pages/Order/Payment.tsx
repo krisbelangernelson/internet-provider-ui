@@ -7,11 +7,11 @@ import { useLocation } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
 import CheckoutForm from '@/components/molecules/CheckoutForm/CheckoutForm'
-import logger from '@/utils/logger'
 import { MAIN_HEADERS } from '@/constants'
 import useRedirect from '@/hooks/useRedirect'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
 import type { CustomerRegister } from '@/types/customer'
+import { useNotificationContext } from '@/providers/notification/NotificationContext'
 
 interface Props {
   stripePromise: Stripe | null
@@ -30,11 +30,12 @@ const Payment: FC<Props> = ({ stripePromise }) => {
       serviceSelection: { serviceType, offerName }
     }
   } = useCustomerContext()
+  const { showErrorNotification } = useNotificationContext()
+
   const { customer } = (location.state as { customer: CustomerRegister }) ?? {}
 
   useRedirect(customer === undefined, '/internet')
 
-  // TODO: use notification component to show error
   const { mutateAsync: stripePayment } = useMutation({
     mutationFn: async (body: PaymentBody) => await orderService.stripePaymenIntent(body)
   })
@@ -49,7 +50,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
         setTotal(amount)
       })
       .catch((error: Error) => {
-        logger.error(error, 'stripePayment')
+        showErrorNotification({ error, caller: 'Payment' })
       })
   }, [])
 

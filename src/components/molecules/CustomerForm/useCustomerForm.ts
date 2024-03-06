@@ -5,7 +5,6 @@ import { normalizeInputPhone, keepDigits } from '@/utils/utils'
 import { useMutation } from '@tanstack/react-query'
 import customerService from '@/services/customerService'
 import VALIDATIONS from '@/constants/validations'
-import { handleAxiosError } from '@/utils/handleError'
 import type {
   CustomerRegister,
   CustomerExists,
@@ -16,6 +15,7 @@ import type {
 import { customerFormSchema } from '@/utils/validationSchemas'
 import { ROUTES } from '@/constants'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
+import { useNotificationContext } from '@/providers/notification/NotificationContext'
 
 interface UseCustomerForm {
   data: {
@@ -44,8 +44,8 @@ const useCustomerForm = (): UseCustomerForm => {
   const {
     state: { customerInfo }
   } = useCustomerContext()
+  const { showErrorNotification } = useNotificationContext()
 
-  // TODO: use notification hook to show error
   const { mutateAsync: customerExists } = useMutation({
     mutationFn: async (body: CustomerExists) => await customerService.customerExists(body)
   })
@@ -57,7 +57,7 @@ const useCustomerForm = (): UseCustomerForm => {
   } = useMutation({
     mutationFn: async (body: CustomerRegister) => await customerService.registerCustomer(body),
     onError: (error) => {
-      handleAxiosError(error, 'registerCustomer')
+      showErrorNotification({ error, caller: 'useCustomerForm/registerCustomer' })
     },
     onSuccess: (data) => {
       navigate(ROUTES.orderPayment, {
@@ -78,6 +78,9 @@ const useCustomerForm = (): UseCustomerForm => {
       const { emailExists, phoneExists } = await customerExists({
         email: values.email,
         phone: phoneClean
+      }).catch((error) => {
+        showErrorNotification({ error: error as unknown as Error, caller: 'useCustomerForm/customerExists' })
+        return { emailExists: true, phoneExists: true }
       })
 
       if (!emailExists && !phoneExists) {

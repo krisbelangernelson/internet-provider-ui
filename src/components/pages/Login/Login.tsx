@@ -31,7 +31,6 @@ const Login: FC = () => {
   const { from = ROUTES.customerArea } = (location?.state as LocationState) ?? {}
   const { setCustomer } = useCustomerContext()
 
-  // TODO: use notification component to show error
   const { mutate: loginCustomer, isPending } = useMutation({
     mutationFn: async (body: CustomerLogin) => await customerService.loginCustomer(body),
     onError: (error) => {

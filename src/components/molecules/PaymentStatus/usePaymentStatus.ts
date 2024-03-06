@@ -6,7 +6,7 @@ import { getPaymentStatus } from '@/utils/utils'
 import type { StripePaymentStatus, CreateOrder } from '@/types/order'
 import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
-import logger from '@/utils/logger'
+import { useNotificationContext } from '@/providers/notification/NotificationContext'
 
 interface UsePaymentStatus {
   isProcessing: boolean
@@ -23,13 +23,12 @@ const usePaymentStatus = (): UsePaymentStatus => {
     isError: false
   })
   const [isProcessing, setIsProcessing] = useState(true)
+  const { showErrorNotification } = useNotificationContext()
 
-  // TODO: use notification component to show error
   const { mutateAsync: createOrder } = useMutation({
     mutationFn: async (body: CreateOrder) => await orderService.createOrder(body)
   })
 
-  // TODO: custom hook
   useEffect(() => {
     if (stripe == null) {
       return
@@ -43,7 +42,6 @@ const usePaymentStatus = (): UsePaymentStatus => {
       return
     }
 
-    // TODO: handle errors?
     void stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       const status = getPaymentStatus(paymentIntent)
       setPaymentStatus(status)
@@ -62,7 +60,7 @@ const usePaymentStatus = (): UsePaymentStatus => {
         }
 
         void createOrder(data).catch((error: Error) => {
-          logger.error(error, 'createOrder')
+          showErrorNotification({ error, caller: 'CustomerArea' })
         })
       }
 
