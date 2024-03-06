@@ -1,20 +1,17 @@
-import { type FC, useMemo } from 'react'
+import { type FC } from 'react'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import customerService from '@/services/customerService'
 import { useQuery } from '@tanstack/react-query'
 import Loading from '@/components/atoms/Loading/Loading'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
-import { useCustomerContext } from '@/providers/customer/CustomerContext'
 import LoginNoAccess from '@/components/atoms/LoginNoAccess/LoginNoAccess'
 import Logout from '@/components/atoms/Logout/Logout'
+import useIsLoggedIn from '@/hooks/useIsLoggedIn'
 
 // TODO: consts
 const CustomerArea: FC = () => {
-  const {
-    state: { customerInfo }
-  } = useCustomerContext()
-  const isLoggedIn = useMemo(() => customerInfo.accessToken !== '', [customerInfo.accessToken])
+  const isLoggedIn = useIsLoggedIn()
 
   // TODO: use notification component to show error
   const { data, isLoading, isError } = useQuery({
