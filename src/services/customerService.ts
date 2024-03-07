@@ -36,6 +36,10 @@ const logout = async (): Promise<object> => {
   return await apiClient.get<object>('/auth/logout').then((response) => response.data)
 }
 
-const customerService = { registerCustomer, loginCustomer, customerExists, customerArea, logout }
+const autoLoginCheck = async (): Promise<CustomerResponse> => {
+  return await apiClient.get<CustomerResponse>('/auth/auto-login-check').then((response) => response.data)
+}
+
+const customerService = { registerCustomer, loginCustomer, customerExists, customerArea, logout, autoLoginCheck }
 
 export default customerService

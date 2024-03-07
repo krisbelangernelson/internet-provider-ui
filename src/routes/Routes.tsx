@@ -28,18 +28,20 @@ const AppRoutes: FC = () => {
   const { setCustomer } = useCustomerContext()
   const { showErrorNotification } = useNotificationContext()
 
-  const { mutate: loginCustomer, isPending } = useMutation({
-    mutationFn: async (body: undefined) => await customerService.loginCustomer(body),
+  const { mutate: autoLoginCheck, isPending } = useMutation({
+    mutationFn: async () => await customerService.autoLoginCheck(),
     onError: (error) => {
       showErrorNotification({ title: 'Auth Error', error, caller: 'AppRoutes' })
     },
     onSuccess: (customer) => {
-      setCustomer(customer)
+      if (customer.accessToken !== undefined) {
+        setCustomer(customer)
+      }
     }
   })
 
   useEffect(() => {
-    loginCustomer(undefined)
+    autoLoginCheck()
   }, [])
 
   if (isPending) {
