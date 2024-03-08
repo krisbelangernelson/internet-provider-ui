@@ -9,6 +9,7 @@ import LoginNoAccess from '@/components/atoms/LoginNoAccess/LoginNoAccess'
 import Logout from '@/components/atoms/Logout/Logout'
 import useIsLoggedIn from '@/hooks/useIsLoggedIn'
 import { useNotificationContext } from '@/providers/notification/NotificationContext'
+import RegisterCustomerArea from '@/components/atoms/RegisterCustomerArea/RegisterCustomerArea'
 
 // TODO: consts
 const CustomerArea: FC = () => {
@@ -41,7 +42,10 @@ const CustomerArea: FC = () => {
               <Logout />
             </>
           ) : (
-            <LoginNoAccess />
+            <>
+              <LoginNoAccess />
+              <RegisterCustomerArea className="mt-3" />
+            </>
           )}
         </Col>
       </Row>

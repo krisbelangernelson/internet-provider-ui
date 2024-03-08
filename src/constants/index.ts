@@ -72,3 +72,10 @@ export const SERVICE_AVAILABILITY = {
 }
 
 export const VIEWPORT_BREAKPOINT = 768
+
+export const REGISTER = {
+  customerArea: {
+    label: 'Plans',
+    link: ROUTES.internet
+  }
+}
