@@ -78,6 +78,16 @@ a {
   color: $primary
 }
 
+.section-dark {
+  background-color: $dark-bg;
+  color: $dark-bg-text
+}
+
+.section-light {
+  background-color: $light-bg;
+  color: $light-bg-text
+}
+
 /* Customize boostrap styles */
 
 .form-label {

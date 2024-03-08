@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom'
 import Stack from 'react-bootstrap/Stack'
 import Accordion from 'react-bootstrap/Accordion'
+import Copyright from './Copyright'
 
 // TODO: constants
 const MobileFooter = (): ReactElement => (
@@ -69,6 +70,7 @@ const MobileFooter = (): ReactElement => (
         </Accordion>
       </Col>
     </Row>
+    <Copyright />
   </Container>
 )
 

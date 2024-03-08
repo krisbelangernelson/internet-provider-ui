@@ -3,6 +3,8 @@ declare module '*.svg' {
   export default content
 }
 
+declare module '*.jpg'
+
 interface ScssVariables {
   primary: string
   'primary-hover': string

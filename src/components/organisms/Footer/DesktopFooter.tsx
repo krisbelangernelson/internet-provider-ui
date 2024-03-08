@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom'
 import Stack from 'react-bootstrap/Stack'
+import Copyright from './Copyright'
 
 // TODO: constants
 const DesktopFooter = (): ReactElement => (
@@ -48,6 +49,7 @@ const DesktopFooter = (): ReactElement => (
         </Stack>
       </Col>
     </Row>
+    <Copyright />
   </Container>
 )
 

@@ -1,0 +1,82 @@
+@import '../../../_variables.module.scss';
+
+#outer-ring {
+  position: relative;
+  background: linear-gradient(#b18c47, $primary);
+  padding: 1px;
+  border-radius: 1000px;
+  width: 284px;
+  height: 284px;
+  min-width: 284px;
+  min-height: 284px;
+  margin-top: 2rem;
+  // scale: 0.5;
+  
+  @media screen and (min-width: 769px) {
+    width: 468px;
+    height: 468px;
+    min-width: 468px;
+    min-height: 468px;
+  }
+}
+
+#outer-ring-filler {
+  background: $dark-bg;
+  padding: 20px;
+  border-radius: 1000px;
+  width: 282px;
+  height: 282px;
+  min-width: 282px;
+  min-height: 282px;
+  
+  @media screen and (min-width: 769px) {
+    padding: 29px;
+    width: 466px;
+    height: 466px;
+    min-width: 466px;
+    min-height: 466px;
+  }
+}
+
+#inner-ring {
+  background: linear-gradient(#bc7a00, $dark-bg 45% 55%, #bc7a00);
+  padding: 1px;
+  border-radius: 1000px;
+  width: 242px;
+  height: 242px;
+  min-width: 242px;
+  min-height: 242px;
+  
+  @media screen and (min-width: 769px) {
+    width: 410px;
+    height: 410px;
+    min-width: 410px;
+    min-height: 410px;
+  }
+}
+
+#inner-ring-filler {
+  background: $dark-bg;
+  padding: 20px;
+  border-radius: 1000px;
+  width: 240px;
+  height: 240px;
+  min-width: 240px;
+  min-height: 240px;
+  
+  @media screen and (min-width: 769px) {
+    padding: 29px;
+    width: 408px;
+    height: 408px;
+    min-width: 408px;
+    min-height: 408px;
+  }
+}
+
+#inner-ring-filler img {
+  width: 200px;
+
+  @media screen and (min-width: 769px) {
+    width: 350px;
+  }
+}
