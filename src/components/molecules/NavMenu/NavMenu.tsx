@@ -2,6 +2,7 @@ import { type FC } from 'react'
 import MobileNavMenu from './MobileNavMenu'
 import DesktopNavMenu from './DesktopNavMenu'
 import useViewport from '@/hooks/useViewport'
+import './NavMenu.scss'
 
 const NavMenu: FC = () => {
   const { width } = useViewport()

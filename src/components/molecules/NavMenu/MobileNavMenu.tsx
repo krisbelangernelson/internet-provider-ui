@@ -15,7 +15,7 @@ const MobileNavMenu = (): ReactElement => {
     <Navbar expand={expand}>
       <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
       <Navbar.Offcanvas
-        id={`offcanvasNavbar-expand-${expand}`}
+        id={`menu-offcanvasNavbar-expand-${expand}`}
         aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
         placement="end"
       >
