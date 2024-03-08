@@ -1,3 +1,5 @@
+export const COMPANY = 'Ping!'
+
 export const MAIN_HEADERS = {
   payment: 'Payment',
   createAccount: 'Create an Account',
@@ -8,6 +10,7 @@ export const MAIN_HEADERS = {
 
 export const ROUTES = {
   internet: '/internet',
+  contact: '/contact',
   login: '/login',
   order: '/order/availability',
   orderCompleted: '/order/completed',
@@ -15,6 +18,21 @@ export const ROUTES = {
   orderPayment: '/order/payment',
   customerArea: '/customer-area'
 }
+
+export const NAV_MENU = [
+  {
+    label: COMPANY,
+    link: '/'
+  },
+  {
+    label: 'Internet',
+    link: ROUTES.internet
+  },
+  {
+    label: 'Contact',
+    link: ROUTES.contact
+  }
+]
 
 export const HELP_CHOOSE_HEADERS = [
   'Number of people',

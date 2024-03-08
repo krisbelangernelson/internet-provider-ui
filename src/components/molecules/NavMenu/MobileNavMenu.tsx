@@ -1,10 +1,8 @@
 import { type ReactElement } from 'react'
 import { useLocation } from 'react-router-dom'
-import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Offcanvas from 'react-bootstrap/Offcanvas'
-import { ROUTES } from '@/constants'
-import FORMS from '@/constants/forms'
+import NavLinks from './NavLinks'
 
 const MobileNavMenu = (): ReactElement => {
   const location = useLocation()
@@ -23,12 +21,7 @@ const MobileNavMenu = (): ReactElement => {
           <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Nav className="me-auto" variant="underline" defaultActiveKey="/">
-            <Navbar.Brand href="/">Ping!</Navbar.Brand>
-            <Nav.Link href={ROUTES.internet} active={pathname === ROUTES.internet}>
-              {FORMS.buttons.internet.label}
-            </Nav.Link>
-          </Nav>
+          <NavLinks pathname={pathname} />
         </Offcanvas.Body>
       </Navbar.Offcanvas>
     </Navbar>

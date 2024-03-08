@@ -1,9 +1,7 @@
 import { type ReactElement } from 'react'
 import { useLocation } from 'react-router-dom'
-import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { ROUTES } from '@/constants'
-import FORMS from '@/constants/forms'
+import NavLinks from './NavLinks'
 
 const DesktopNavMenu = (): ReactElement => {
   const location = useLocation()
@@ -11,12 +9,7 @@ const DesktopNavMenu = (): ReactElement => {
 
   return (
     <Navbar>
-      <Nav className="me-auto" variant="underline" defaultActiveKey="/">
-        <Navbar.Brand href="/">Ping!</Navbar.Brand>
-        <Nav.Link href={ROUTES.internet} active={pathname === ROUTES.internet}>
-          {FORMS.buttons.internet.label}
-        </Nav.Link>
-      </Nav>
+      <NavLinks pathname={pathname} />
     </Navbar>
   )
 }

@@ -10,7 +10,7 @@ import './HeroSection.scss'
 
 const HeroSection: FC = () => {
   return (
-    <section className="section-dark mb-5">
+    <section className="section-dark mb-md-5">
       <Container>
         <Row>
           <Col className="text-center mb-4">
