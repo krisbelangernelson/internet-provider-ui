@@ -3,16 +3,16 @@ import { type FC } from 'react'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
 
-interface Props {
+interface RegisterCustomerAreaProps {
   className?: string
 }
-// TODO: const
-const RegisterCustomerArea: FC<Props> = ({ ...rest }) => {
+
+const RegisterCustomerArea: FC<RegisterCustomerAreaProps> = ({ ...rest }) => {
   const navigate = useNavigate()
 
   return (
     <div {...rest}>
-      <div>Not a customer? Check out our plans!</div>
+      <div>{REGISTER.customerArea.title}</div>
       <Button
         onClick={() => {
           navigate(REGISTER.customerArea.link)
