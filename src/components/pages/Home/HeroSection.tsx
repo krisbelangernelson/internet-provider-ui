@@ -25,6 +25,13 @@ const HeroSection: FC = () => {
                   <h5 className="text-start w-75">
                     Experience next-level internet for streaming, gaming, and everything in between.
                   </h5>
+                  {/* <h5 className="text-start w-75">
+                    Experience the frustration-free internet you deserve. Say goodbye to buffering, lag, and dropped
+                    connections. We offer blazing-fast internet speeds that seamlessly adapt to your online activities,
+                    whether you&apos;re streaming your favorite shows in 4K, downloading large files, or competing in
+                    fast-paced online games. With Ping!, you can finally unleash the full potential of your internet
+                    connection and connect to what matters most.
+                  </h5> */}
                 </Row>
 
                 <div className="d-flex justify-content-center">

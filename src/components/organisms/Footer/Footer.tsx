@@ -3,12 +3,12 @@ import useViewport from '@/hooks/useViewport'
 import DesktopFooter from './DesktopFooter'
 import MobileFooter from './MobileFooter'
 import './Footer.scss'
+import { VIEWPORT_BREAKPOINT } from '@/constants'
 
 const Footer: FC = () => {
   const { width } = useViewport()
-  const breakpoint = 768
 
-  return <footer>{width < breakpoint ? <MobileFooter /> : <DesktopFooter />}</footer>
+  return <footer>{width < VIEWPORT_BREAKPOINT ? <MobileFooter /> : <DesktopFooter />}</footer>
 }
 
 export default Footer

@@ -11,6 +11,7 @@ export const MAIN_HEADERS = {
 export const ROUTES = {
   internet: '/internet',
   contact: '/contact',
+  faq: '/faq',
   login: '/login',
   order: '/order/availability',
   orderCompleted: '/order/completed',
@@ -25,8 +26,12 @@ export const NAV_MENU = [
     link: '/'
   },
   {
-    label: 'Internet',
+    label: 'Plans',
     link: ROUTES.internet
+  },
+  {
+    label: 'FAQ',
+    link: ROUTES.faq
   },
   {
     label: 'Contact',
@@ -65,3 +70,5 @@ export const SERVICE_AVAILABILITY = {
   verifyLabel: 'Verify that this service is available at your address',
   qualifiedLabel: 'Your address qualifies for this service!'
 }
+
+export const VIEWPORT_BREAKPOINT = 768
