@@ -26,8 +26,7 @@ const FeaturesItem: FC<FeaturesItemProps> = ({ imgSrc, heading, subHeading, text
         <h2>{heading}</h2>
         <p>{subHeading}</p>
         <Button
-          variant="link"
-          className="p-0 fw-bold"
+          variant="primary"
           onClick={() => {
             navigate(ROUTES.internet)
           }}

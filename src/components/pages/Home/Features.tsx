@@ -12,7 +12,7 @@ const Features: FC = () => (
         imgSrc={SpeedImg as string}
         imageOrder={1}
         textOrder={2}
-        heading="Accelerating to your goals"
+        heading="Accelerate to your goals"
         subHeading="No more waiting for videos to load or games to buffer. Experience lightning-fast internet speeds that allow you to download files in seconds, stream 4K content without interruptions, and enjoy lag-free online gaming."
       />
       <div className="mt-lg-3" />
