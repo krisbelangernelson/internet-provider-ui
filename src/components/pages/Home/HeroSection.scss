@@ -12,7 +12,7 @@
   margin-top: 2rem;
   // scale: 0.5;
   
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     width: 468px;
     height: 468px;
     min-width: 468px;
@@ -29,7 +29,7 @@
   min-width: 282px;
   min-height: 282px;
   
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     padding: 29px;
     width: 466px;
     height: 466px;
@@ -47,7 +47,7 @@
   min-width: 242px;
   min-height: 242px;
   
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     width: 410px;
     height: 410px;
     min-width: 410px;
@@ -64,7 +64,7 @@
   min-width: 240px;
   min-height: 240px;
   
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     padding: 29px;
     width: 408px;
     height: 408px;
@@ -76,7 +76,7 @@
 #inner-ring-filler img {
   width: 200px;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     width: 350px;
   }
 }

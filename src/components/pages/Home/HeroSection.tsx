@@ -4,17 +4,22 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
-import Logo from '@/assets/images/hero-woman-350px.jpg'
+import Hero from '@/assets/images/hero-woman-350px.jpg'
 import Image from 'react-bootstrap/Image'
+import { useNavigate } from 'react-router-dom'
 import './HeroSection.scss'
+import { ROUTES } from '@/constants'
+import FORMS from '@/constants/forms'
 
 const HeroSection: FC = () => {
+  const navigate = useNavigate()
+
   return (
     <section className="section-dark mb-md-5">
       <Container>
         <Row>
           <Col className="text-center mb-4">
-            <Row className="justify-content-center">
+            <Row className="xs-col-lg-row justify-content-center">
               <Col className="align-self-center">
                 <h1 style={{ fontSize: '3rem' }}>
                   <span className="primary">Unleash</span> the Speed.
@@ -36,8 +41,14 @@ const HeroSection: FC = () => {
 
                 <div className="d-flex justify-content-center">
                   <Stack direction="horizontal" gap={3}>
-                    <Button type="button" variant="primary">
-                      Explore Plans
+                    <Button
+                      type="button"
+                      variant="primary"
+                      onClick={() => {
+                        navigate(ROUTES.internet)
+                      }}
+                    >
+                      {FORMS.buttons.explorePlans.label}
                     </Button>
                     <Button type="button" variant="outline-primary">
                       Learn More
@@ -50,7 +61,7 @@ const HeroSection: FC = () => {
                   <div id="outer-ring-filler">
                     <div id="inner-ring">
                       <div id="inner-ring-filler">
-                        <Image src={Logo as string} roundedCircle />
+                        <Image src={Hero as string} roundedCircle />
                       </div>
                     </div>
                   </div>

@@ -7,7 +7,7 @@ exports.svgLoader = {
         use: [{ loader: '@svgr/webpack', options: { icon: true } }]
       },
       {
-        test: /\.jpg/,
+        test: /\.(png|jpg|gif)$/i,
         type: 'asset/resource'
       }
     ]

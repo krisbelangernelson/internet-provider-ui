@@ -4,6 +4,7 @@ declare module '*.svg' {
 }
 
 declare module '*.jpg'
+declare module '*.png'
 
 interface ScssVariables {
   primary: string

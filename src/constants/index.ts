@@ -76,7 +76,7 @@ export const VIEWPORT_BREAKPOINT = 768
 export const REGISTER = {
   customerArea: {
     title: 'Not a customer? Check out our plans!',
-    label: 'Plans',
+    label: 'Explore Plans',
     link: ROUTES.internet
   }
 }
