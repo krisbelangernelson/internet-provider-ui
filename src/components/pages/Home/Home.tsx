@@ -1,13 +1,11 @@
 import { type FC } from 'react'
-import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import HeroSection from './HeroSection'
 import FeaturesSummary from './FeaturesSummary'
 import Features from './Features'
 import WhyChooseUs from './WhyChooseUs'
 import FeaturesSummaryMore from './FeaturesSummaryMore'
 import FeaturesMore from './FeaturesMore'
+import Testimonials from './Testimonials'
 
 const Home: FC = () => (
   <>
@@ -17,15 +15,11 @@ const Home: FC = () => (
     <Features />
     <FeaturesSummaryMore />
     <FeaturesMore />
-    <section className="section-dark testimony">TEstminonals</section>
+    <Testimonials />
     <section className="section-light cta">
-      <Container>
-        <Row>
-          <Col className="text-center my-4">
-            Ready to Experience the Power?<div>Get Connected Now</div>
-          </Col>
-        </Row>
-      </Container>
+      <div className="text-center my-4">
+        Ready to Experience the Power?<div>Get Connected Now</div>
+      </div>
     </section>
   </>
 )
