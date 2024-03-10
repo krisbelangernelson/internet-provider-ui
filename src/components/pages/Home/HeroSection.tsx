@@ -4,7 +4,8 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
-import Hero from '@/assets/images/hero-woman-350px.jpg'
+import HeroDesktop from '@/assets/images/hero-woman-350px.jpg'
+import HeroMobile from '@/assets/images/hero-woman-200px.jpg'
 import Image from 'react-bootstrap/Image'
 import { useNavigate } from 'react-router-dom'
 import './HeroSection.scss'
@@ -15,7 +16,7 @@ const HeroSection: FC = () => {
   const navigate = useNavigate()
 
   return (
-    <section className="section-dark mb-md-5">
+    <section className="section-dark pb-md-5">
       <Container>
         <Row>
           <Col className="text-center mb-4">
@@ -61,12 +62,14 @@ const HeroSection: FC = () => {
                   <div id="outer-ring-filler">
                     <div id="inner-ring">
                       <div id="inner-ring-filler">
-                        <Image src={Hero as string} roundedCircle />
+                        <picture>
+                          <source media="(min-width:768px)" srcSet={HeroDesktop as string} />
+                          <Image src={HeroMobile as string} roundedCircle loading="lazy" />
+                        </picture>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* <Image src={Logo as string} roundedCircle width="175px" /> */}
               </Col>
             </Row>
           </Col>

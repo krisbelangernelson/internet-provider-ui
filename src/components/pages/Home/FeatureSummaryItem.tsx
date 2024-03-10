@@ -12,7 +12,7 @@ interface FeaturesSummaryItemProps {
 const FeaturesSummaryItem: FC<FeaturesSummaryItemProps> = ({ imgSrc, heading, subHeading }) => (
   <Row className="d-flex flex-row">
     <Col xs={3} className="text-end mt-2">
-      <Image src={imgSrc} width="64px" />
+      <Image src={imgSrc} width="64px" loading="lazy" alt="Feature image" />
     </Col>
 
     <Col xs={9} className="text-start">

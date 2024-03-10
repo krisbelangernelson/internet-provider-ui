@@ -8,7 +8,11 @@ import { VIEWPORT_BREAKPOINT } from '@/constants'
 const Footer: FC = () => {
   const { width } = useViewport()
 
-  return <footer>{width < VIEWPORT_BREAKPOINT ? <MobileFooter /> : <DesktopFooter />}</footer>
+  return (
+    <footer className="mt-auto section-dark">
+      {width < VIEWPORT_BREAKPOINT ? <MobileFooter /> : <DesktopFooter />}
+    </footer>
+  )
 }
 
 export default Footer

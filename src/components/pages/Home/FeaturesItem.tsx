@@ -20,7 +20,7 @@ const FeaturesItem: FC<FeaturesItemProps> = ({ imgSrc, heading, subHeading, text
   return (
     <Row className="align-items-center flex-column flex-lg-row">
       <Col lg={{ order: imageOrder }} className="text-center">
-        <Image src={imgSrc} className="rounded shadow" fluid />
+        <Image loading="lazy" src={imgSrc} className="rounded shadow" fluid alt="Feature image" />
       </Col>
       <Col className="text-start p-3 p-lg-5" lg={{ order: textOrder }}>
         <h2>{heading}</h2>
