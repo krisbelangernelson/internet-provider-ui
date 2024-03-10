@@ -24,6 +24,9 @@ const FORMS = {
     explorePlans: {
       label: 'Explore Plans'
     },
+    getConnected: {
+      label: 'Get Connected Now'
+    },
     chooseUs: {
       label: 'Choose Us'
     },

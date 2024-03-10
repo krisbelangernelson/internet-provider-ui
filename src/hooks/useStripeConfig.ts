@@ -4,7 +4,7 @@ import orderService from '@/services/orderService'
 import { type StripeConfig } from '@/types/order'
 import { useQuery } from '@tanstack/react-query'
 import { handleAxiosError } from '@/utils/handleError'
-import APP_ERRORS from '@/constants/appErrors'
+import { APP_ERRORS } from '@/constants'
 
 interface UseStripeConfig {
   stripePromise: Stripe | null

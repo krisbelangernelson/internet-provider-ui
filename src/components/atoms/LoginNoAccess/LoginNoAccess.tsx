@@ -1,5 +1,4 @@
-import { ROUTES } from '@/constants'
-import FORMS from '@/constants/forms'
+import { ROUTES, FORMS } from '@/constants'
 import { type FC } from 'react'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'

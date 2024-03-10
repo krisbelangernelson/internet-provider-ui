@@ -4,8 +4,7 @@ import Row from 'react-bootstrap/Row'
 import WhyChooseImg from '@/assets/images/why-choose-595h.jpg'
 import LazyBackgroundImg from '@/components/atoms/LazyBackgroundImg/LazyBackgroundImg'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '@/constants'
-import FORMS from '@/constants/forms'
+import { ROUTES, FORMS } from '@/constants'
 import Button from 'react-bootstrap/Button'
 
 const WhyChooseUs: FC = () => {

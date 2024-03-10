@@ -8,8 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 import Alert from 'react-bootstrap/Alert'
 import { useNavigate } from 'react-router-dom'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
-import { ROUTES, MAIN_HEADERS, SERVICE_AVAILABILITY } from '@/constants'
-import FORMS from '@/constants/forms'
+import { ROUTES, MAIN_HEADERS, SERVICE_AVAILABILITY, FORMS } from '@/constants'
 
 // TODO: make an autocomplete with real addresses
 // https://apidocs.geoapify.com/playground

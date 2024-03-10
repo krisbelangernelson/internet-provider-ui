@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { normalizeInputPhone, keepDigits } from '@/utils/utils'
 import { useMutation } from '@tanstack/react-query'
 import customerService from '@/services/customerService'
-import VALIDATIONS from '@/constants/validations'
 import type {
   CustomerRegister,
   CustomerExists,
@@ -13,7 +12,7 @@ import type {
   CustomerFormikTouched
 } from '@/types/customer'
 import { customerFormSchema } from '@/utils/validationSchemas'
-import { ROUTES } from '@/constants'
+import { ROUTES, VALIDATIONS } from '@/constants'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
 import { useNotificationContext } from '@/providers/notification/NotificationContext'
 

@@ -9,8 +9,7 @@ import HeroMobile from '@/assets/images/hero-woman-200px.jpg'
 import Image from 'react-bootstrap/Image'
 import { useNavigate } from 'react-router-dom'
 import './HeroSection.scss'
-import { ROUTES } from '@/constants'
-import FORMS from '@/constants/forms'
+import { ROUTES, FORMS } from '@/constants'
 
 const HeroSection: FC = () => {
   const navigate = useNavigate()

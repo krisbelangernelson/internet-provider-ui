@@ -5,10 +5,8 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { normalizeInputPhone } from '@/utils/utils'
-import APP_ERRORS from '@/constants/appErrors'
 import Alert from 'react-bootstrap/Alert'
-import FORMS from '@/constants/forms'
-import { MAIN_HEADERS } from '@/constants'
+import { MAIN_HEADERS, FORMS, APP_ERRORS } from '@/constants'
 import useCustomerForm from './useCustomerForm'
 
 const CustomerForm: FC = () => {

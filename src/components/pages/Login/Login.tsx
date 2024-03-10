@@ -12,9 +12,8 @@ import { useFormik } from 'formik'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import SectionLayout from '@/components/templates/SectionLayout/SectionLayout'
 import { handleAxiosError } from '@/utils/handleError'
-import FORMS from '@/constants/forms'
 import { loginFormSchema } from '@/utils/validationSchemas'
-import { ROUTES, MAIN_HEADERS } from '@/constants'
+import { ROUTES, MAIN_HEADERS, FORMS } from '@/constants'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
 
 interface LocationState {

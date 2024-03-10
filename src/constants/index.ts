@@ -1,3 +1,9 @@
+import FORMS from './forms'
+import APP_ERRORS from './appErrors'
+import VALIDATIONS from './validations'
+
+export { FORMS, APP_ERRORS, VALIDATIONS }
+
 export const COMPANY = 'Ping!'
 
 export const MAIN_HEADERS = {
@@ -76,7 +82,7 @@ export const VIEWPORT_BREAKPOINT = 768
 export const REGISTER = {
   customerArea: {
     title: 'Not a customer? Check out our plans!',
-    label: 'Explore Plans',
+    label: FORMS.buttons.explorePlans.label,
     link: ROUTES.internet
   }
 }
