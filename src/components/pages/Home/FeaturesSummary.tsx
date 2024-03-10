@@ -8,7 +8,7 @@ import SupportImg from '@/assets/icons/support.png'
 import FeaturesSummaryItem from './FeatureSummaryItem'
 
 const FeaturesSummary: FC = () => (
-  <section className="section-light features-summary">
+  <section className="section-light" id="features-summary">
     <Container>
       <Row className="">
         <Col className="text-center my-4">

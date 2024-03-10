@@ -24,6 +24,9 @@ const FORMS = {
     explorePlans: {
       label: 'Explore Plans'
     },
+    chooseUs: {
+      label: 'Choose Us'
+    },
     login: {
       label: 'Login',
       loadingLabel: 'Logging in...'
