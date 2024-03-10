@@ -1,7 +1,20 @@
 $primary: #ffa500;
 $primaryHover: #ffb326;
+// $dark-bg: #402e32;
+// $dark-bg: #352a2a;
+// $dark-bg: #302727;
+$dark-bg: #333333;
+// $dark-bg: #332f2f;
+$dark-bg-text: #fff;
+$light-bg: #fff;
+// $light-bg-text: #131313;
+$light-bg-text: #333333;
 
 :export {
   primary: $primary;
   primary-hover: $primaryHover;
+  dark-bg: $dark-bg;
+  dark-bg-text: $dark-bg-text;
+  light-bg: $light-bg;
+  light-bg-text: $light-bg-text;
 }

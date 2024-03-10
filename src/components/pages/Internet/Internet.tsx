@@ -68,7 +68,7 @@ const Internet: FC = () => {
           <div className="mt-5" />
         </Col>
       </Row>
-      <Row className={`mb-2 mob-col-desk-row ${disabledStyle}`}>
+      <Row className={`mb-2 xs-col-md-row ${disabledStyle}`}>
         <Col>
           <span className="fs-2">{INTERNET_PAGE.chooseSpeed}</span>
         </Col>

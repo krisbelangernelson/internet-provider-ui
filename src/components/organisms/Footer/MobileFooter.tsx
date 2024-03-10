@@ -5,11 +5,12 @@ import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom'
 import Stack from 'react-bootstrap/Stack'
 import Accordion from 'react-bootstrap/Accordion'
+import Copyright from './Copyright'
 
 // TODO: constants
 const MobileFooter = (): ReactElement => (
   <Container className="mt-5">
-    <Row style={{ minHeight: '200px', padding: '1rem' }} className="mob-col-desk-row">
+    <Row style={{ minHeight: '200px', padding: '1rem' }} className="xs-col-md-row">
       <Col>
         <Accordion flush>
           <Accordion.Item eventKey="0">
@@ -69,6 +70,7 @@ const MobileFooter = (): ReactElement => (
         </Accordion>
       </Col>
     </Row>
+    <Copyright />
   </Container>
 )
 

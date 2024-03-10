@@ -38,7 +38,7 @@ $theme-colors: map-merge($theme-colors, (
   }
 }
 
-a {
+a, .btn-link {
   text-decoration: none;
   color: $primary;
 
@@ -60,11 +60,29 @@ a {
   cursor: pointer;
 }
 
-.mob-col-desk-row {
+.xs-col-lg-row {
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 992px) {
+    flex-direction: row;
+  }
+}
+
+.xs-col-md-row {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.xs-col-sm-row {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 576px) {
     flex-direction: row;
   }
 }
@@ -78,20 +96,37 @@ a {
   color: $primary
 }
 
+.section-dark {
+  background-color: $dark-bg;
+  color: $dark-bg-text
+}
+
+.section-light {
+  background-color: $light-bg;
+  color: $light-bg-text
+}
+
+blockquote p::before {
+  content: '\201C';
+}
+
+blockquote p::after {
+  content: '\201D';
+}
+
 /* Customize boostrap styles */
 
 .form-label {
   margin-bottom: 0.2rem;
 }
 
-// .form-control:focus {
-//   border-color: $primary;
-//   box-shadow: 0 0 0 0.2rem rgba(255, 165, 0, 0.25);
-// }
-
 .btn-primary {
   --bs-btn-color: white;
   --bs-btn-hover-color: white;
   --bs-btn-disabled-bg: lightgray;
   font-weight: bold;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(#000, .5) !important
 }

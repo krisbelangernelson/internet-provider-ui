@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 const Header = (): ReactElement => (
-  <header>
+  <header className="section-dark">
     <Container>
       <Row>
         <Col style={{ minHeight: '100px' }}>

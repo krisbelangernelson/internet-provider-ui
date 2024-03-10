@@ -2,7 +2,7 @@ import { PaymentElement, AddressElement } from '@stripe/react-stripe-js'
 import { type FC } from 'react'
 import ButtonSpinner from '@/components/atoms/ButtonSpinner/ButtonSpinner'
 import './CheckoutForm.scss'
-import FORMS from '@/constants/forms'
+import { FORMS } from '@/constants'
 import useCheckoutForm from './useCheckoutForm'
 
 interface CheckoutFormProps {

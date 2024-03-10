@@ -9,12 +9,12 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ children, alertMsg }) => (
-  <>
+  <div className="d-flex flex-column vh-100">
     <StickyAlert text={alertMsg} variant="danger" />
     <Header />
     <section id="page-content">{children}</section>
     <Footer />
-  </>
+  </div>
 )
 
 export default Layout

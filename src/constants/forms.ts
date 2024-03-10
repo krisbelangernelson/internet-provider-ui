@@ -21,8 +21,14 @@ const FORMS = {
     reload: {
       label: 'Reload'
     },
-    internet: {
-      label: 'Internet'
+    explorePlans: {
+      label: 'Explore Plans'
+    },
+    getConnected: {
+      label: 'Get Connected Now'
+    },
+    chooseUs: {
+      label: 'Choose Us'
     },
     login: {
       label: 'Login',

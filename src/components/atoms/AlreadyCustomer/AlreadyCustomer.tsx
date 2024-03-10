@@ -1,7 +1,6 @@
 import { type FC } from 'react'
 import { Link } from 'react-router-dom'
-import FORMS from '@/constants/forms'
-import { ROUTES } from '@/constants'
+import { FORMS, ROUTES } from '@/constants'
 
 const AlreadyCustomer: FC = () => {
   return (

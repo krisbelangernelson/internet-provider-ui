@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import VALIDATIONS from '@/constants/validations'
+import { VALIDATIONS } from '@/constants'
 
 export const customerFormSchema = yup.object().shape({
   firstName: yup

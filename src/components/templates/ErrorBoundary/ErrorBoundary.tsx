@@ -2,9 +2,8 @@ import { type ErrorInfo, type FC, type ReactNode } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { ErrorBoundary as ErrorBoundaryLib } from 'react-error-boundary'
-import APP_ERRORS from '@/constants/appErrors'
 import logger from '@/utils/logger'
-import FORMS from '@/constants/forms'
+import { FORMS, APP_ERRORS } from '@/constants'
 
 interface Props {
   children: ReactNode
