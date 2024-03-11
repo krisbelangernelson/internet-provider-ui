@@ -24,7 +24,7 @@ const HeroSection: FC = () => {
                 <h1 style={{ fontSize: '3rem' }}>
                   <span className="primary">Unleash</span> the Speed.
                   <br />
-                  Power Up with <span className="primary">Ping</span>.
+                  Power Up with <span className="primary">Ping!</span>
                 </h1>
                 <Row className="justify-content-center my-4">
                   <h5 className="text-start w-75">
