@@ -86,3 +86,9 @@ export const REGISTER = {
     link: ROUTES.internet
   }
 }
+
+export const LANDING = {
+  getConnected: {
+    title: 'Ready to Experience the Power?'
+  }
+}

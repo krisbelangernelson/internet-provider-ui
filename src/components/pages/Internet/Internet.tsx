@@ -49,7 +49,7 @@ const Internet: FC = () => {
   }
 
   return (
-    <Container>
+    <Container className="my-4">
       <Row className="mb-2 align-items-center">
         <Col>{INTERNET_PAGE.featuredOffer}</Col>
       </Row>

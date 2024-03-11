@@ -6,38 +6,19 @@ import WhyChooseUs from './WhyChooseUs'
 import FeaturesSummaryMore from './FeaturesSummaryMore'
 import FeaturesMore from './FeaturesMore'
 import Testimonials from './Testimonials'
-import Button from 'react-bootstrap/Button'
-import { useNavigate } from 'react-router-dom'
-import { ROUTES, FORMS } from '@/constants'
+import GetConnected from './GetConnected'
 
-const Home: FC = () => {
-  const navigate = useNavigate()
-
-  return (
-    <>
-      <HeroSection />
-      <WhyChooseUs />
-      <FeaturesSummary />
-      <Features />
-      <FeaturesSummaryMore />
-      <FeaturesMore />
-      <Testimonials />
-      <section className="section-light cta">
-        <div className="text-center my-4">
-          <h3>Ready to Experience the Power?</h3>
-          <Button
-            type="button"
-            variant="primary"
-            onClick={() => {
-              navigate(ROUTES.internet)
-            }}
-          >
-            {FORMS.buttons.getConnected.label}
-          </Button>
-        </div>
-      </section>
-    </>
-  )
-}
+const Home: FC = () => (
+  <>
+    <HeroSection />
+    <WhyChooseUs />
+    <FeaturesSummary />
+    <Features />
+    <FeaturesSummaryMore />
+    <FeaturesMore />
+    <Testimonials />
+    <GetConnected />
+  </>
+)
 
 export default Home
