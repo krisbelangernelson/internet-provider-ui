@@ -8,12 +8,12 @@ import SupportImg from '@/assets/icons/support.png'
 import FeaturesSummaryItem from './FeatureSummaryItem'
 
 const FeaturesSummary: FC = () => (
-  <section className="section-light" id="features-summary">
+  <section className="section-light features-summary">
     <Container>
       <Row className="">
         <Col className="text-center my-4">
           <h1 className="primary">Unleash the Potential</h1>
-          <div className="d-flex flex-column flex-lg-row mt-4 gx-lg-3 gy-3">
+          <div className="item-container">
             <FeaturesSummaryItem
               imgSrc={SpeedImg as string}
               heading="Ultra-Fast Speeds"

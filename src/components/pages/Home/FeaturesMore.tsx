@@ -6,8 +6,8 @@ import WorkImg from '@/assets/images/student.jpg'
 import FeaturesItem from './FeaturesItem'
 
 const FeaturesMore: FC = () => (
-  <section className="section-dark features pt-5 pb-4">
-    <Container className="d-grid gap-3">
+  <section className="section-dark features">
+    <Container>
       <FeaturesItem
         imgSrc={FamilyImg as string}
         imageOrder={2}
@@ -15,7 +15,6 @@ const FeaturesMore: FC = () => (
         heading="Fun for the whole family"
         subHeading="Keep everyone in your family connected with our unlimited data plans. Stream movies, watch educational videos, play online games, and stay connected with loved ones without worrying about exceeding data limits."
       />
-      <div className="mt-lg-3" />
       <FeaturesItem
         imgSrc={GamingImg as string}
         imageOrder={1}
@@ -23,7 +22,6 @@ const FeaturesMore: FC = () => (
         heading="Blaze your way to wins"
         subHeading="Experience low latency and ultra-fast speeds for a smooth and uninterrupted gaming experience. Dominate the competition with lag-free gameplay and reliable connections, allowing you to react quickly and perform at your best."
       />
-      <div className="mt-lg-3" />
       <FeaturesItem
         imgSrc={WorkImg as string}
         imageOrder={2}

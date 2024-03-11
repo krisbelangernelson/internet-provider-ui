@@ -114,6 +114,18 @@ blockquote p::after {
   content: '\201D';
 }
 
+.features {
+  @extend .pt-3, .pt-lg-5, .pb-4, .pb-lg-5;
+
+  & > .container {
+    @extend .d-grid, .gap-3, .gap-lg-5
+  }
+}
+
+.features-summary .item-container {
+  @extend .d-flex, .flex-column, .flex-lg-row, .mt-4, .gx-lg-3, .gy-3
+}
+
 /* Customize boostrap styles */
 
 .form-label {
