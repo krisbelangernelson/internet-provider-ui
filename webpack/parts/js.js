@@ -1,5 +1,5 @@
 const TerserPlugin = require('terser-webpack-plugin')
-const { regExp } = require('./webpack.utils')
+const { regExp } = require('./utils')
 
 exports.jsLoader = {
   module: {

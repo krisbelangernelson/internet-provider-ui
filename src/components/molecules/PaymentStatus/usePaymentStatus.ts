@@ -60,7 +60,13 @@ const usePaymentStatus = (): UsePaymentStatus => {
         }
 
         void createOrder(data).catch((error: Error) => {
-          showErrorNotification({ error, caller: 'CustomerArea' })
+          showErrorNotification({
+            error: {
+              message: 'Error in payment process or account creation. Please contact support.',
+              name: error.name
+            },
+            caller: 'CustomerArea'
+          })
         })
       }
 

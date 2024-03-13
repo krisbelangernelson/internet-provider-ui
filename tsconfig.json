@@ -22,8 +22,10 @@
     "skipLibCheck": true
   },
   "exclude": [
-    "config",
+    "server",
+    "webpack",
     "coverage",
-    "dist"
+    "dist",
+    "build"
   ]
 }

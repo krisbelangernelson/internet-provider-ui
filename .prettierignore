@@ -10,6 +10,7 @@
 
 # skip the following
 dist
+build
 server-dist
 node_modules
 .gitignore

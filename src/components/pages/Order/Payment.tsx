@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import orderService from '@/services/orderService'
 import CheckoutForm from '@/components/molecules/CheckoutForm/CheckoutForm'
-import { MAIN_HEADERS } from '@/constants'
+import { MAIN_HEADERS, ROUTES } from '@/constants'
 import useRedirect from '@/hooks/useRedirect'
 import { useCustomerContext } from '@/providers/customer/CustomerContext'
 import type { CustomerRegister } from '@/types/customer'
@@ -34,7 +34,7 @@ const Payment: FC<Props> = ({ stripePromise }) => {
 
   const { customer } = (location.state as { customer: CustomerRegister }) ?? {}
 
-  useRedirect(customer === undefined, '/internet')
+  useRedirect(customer === undefined, ROUTES.internet)
 
   const { mutateAsync: stripePayment } = useMutation({
     mutationFn: async (body: PaymentBody) => await orderService.stripePaymenIntent(body)

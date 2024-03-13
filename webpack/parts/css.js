@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const { regExp } = require('./webpack.utils')
+const { regExp } = require('./utils')
 
 const miniCssExtractPluginLoader = {
   loader: MiniCssExtractPlugin.loader
