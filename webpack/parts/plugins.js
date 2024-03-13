@@ -7,7 +7,7 @@ const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const zlib = require('zlib')
 
-const { purgeCSSPath } = require('./webpack.utils')
+const { purgeCSSPath } = require('./utils')
 
 exports.bundleAnalyzerPlugin = {
   plugins: [

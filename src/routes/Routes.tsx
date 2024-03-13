@@ -64,6 +64,8 @@ const AppRoutes: FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/internet/how-it-works" element={<HowItWorks />} />
             <Route path="/internet" element={<Internet />} />
+            <Route path="/faq" element={<Internet />} />
+            <Route path="/contact" element={<Internet />} />
             <Route path="/customer-area" element={<CustomerArea />} />
             <Route path="/order/completed" element={<Completed stripePromise={stripePromise} />} />
             <Route path="/order/" element={<Order />}>

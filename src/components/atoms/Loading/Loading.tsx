@@ -8,7 +8,7 @@ const Loading: FC<{ children?: ReactElement }> = ({ children }) => {
   return (
     <Container>
       <Row>
-        <Col className="text-center">
+        <Col className="text-center mt-3">
           <Spinner
             as="span"
             animation="border"

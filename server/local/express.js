@@ -9,7 +9,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const pinoHttp = require('pino-http')
 const serverConfig = require('./server-config')
 const webpackConfig = require('../../webpack/webpack.local')
-const { corsConfig } = require('./resources')
+// const { corsConfig } = require('./resources')
 const cors = require('cors')
 
 const server = express()
@@ -26,7 +26,7 @@ const staticMiddleware = express.static(dist)
 
 const pino = pinoHttp()
 
-server.use(cors(corsConfig))
+server.use(cors())
 server.use(pino)
 server.use(devMiddleware)
 server.use(hotMiddleware)

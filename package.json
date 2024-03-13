@@ -4,8 +4,10 @@
   "description": "Internet Provider UI",
   "main": "index.js",
   "scripts": {
-    "build:local": "webpack --config config/webpack/webpack.local.js",
-    "dev": "webpack serve --config  config/webpack/webpack.local.js",
+    "build": "set APP_ENV=production && set NODE_ENV=production && webpack --config webpack/webpack.production.js",
+    "build:local": "webpack --config webpack/webpack.local.js",
+    "build:production": "export APP_ENV=production && webpack --config webpack/webpack.production.js",
+    "dev": "webpack serve --config  webpack/webpack.local.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "npm run lint",

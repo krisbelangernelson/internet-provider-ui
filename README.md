@@ -8,6 +8,12 @@ Here are the other applications in this service provider project. These APIs are
 - https://github.com/krisbelangernelson/internet-customers-api
 - https://github.com/krisbelangernelson/internet-orders-api
 
+Tech used:
+- Typescript React with Webpack
+- Node Express backend to serve the build
+- Bootstrap for styling
+- Formik for forms
+
 
 ## Payment testing
 - From https://docs.stripe.com/testing

@@ -4,10 +4,6 @@ const { environment } = require('./server-config')
 module.exports = {
   ...common,
   environment,
-  corsConfig: {
-    origin: 'http://localhost:8080',
-    credentials: true
-  },
   internetApi: {
     baseUrl: 'http://localhost:3000/api/v1'
   },
