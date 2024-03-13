@@ -23,13 +23,11 @@ const loginCustomer = async (body: CustomerLogin | undefined): Promise<CustomerR
 }
 
 const customerExists = async (body: CustomerExists): Promise<CustomerExistsResponse> => {
-  return await apiClient
-    .post<CustomerExistsResponse>('/customer/customer-exists', body)
-    .then((response) => response.data)
+  return await apiClient.post<CustomerExistsResponse>('/customer/exists', body).then((response) => response.data)
 }
 
 const customerArea = async (): Promise<{ message: string }> => {
-  return await apiClient.get<{ message: string }>('/customer/customer-area').then((response) => response.data)
+  return await apiClient.get<{ message: string }>('/customer/area').then((response) => response.data)
 }
 
 const logout = async (): Promise<object> => {

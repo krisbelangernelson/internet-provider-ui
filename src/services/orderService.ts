@@ -16,7 +16,7 @@ const stripePaymenIntent = async (body: { plan: string }): Promise<StripeIntent>
 }
 
 const createOrder = async (body: CreateOrder): Promise<{ code: string }> => {
-  return await apiClient.post<{ code: string }>('/create-order', body).then((response) => response.data)
+  return await apiClient.post<{ code: string }>('/order', body).then((response) => response.data)
 }
 
 const orderService = { stripeConfig, stripePaymenIntent, createOrder }
