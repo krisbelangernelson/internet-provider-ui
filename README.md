@@ -15,6 +15,11 @@ Tech used:
 - Formik for forms
 
 
+## Vercel deployment
+
+The work-in-progress can be viewed at https://internet-provider-ui-pearl.vercel.app/
+
+
 ## Payment testing
 - From https://docs.stripe.com/testing
 
