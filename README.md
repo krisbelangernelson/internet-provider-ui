@@ -17,6 +17,11 @@ Tech used:
 Furuther development has moved on to the Next.js version of the app: https://github.com/krisbelangernelson/internet-provider-ui-nextjs
 
 
+## Vercel deployment
+
+The work-in-progress can be viewed at https://internet-provider-ui-pearl.vercel.app/
+
+
 ## Payment testing
 - From https://docs.stripe.com/testing
 
