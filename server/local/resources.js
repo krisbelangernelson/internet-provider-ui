@@ -5,7 +5,7 @@ module.exports = {
   ...common,
   environment,
   internetApi: {
-    baseUrl: 'http://localhost:3000/api/v1'
+    baseUrl: 'http://localhost:30001/api/v1'
   },
   customersApi: {
     baseUrl: 'http://localhost:3001/api/v1'

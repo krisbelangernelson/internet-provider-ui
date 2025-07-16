@@ -5,11 +5,28 @@ export interface Customer {
   phone: string
 }
 
-interface CustomerFormikValues extends Customer {
+export interface CustomerRegister extends Customer {
+  password?: string
+  id?: string
+}
+
+export interface RegisterResponse {
+  id: string
+}
+
+export interface CustomerResponse extends Customer, RegisterResponse {
+  accessToken: string
+}
+
+export interface CustomerLogin extends Pick<Customer, 'email'> {
   password: string
+}
+
+interface CustomerFormikValues extends Customer, Pick<CustomerLogin, 'password'> {
   passwordConfirm: string
   terms: boolean
 }
+
 interface CustomerFormikErrors {
   firstName?: string
   lastName?: string
@@ -30,29 +47,8 @@ interface CustomerFormikTouched {
   terms?: boolean
 }
 
-export interface CustomerRegister extends Customer {
-  password?: string
-  id?: string
-}
+export interface CustomerExists extends Pick<Customer, 'email' | 'phone'> { }
 
-export interface RegisterResponse {
-  id: string
-}
-
-export interface CustomerResponse extends Customer {
-  accessToken: string
-  id: string
-}
-
-export interface CustomerLogin {
-  email: string
-  password: string
-}
-
-export interface CustomerExists {
-  email: string
-  phone: string
-}
 export interface CustomerExistsResponse {
   emailExists: boolean
   phoneExists: boolean

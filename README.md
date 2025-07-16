@@ -14,6 +14,8 @@ Tech used:
 - Bootstrap for styling
 - Formik for forms
 
+Furuther development has moved on to the Next.js version of the app: https://github.com/krisbelangernelson/internet-provider-ui-nextjs
+
 
 ## Payment testing
 - From https://docs.stripe.com/testing
@@ -35,3 +37,5 @@ If you get errors for `/usr/bin/env: 'bash': No such file or directory`, install
 If that's fixed and you try again with errors for `npm ERR! Cannot read properties of undefined (reading 'stdin')`, run this command `npm config set script-shell "C:\Program Files\Git\bin\bash.exe"`
 
 Now GitHub Desktop will work with husky, and you don't have to use the command line to make commits.
+
+For a `/bin/bash: C:/Program Files/nodejs/npm: No such file or directory`, [this](https://github.com/desktop/desktop/issues/12562#issuecomment-1335391830) solution worked for me.
